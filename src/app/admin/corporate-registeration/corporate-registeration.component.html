@@ -1,0 +1,98 @@
+<mat-card fxLayoutAlign="center center">
+    <form
+      [formGroup]="contactForm"
+      fxLayout="column wrap"
+      fxLayoutGap="3%"
+      (ngSubmit)="onFormSubmit()"
+    >
+      <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-card-title> Add Employee </mat-card-title>
+      </div>
+  
+      <div fxLayout="row "  fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="10%">
+        <div fxFlex="30" id="title-label">Title: </div>
+        <div fxFlex="70">
+          <mat-radio-group aria-labelledby="title-label" color="accent" formControlName="title">
+            <mat-radio-button value="Mr">Mr</mat-radio-button>
+            <mat-radio-button value="Miss">Miss</mat-radio-button>
+            <mat-radio-button value="Mrs">Mrs</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+  
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent" >
+          <input
+            id="fName"
+            matInput
+            
+            type="text"
+            placeholder="Your first name"
+            formControlName="firstName"
+          />
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <input
+            id="lName"
+            matInput
+            type="text"
+            placeholder="Your last name"
+            formControlName="lastName"
+          />
+        </mat-form-field>
+      </div>
+  
+      <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="email"
+            matInput
+            type="text"
+            placeholder="Your email"
+            formControlName="email"
+          />
+        </mat-form-field>
+        <mat-form-field color="accent" appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dob" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+  
+      <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent" class="example-full-width">
+          <mat-label>Choose Role</mat-label>
+          <mat-select formControlName="role">
+            <mat-option [value]="role" *ngFor="let role of roles"
+              >{{ role }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <input
+            id="empId"
+            matInput
+            type="text"
+            placeholder="Your EmployeeId"
+            formControlName="empId"
+          />
+        </mat-form-field>
+      </div>
+  
+      <div fxLayout="row " fxLayoutAlign="center center"  fxLayout.lt-sm="column" fxLayoutGap="1%">
+        <mat-card-actions fxFlexFill>
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            [disabled]="!contactForm.valid"
+            fxFlexFill
+          >
+            Submit!
+          </button>
+        </mat-card-actions>
+      </div>
+    </form>
+  </mat-card>
+  

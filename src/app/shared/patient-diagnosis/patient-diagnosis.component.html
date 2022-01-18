@@ -1,0 +1,266 @@
+
+Check data here !! {{selectedMeeting}}
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Patient Info"> </mat-tab>
+
+  <mat-tab label="Vital Signs">
+    <mat-card fxLayoutAlign="center center">
+      <form
+        [formGroup]="VitalSignForm"
+        fxLayout="column wrap"
+        fxLayoutGap="3%"
+        (ngSubmit)="onVitalSignFormSubmit()"
+      >
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field color="accent">
+            <input
+              id="H"
+              matInput
+              type="text"
+              placeholder="Height in Feet"
+              formControlName="height"
+            />
+          </mat-form-field>
+
+          <mat-form-field color="accent">
+            <input
+              id="W"
+              matInput
+              type="text"
+              placeholder="Weight in kg"
+              formControlName="weight"
+            />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field color="accent">
+            <input
+              id="BP"
+              matInput
+              type="text"
+              placeholder="Blood Pressure"
+              formControlName="bloodpressure"
+            />
+          </mat-form-field>
+
+          <mat-form-field color="accent">
+            <input
+              id="BT"
+              matInput
+              type="text"
+              placeholder="Body Temperature"
+              formControlName="bodytemperature"
+            />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field color="accent">
+            <input
+              id="RR"
+              matInput
+              type="text"
+              placeholder="Respiration Rate"
+              formControlName="respirationrate"
+            />
+          </mat-form-field>
+        </div>
+
+        <div
+          fxLayout="row "
+          fxLayoutAlign="center center"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="1%"
+        >
+          <mat-card-actions fxFlexFill>
+            <button color="accent" mat-raised-button type="submit" fxFlexFill>
+              Submit!
+            </button>
+          </mat-card-actions>
+        </div>
+      </form>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Diagnosis & Procedures & Medication">
+      <mat-card fxLayoutAlign="center center">
+    <form
+      [formGroup]="contactForm"
+      fxLayout="column wrap"
+      fxLayoutGap="3%"
+      (ngSubmit)="onFormSubmit()"
+    >
+      <div
+        fxLayout="row "
+        fxLayoutAlign=" "
+        fxLayout.lt-sm="column"
+        fxLayoutGap="3%"
+      >
+        <mat-card-title background-color="accent"
+          ><h1>Diagnosis</h1>
+        </mat-card-title>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="C"
+            matInput
+            type="text"
+            placeholder="Diagnosis Code"
+            formControlName="code1"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="D"
+            matInput
+            type="text"
+            placeholder="Diagnosis Description"
+            formControlName="description1"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="D"
+            matInput
+            type="text"
+            placeholder="Diagnosis Is Depricated"
+            formControlName="depricated1"
+          />
+        </mat-form-field>
+      </div>
+
+      <div
+        fxLayout="row "
+        fxLayoutAlign=" "
+        fxLayout.lt-sm="column"
+        fxLayoutGap="3%"
+      >
+        <mat-card-title background-color="accent"
+          ><h1>Procedures</h1>
+        </mat-card-title>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="C1"
+            matInput
+            type="text"
+            placeholder="Procedure Code"
+            formControlName="code2"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="D1"
+            matInput
+            type="text"
+            placeholder="Procedure Description"
+            formControlName="description2"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="D2"
+            matInput
+            type="text"
+            placeholder="Procedure Is Depricated"
+            formControlName="depricated2"
+          />
+        </mat-form-field>
+      </div>
+
+      <div
+        fxLayout="row "
+        fxLayoutAlign=" "
+        fxLayout.lt-sm="column"
+        fxLayoutGap="3%"
+      >
+        <mat-card-title><h1>Medication</h1> </mat-card-title>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="I"
+            matInput
+            type="text"
+            placeholder="Drug_ID"
+            formControlName="id"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="N"
+            matInput
+            type="text"
+            placeholder="Drug_Name"
+            formControlName="name"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="GN"
+            matInput
+            type="text"
+            placeholder="Drug_Generic_Name"
+            formControlName="genericname"
+          />
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="BN"
+            matInput
+            type="text"
+            placeholder="Drug_Brand_Name"
+            formControlName="brandname"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="F"
+            matInput
+            type="text"
+            placeholder="Drug_Form"
+            formControlName="form"
+          />
+        </mat-form-field>
+
+        <mat-form-field color="accent">
+          <input
+            id="S"
+            matInput
+            type="text"
+            placeholder="Drug_Strength"
+            formControlName="strength"
+          />
+        </mat-form-field>
+      </div>
+
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="1%"
+      >
+        <mat-card-actions fxFlexFill>
+          <button color="accent" mat-raised-button type="submit" fxFlexFill>
+            Submit!
+          </button>
+        </mat-card-actions>
+      </div>
+    </form>
+</mat-card>
+  </mat-tab>
+</mat-tab-group>

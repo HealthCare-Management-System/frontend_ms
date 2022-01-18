@@ -1,0 +1,65 @@
+<div class="image">
+<a [routerLink]="['../']"> Go back to home page</a>
+<a [routerLink]="['../patient-inbox']"> Go back to inbox</a>
+<mat-card>
+<table mat-table [dataSource]="chatdata" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.notesId }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="sendDate">
+    <th mat-header-cell *matHeaderCellDef>Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+  </ng-container>
+ 
+  <ng-container matColumnDef="receiverName">
+    <th mat-header-cell *matHeaderCellDef>RecieverName</th>
+    <td mat-cell *matCellDef="let element">{{ element.receiverName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="message">
+    <th mat-header-cell *matHeaderCellDef>Message</th>
+    <td mat-cell *matCellDef="let element">{{ element.message }}</td>
+  </ng-container>
+  <ng-container matColumnDef="urgencyLevel">
+    <th mat-header-cell *matHeaderCellDef>UrgencyLevel</th>
+    <td mat-cell *matCellDef="let element">{{ element.urgencyLevel }}</td>
+  </ng-container>
+  <ng-container matColumnDef="isDeleted">
+    <th mat-header-cell *matHeaderCellDef>IsDeleted</th>
+    <td mat-cell *matCellDef="let element">{{ element.deleted }}</td>
+  </ng-container>
+  <ng-container matColumnDef="isRead">
+    <th mat-header-cell *matHeaderCellDef>isRead</th>
+    <td mat-cell *matCellDef="let element">{{ element.read }}</td>
+  </ng-container>
+  <ng-container matColumnDef="reply">
+    <th mat-header-cell *matHeaderCellDef>Reply</th>
+    <td mat-cell *matCellDef="let element">{{ element.reply }}</td>
+  </ng-container>
+  <ng-container matColumnDef="ReplySender">
+    <th mat-header-cell *matHeaderCellDef>reply</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary">reply</button>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>action</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="warn" (click)="deleteNotes(element)">
+        Delete
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator>
+</mat-card>
+</div>

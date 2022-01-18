@@ -1,0 +1,12 @@
+table {
+	width: 100%;
+  }
+  a{
+    margin-left: 5%;
+    color: white;
+  }
+  .image{
+    height:40em; background-size:cover; width:auto;
+    background-image:url("https://www.kauveryhospital.com/images/corona/covid_vaccine_banner.jpg");
+    background-position:50% 50%;
+  }

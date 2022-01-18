@@ -1,0 +1,968 @@
+{
+  "persons": [
+    {
+      "id": 1,
+      "title": "Mr.",
+      "name": "Finland",
+      "lname": "fdsfsd",
+      "email": "admin@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "12345",
+      "role": "admin",
+      "status": "Active",
+      "empid": "ct06545"
+    },
+    {
+      "id": 2,
+      "title": "Mrs.",
+      "name": "Shubhangi",
+      "lname": "fdsdfsfsfsd",
+      "email": "physician@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "12345",
+      "role": "Patient",
+      "status": "Active",
+      "empid": "ct06545"
+    },
+    {
+      "id": 3,
+      "title": "Miss.",
+      "name": "Rohit",
+      "lname": "xcvx",
+      "email": "patient@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "12345",
+      "role": "Patient",
+      "status": "Active",
+      "empid": "ct06545"
+    },
+    {
+      "name": "asdasd",
+      "lname": "asdas",
+      "email": "nurse@gmail.com",
+      "empid": "asdsadasd",
+      "dob": "2021-12-27T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mr",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 4
+    },
+    {
+      "name": "asdasd",
+      "lname": "asdas",
+      "email": "asdasd",
+      "empid": "asdsadasd",
+      "dob": "2021-12-27T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mr",
+      "phone": "000000000",
+      "status": "Block",
+      "password": "12345",
+      "id": 5
+    },
+    {
+      "title": "Mr.",
+      "name": "safsfafsf",
+      "lname": "fdsfsd",
+      "email": "admin@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "515safasfsa15151",
+      "role": "Patient",
+      "status": "Active",
+      "empid": "ct06545",
+      "id": 6
+    },
+    {
+      "name": "bye",
+      "lname": "hello",
+      "email": "dddddddd",
+      "empid": "PT0000",
+      "dob": "2021-11-30T18:30:00.000Z",
+      "role": "patient",
+      "title": "Mr",
+      "phone": "747474747",
+      "status": "Deactive",
+      "password": "12345",
+      "id": 7
+    },
+    {
+      "name": "physican3",
+      "lname": "phy3",
+      "email": "priyanka@citius.com",
+      "empid": "420",
+      "dob": "2021-12-12T18:30:00.000Z",
+      "role": "Physician",
+      "title": "Mrs",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 8
+    },
+    {
+      "name": "pat3",
+      "lname": "pat3",
+      "email": "pat3@gmail.com",
+      "empid": "PT0000",
+      "dob": "2021-12-12T18:30:00.000Z",
+      "role": "patient",
+      "title": "Mr",
+      "phone": "7878787878",
+      "status": "Active",
+      "password": "12345",
+      "id": 9
+    },
+    {
+      "name": "sadasdas",
+      "lname": "asdasdasd",
+      "email": "asdsdsasdds",
+      "empid": "gfgfgfdgf",
+      "dob": "2021-12-14T18:30:00.000Z",
+      "role": "Nurse",
+      "title": "Miss",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 10
+    },
+    {
+      "name": "swapnil",
+      "lname": "citi",
+      "email": "swap@gmail.com",
+      "empid": "124578",
+      "dob": "2021-12-13T18:30:00.000Z",
+      "role": "Physician",
+      "title": "Mr",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 11
+    },
+    {
+      "name": "Nikhil",
+      "lname": "",
+      "email": "",
+      "empid": "PT0000",
+      "dob": "",
+      "role": "patient",
+      "title": "",
+      "phone": "",
+      "status": "Block",
+      "password": "",
+      "id": 12
+    }
+  ],
+  "patients": [
+    {
+      "id": 1,
+      "title": "Mr.",
+      "name": "Aditya",
+      "lname": "fdsfsd",
+      "email": "admin@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "12345",
+      "role": "Patient",
+      "status": "Active",
+      "empid": "ct06545"
+    },
+    {
+      "id": 2,
+      "title": "Mrs.",
+      "name": "Shubhangi",
+      "lname": "fdsdfsfsfsd",
+      "email": "physician@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "12345",
+      "role": "Patient",
+      "status": "Deactive",
+      "empid": "ct06545"
+    },
+    {
+      "id": 3,
+      "title": "Miss.",
+      "name": "Rohit",
+      "lname": "xcvx",
+      "email": "patient@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "12345",
+      "role": "Patient",
+      "status": "Active",
+      "empid": "ct06545"
+    },
+    {
+      "name": "asdasd",
+      "lname": "asdas",
+      "email": "nurse@gmail.com",
+      "empid": "asdsadasd",
+      "dob": "2021-12-27T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mr",
+      "phone": "000000000",
+      "status": "Deactive",
+      "password": "12345",
+      "id": 4
+    },
+    {
+      "name": "asdasd",
+      "lname": "asdas",
+      "email": "asdasd",
+      "empid": "asdsadasd",
+      "dob": "2021-12-27T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mr",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 5
+    },
+    {
+      "title": "Mr.",
+      "name": "safsfafsf",
+      "lname": "fdsfsd",
+      "email": "admin@gmail.com",
+      "dob": "25/20/2145",
+      "phone": "0962541551",
+      "password": "515safasfsa15151",
+      "role": "Patient",
+      "status": "Active",
+      "empid": "ct06545",
+      "id": 6
+    },
+    {
+      "name": "bye",
+      "lname": "hello",
+      "email": "dddddddd",
+      "empid": "PT0000",
+      "dob": "2021-11-30T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mr",
+      "phone": "747474747",
+      "status": "Deactive",
+      "password": "12345",
+      "id": 7
+    },
+    {
+      "name": "physican3",
+      "lname": "phy3",
+      "email": "priyanka@citius.com",
+      "empid": "420",
+      "dob": "2021-12-12T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mrs",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 8
+    },
+    {
+      "name": "pat3",
+      "lname": "pat3",
+      "email": "pat3@gmail.com",
+      "empid": "PT0000",
+      "dob": "2021-12-12T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mr",
+      "phone": "7878787878",
+      "status": "Active",
+      "password": "12345",
+      "id": 9
+    },
+    {
+      "name": "sadasdas",
+      "lname": "asdasdasd",
+      "email": "asdsdsasdds",
+      "empid": "gfgfgfdgf",
+      "dob": "2021-12-14T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Miss",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 10
+    },
+    {
+      "name": "swapnil",
+      "lname": "citi",
+      "email": "swap@gmail.com",
+      "empid": "124578",
+      "dob": "2021-12-13T18:30:00.000Z",
+      "role": "Patient",
+      "title": "Mr",
+      "phone": "000000000",
+      "status": "Active",
+      "password": "12345",
+      "id": 11
+    },
+    {
+      "name": "",
+      "lname": "",
+      "email": "",
+      "empid": "PT0000",
+      "dob": "",
+      "role": "Patient",
+      "title": "",
+      "phone": "",
+      "status": "Block",
+      "password": "",
+      "id": 12
+    },
+    {
+      "name": "Priyanka",
+      "lname": "Bhosale",
+      "email": "bhosale@gmail.com",
+      "empid": "PT0000",
+      "dob": "2021-12-16T18:30:00.000Z",
+      "role": "patient",
+      "title": "Miss",
+      "phone": "6786543234",
+      "status": "Active",
+      "password": "12345678",
+      "id": 13
+    },
+    {
+      "name": "Priyanka",
+      "lname": "Bhosale",
+      "email": "priyanka.bhosaledangat@citiustech.com",
+      "empid": "PT0000",
+      "dob": "2021-12-15T18:30:00.000Z",
+      "role": "patient",
+      "title": "Miss",
+      "phone": "7654345678",
+      "status": "Deactive",
+      "password": "123456789",
+      "id": 14
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "physician",
+      "password": "physician",
+      "role": "physician"
+    },
+    {
+      "id": "2",
+      "name": "admin",
+      "password": "admin",
+      "role": "admin"
+    },
+    {
+      "id": "3",
+      "name": "nurse",
+      "password": "nurse",
+      "role": "nurse"
+    },
+    {
+      "id": "4",
+      "name": "patient",
+      "password": "patient",
+      "role": "patient"
+    }
+  ],
+  "lock-unlockUsers": [
+    {
+      "position": "1",
+      "name": "Rohit",
+      "role": "doctor",
+      "status": "locked"
+    },
+    {
+      "position": "2",
+      "name": "Aditya",
+      "role": "doctor",
+      "status": "unlocked"
+    },
+    {
+      "position": "3",
+      "name": "Priyanka",
+      "role": "nurse",
+      "status": "locked"
+    },
+    {
+      "position": "4",
+      "name": "Shubhangi",
+      "role": "doctor",
+      "status": "locked"
+    },
+    {
+      "position": "5",
+      "name": "Sudha",
+      "role": "nurse",
+      "status": "unlocked"
+    },
+    {
+      "position": "6",
+      "name": "Varsha",
+      "role": "doctor",
+      "status": "locked"
+    },
+    {
+      "position": "7",
+      "name": "Shital",
+      "role": "doctor",
+      "status": "unlocked"
+    },
+    {
+      "position": "8",
+      "name": "Mahesh",
+      "role": "nurse",
+      "status": "locked"
+    },
+    {
+      "position": "9",
+      "name": "Dinkar",
+      "role": "nurse",
+      "status": "unlocked"
+    },
+    {
+      "position": "10",
+      "name": "Abhijeet",
+      "role": "doctor",
+      "status": "locked"
+    }
+  ],
+  "VitalSign": [
+    {
+      "Height": 5,
+      "Weight": 30,
+      "BloodPressure": 90,
+      "BodyTemperature": 80,
+      "RespirationRate": 10,
+      "id": 1
+    },
+    {
+      "height": 3,
+      "weight": 2,
+      "bloodpressure": 8,
+      "bodytemperature": 9,
+      "respirationrate": 7,
+      "id": 2
+    },
+    {
+      "height": 3,
+      "weight": 6,
+      "bloodpressure": 7,
+      "bodytemperature": 7,
+      "respirationrate": 9,
+      "id": 3
+    },
+    {
+      "height": 1,
+      "weight": 50,
+      "bloodpressure": 120,
+      "bodytemperature": 90,
+      "respirationrate": 10,
+      "id": 4
+    },
+    {
+      "height": 1,
+      "weight": 2,
+      "bloodpressure": 120,
+      "bodytemperature": 70,
+      "respirationrate": 6,
+      "id": 5
+    },
+    {
+      "height": 1,
+      "weight": 2,
+      "bloodpressure": 120,
+      "bodytemperature": 70,
+      "respirationrate": 6,
+      "id": 6
+    },
+    {
+      "height": "5",
+      "weight": "50",
+      "bloodpressure": "11",
+      "bodytemperature": "12",
+      "respirationrate": "12",
+      "id": 7
+    },
+    {
+      "height": "5",
+      "weight": "50",
+      "bloodpressure": "11",
+      "bodytemperature": "12",
+      "respirationrate": "12",
+      "id": 8
+    }
+  ],
+  "altype": [
+    {
+      "id": 1,
+      "value": "Animal",
+      "clinicalInformation": "clinicalInformationA"
+    },
+    {
+      "id": 2,
+      "value": "Fungi",
+      "clinicalInformation": "clinicalInformationF"
+    }
+  ],
+  "alname": [
+    {
+      "id": 1,
+      "value": "Dog",
+      "AtypeV": "Animal"
+    },
+    {
+      "id": 2,
+      "value": "Cat",
+      "AtypeV": "Animal"
+    },
+    {
+      "id": 3,
+      "value": "Fungus",
+      "AtypeV": "Fungi"
+    },
+    {
+      "id": 4,
+      "value": "Others",
+      "AtypeV": "Animal"
+    },
+    {
+      "id": 4,
+      "value": "Others",
+      "AtypeV": "Fungi"
+    }
+  ],
+  "allergyinformation": [
+    {
+      "allergyType": "animal",
+      "allergyName": "cat",
+      "allergyDescription": "string",
+      "allergyClinicalInformation": "string",
+      "allergyIsFatal": "yes",
+      "patientId": 1,
+      "id": 1
+    },
+    {
+      "allergyType": "animal",
+      "allergyName": "cat",
+      "allergyDescription": "string",
+      "allergyClinicalInformation": "string",
+      "allergyIsFatal": "yes",
+      "patientId": 2,
+      "id": 2
+    },
+    {
+      "allergyType": "1",
+      "allergyName": "Dog",
+      "allergyDescription": "hghfhsf",
+      "allergyClinicalInformation": "2",
+      "allergyIsFatal": "Yes",
+      "patientId": 1,
+      "id": 3
+    },
+    {
+      "allergyType": "Animal",
+      "allergyName": "Dog",
+      "allergyDescription": "njhjsdgfsdh",
+      "allergyClinicalInformation": "1",
+      "allergyIsFatal": "Yes",
+      "patientId": 1,
+      "id": 4
+    },
+    {
+      "allergyType": "Animal",
+      "allergyName": "Cat",
+      "allergyDescription": "sdhjahgdhah",
+      "allergyClinicalInformation": "1",
+      "allergyIsFatal": "No",
+      "patientId": 1,
+      "id": 5
+    },
+    {
+      "allergyType": "Fungi",
+      "allergyName": "Fungus",
+      "allergyDescription": "hsdhgfsdf",
+      "allergyClinicalInformation": "1",
+      "allergyIsFatal": "Yes",
+      "patientId": 1,
+      "id": 6
+    },
+    {
+      "allergyType": "Fungi",
+      "allergyName": "Fungus",
+      "allergyDescription": "sdbajdjga",
+      "allergyClinicalInformation": "1",
+      "allergyIsFatal": "Yes",
+      "patientId": 1,
+      "id": 7
+    },
+    {
+      "allergyType": "Animal",
+      "allergyName": "Dog",
+      "allergyDescription": "bsdgfhsfsh",
+      "allergyClinicalInformation": "bnbsadhgf",
+      "allergyIsFatal": "Yes",
+      "patientId": 1,
+      "id": 8
+    },
+    {
+      "allergyType": "Fungi",
+      "allergyName": "Others",
+      "allergyDescription": "tnnjghdsf",
+      "allergyClinicalInformation": "bnbsadhgf",
+      "allergyIsFatal": "Yes",
+      "patientId": 1,
+      "id": 9
+    },
+    {
+      "allergyType": "Animal",
+      "allergyName": "Dog",
+      "allergyDescription": "1nkjhfjghgf",
+      "allergyClinicalInformation": "dhfdsjfgdsjfjh",
+      "allergyIsFatal": "Yes",
+      "patientId": 1,
+      "id": 10
+    },
+    {
+      "allergyType": "Animal",
+      "allergyName": "Dog",
+      "allergyDescription": "nbfhdghgdh",
+      "allergyClinicalInformation": "jfhfdjhgdgf",
+      "allergyIsFatal": "Yes",
+      "patientId": 3,
+      "id": 11
+    },
+    {
+      "allergyType": "Animal",
+      "allergyName": "Dog",
+      "allergyDescription": "aaaaaaaaaaaaaaaaaaa",
+      "allergyClinicalInformation": "dhfdsjfgdsjfjh",
+      "allergyIsFatal": "Yes",
+      "patientId": 3,
+      "id": 12
+    },
+    [
+      {
+        "allergyType": "Animal",
+        "allergyName": "Cat",
+        "allergyDescription": "bbbbbbbbbbbbbbbbbbbbbbbb",
+        "allergyClinicalInformation": "bnbsadhgf",
+        "allergyIsFatal": "No",
+        "patientId": 3
+      },
+      {
+        "allergyType": "Fungi",
+        "allergyName": "Others",
+        "allergyDescription": "cccccccccccccccc",
+        "allergyClinicalInformation": "dhfdsjfgdsjfjh",
+        "allergyIsFatal": "No",
+        "patientId": 3
+      }
+    ],
+    [
+      {
+        "allergyType": "Animal",
+        "allergyName": "Dog",
+        "allergyDescription": "dddddddddddddddddddd",
+        "allergyClinicalInformation": "dhfdsjfgdsjfjh",
+        "allergyIsFatal": "Yes",
+        "patientId": 3
+      },
+      {
+        "allergyType": "Animal",
+        "allergyName": "Cat",
+        "allergyDescription": "eeeeeeeeeeeeeeeeee",
+        "allergyClinicalInformation": "bnbsadhgf",
+        "allergyIsFatal": "No",
+        "patientId": 3
+      },
+      {
+        "allergyType": "Fungi",
+        "allergyName": "Fungus",
+        "allergyDescription": "eeeeeeeeeeeeeee",
+        "allergyClinicalInformation": "bnbsadhgf",
+        "allergyIsFatal": "No",
+        "patientId": 3
+      }
+    ]
+  ],
+  "allergyclinicalinformation": [
+    {
+      "id": 1,
+      "value": "bnbsadhgf"
+    },
+    {
+      "id": 2,
+      "value": "dhfdsjfgdsjfjh"
+    },
+    {
+      "id": 3,
+      "value": "hdjhfsjfgjbh"
+    }
+  ],
+  "demographicinformation": [
+    {
+      "gender": "Male",
+      "DOB": "2002-11-19T18:30:00.000Z",
+      "age": 19,
+      "addr1": "ghdj",
+      "Race": "sdfhgsfsy",
+      "emFirstName": "sbfhgrfy",
+      "emLastName": "erkjehrgru",
+      "relation": "father",
+      "ppp": "yes",
+      "emAddress": "ghdj",
+      "allergycheck": "Yes",
+      "patientId": 2,
+      "id": 4
+    },
+    {
+      "gender": "Female",
+      "DOB": "1998-07-15T18:30:00.000Z",
+      "age": 23,
+      "addr1": "Nahhjsgdfdhf",
+      "Race": "mndsjhdbvjdv",
+      "emFirstName": "Jocky",
+      "emLastName": "J",
+      "relation": "sibling",
+      "ppp": "yes",
+      "emAddress": "Nahhjsgdfdhf",
+      "allergycheck": "yes",
+      "patientId": 4,
+      "id": 5
+    },
+    {
+      "birthDate": "Wed Feb 05 1997",
+      "age": 24,
+      "gender": "Female",
+      "race": "mndcjsfs",
+      "ethnicity": "nbchsbcnbscs",
+      "langKnown": "Kannada",
+      "address": "jbsnchvshchsc",
+      "emgrTitle": "Mr",
+      "emgrFname": "John",
+      "emgrLname": "V",
+      "emgrEmail": " sbcnbsjnb",
+      "emgrContactNo": "1010101010",
+      "emgrRelation": "sibling",
+      "emgrAddress": "yes",
+      "ppp": "jbsnchvshchsc",
+      "allergyCheck": "yes",
+      "patientId": 1,
+      "id": 6
+    },
+    {
+      "gender": "",
+      "DOB": "2001-03-06T18:30:00.000Z",
+      "age": 20,
+      "addr1": "Mumbai",
+      "Race": "cdnvdfmbv",
+      "emFirstName": "Kriti1K",
+      "emLastName": "K",
+      "relation": "sibling",
+      "ppp": "yes",
+      "emAddress": "Mumbai",
+      "allergycheck": "yes",
+      "patientId": 5,
+      "id": 7
+    }
+  ],
+  "notes": [
+    {
+      "sendDate": "2021-12-25T18:30:00.000Z",
+      "receiverName": "",
+      "reDesignation": "",
+      "message": "hello",
+      "urgencyLevel": "",
+      "id": 5
+    },
+    {
+      "sendDate": "2021-12-27T18:30:00.000Z",
+      "receiverName": "Rambha",
+      "reDesignation": "Rambha Sidar",
+      "message": "Hello",
+      "urgencyLevel": "",
+      "id": 6
+    },
+    {
+      "sendDate": "2021-12-28T18:30:00.000Z",
+      "receiverName": "nandini",
+      "reDesignation": "hello",
+      "message": "hi",
+      "urgencyLevel": "",
+      "id": 7
+    },
+    {
+      "sendDate": "2021-12-20T18:30:00.000Z",
+      "receiverName": "nandini",
+      "reDesignation": "ho ho",
+      "message": "hello",
+      "urgencyLevel": "",
+      "id": 8
+    },
+    {
+      "sendDate": "2021-12-28T18:30:00.000Z",
+      "receiverName": "Rambha",
+      "reDesignation": "nurse",
+      "message": "hello",
+      "urgencyLevel": "Urgent",
+      "id": 9
+    },
+    {
+      "sendDate": "2021-12-29T18:30:00.000Z",
+      "receiverName": "Rambha",
+      "reDesignation": "Nurse",
+      "message": "hello",
+      "urgencyLevel": "Not urgent",
+      "id": 10
+    },
+    {
+      "sendDate": "2021-12-29T18:30:00.000Z",
+      "receiverName": "Rambha",
+      "reDesignation": "Nurse",
+      "message": "hello",
+      "urgencyLevel": "Urgent",
+      "id": 11
+    }
+  ],
+  "appointment": [
+    {
+      "id": 1,
+      "title": "title1",
+      "description": "description1",
+      "physician": "physician1",
+      "dateCreated": "2021-11-22T06:00:44.043Z",
+      "time": "09:00"
+    },
+    {
+      "title": "meeting2",
+      "description": " bvc mgfchvjbnb",
+      "physician": "physician2",
+      "dateCreated": "2021-12-22T18:30:00.000Z",
+      "time": "06:00",
+      "id": 2
+    },
+    {
+      "title": "meeting3",
+      "description": "hello how are you",
+      "physician": "",
+      "dateCreated": "2021-12-22T18:30:00.000Z",
+      "time": "09:00",
+      "id": 3
+    },
+    {
+      "title": "meeting3",
+      "description": "jhgfhg vkhvlnb",
+      "physician": "",
+      "dateCreated": "2021-12-23T18:30:00.000Z",
+      "time": "10:00",
+      "id": 4
+    },
+    {
+      "title": "gfhgf",
+      "description": "bc b",
+      "physician": "b mbkb",
+      "dateCreated": "2021-12-22T18:30:00.000Z",
+      "time": "11:00",
+      "id": 5
+    },
+    {
+      "title": "meeting4",
+      "description": "hvkhvbk n",
+      "physician": "physician9",
+      "dateCreated": "2021-12-23T18:30:00.000Z",
+      "time": "10:00",
+      "id": 6
+    },
+    {
+      "title": "meeting2",
+      "description": "sddg",
+      "physician": "b mbkb",
+      "dateCreated": "2021-12-22T18:30:00.000Z",
+      "time": "10:00",
+      "id": 7
+    },
+    {
+      "title": "",
+      "description": "",
+      "physician": "",
+      "dateCreated": "",
+      "time": "",
+      "id": 8
+    },
+    {
+      "title": "meeting2",
+      "description": "hello",
+      "physician": "me",
+      "dateCreated": "2021-12-30T18:30:00.000Z",
+      "time": "06:00",
+      "id": 9
+    }
+  ],
+  "inboxdata": [
+    {
+      "id": 1,
+      "title": "title1",
+      "description": "description1",
+      "physician": "physician1",
+      "date": "09-12-21",
+      "time": "09:30"
+    }
+  ],
+  "countries": [
+    {
+      "id": "1",
+      "name": "Finland",
+      "capital": "Helsinki"
+    },
+    {
+      "id": "2",
+      "name": "Norway",
+      "capital": "Oslo"
+    },
+    {
+      "id": "3",
+      "name": "Japan",
+      "capital": "Tokyo"
+    },
+    {
+      "id": "4",
+      "name": "Germany",
+      "capital": "Berlin"
+    },
+    {
+      "id": "5",
+      "name": "Russia",
+      "capital": "Moscow"
+    },
+    {
+      "id": "6",
+      "name": "Kenya",
+      "capital": "Nairobi"
+    },
+    {
+      "id": "7",
+      "name": "Sweden",
+      "capital": "Stockholm"
+    }
+  ],
+  "allergydetails": [
+    {
+      "id": "1",
+      "type": "animal",
+      "clinicalInformation": "clinicalInformationA"
+    },
+    {
+      "id": "2",
+      "type": "food",
+      "clinicalInformation": "clinicalInformationF"
+    },
+    {
+      "id": "3",
+      "type": "Fungi",
+      "clinicalInformation": "clinicalInformationFu"
+    }
+  ]
+}

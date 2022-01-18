@@ -1,0 +1,177 @@
+
+
+
+
+<mat-tab-group>
+
+    <mat-tab label="User Information" style="color: palevioletred">
+  <mat-card fxLayoutAlign="center left" *ngIf="selection==='no'">
+    <table>
+      <tr>
+        <td id="data">Name</td>
+        <td id="data">:</td>
+        <td>{{loggedinUser?.title}} {{loggedinUser?.name}} {{loggedinUser?.lname}}</td>
+      </tr>
+      <tr>
+        <td id="data">Email</td>
+        <td id="data">:</td>
+        <td>{{loggedinUser?.email}}</td>
+      </tr>
+      <tr>
+        <td id="data"> Date Of Birth</td>
+        <td id="data">:</td>
+        <td>{{loggedinUser?.dob}}</td>
+      </tr>
+      <tr>
+        <td id="data">Mobile Number</td>
+        <td id="data">:</td>
+        <td>{{loggedinUser?.phone}}</td>
+      </tr>
+    </table>
+  </mat-card>
+  <div *ngIf="selection==='yes'">
+    <mat-card>
+    <table>
+      <tr>
+        <td id="heading" colspan="4">Your Details:</td>
+      </tr>
+      <tr>
+        <td id="data">Name</td>
+        <td id="data">:</td>
+       
+        <td id="value">{{loggedinUser?.title}} {{loggedinUser?.name}} {{loggedinUser?.lname}}</td>
+        <td>  </td>
+        <td id="data"></td>
+        <td id="data"></td>
+        <td id="value"></td>
+      </tr>
+      <tr>
+        <td id="data">Email</td>
+        <td id="data">:</td>
+       
+        <td id="value">{{loggedinUser?.email}}</td>
+        <td>  </td>
+        <td id="data">Mobile Number</td>
+        <td id="data">:</td>
+        <td id="value">{{loggedinUser?.phone}}</td>
+      </tr>
+      <tr>
+        <td id="data">Date Of Birth</td>
+        <td id="data">:</td>
+       
+        <td id="value">{{patientDetails.demographic?.birthDate}}</td>
+        <td>  </td>
+        <td id="data">Age</td>
+        <td id="data">:</td>
+        <td id="value">{{patientDetails.demographic?.age}}</td>
+      </tr>
+      <tr>
+        <td id="data">Race</td>
+        <td id="data">:</td>
+        <td id="value">{{patientDetails.demographic?.race}}</td>
+        <td>  </td>
+        <td id="data">Ethnicity</td>
+        <td id="data">:</td>
+        <td id="value">{{patientDetails.demographic?.ethnicity}}</td>
+      </tr>
+      <tr>
+        <td id="data" >Gender</td>
+        <td id="data">:</td>
+        <td id="value">{{patientDetails.demographic?.gender}}</td>
+        <td>  </td>
+        <td id="data">langKnown</td>
+        <td id="data">:</td>
+        <td id="value">{{patientDetails.demographic?.langKnown}}</td>
+      </tr>
+      <tr>
+        <td id="data">address</td>
+        <td id="data">:</td>
+        <td id="value">{{patientDetails.demographic?.address}}</td>
+      </tr>
+      <tr>
+        <td id="data" >Do you have allergies</td>
+        <td id="data">:</td>
+        <td colspan="2" id="value">{{patientDetails.demographic?.allergyCheck}}</td>
+    
+      </tr>
+    </table>
+  </mat-card>
+  <mat-card>
+    <table>
+    <tr>
+      <td id="heading" colspan="4">Emergency Contact Details:</td>
+    </tr>
+    <tr>
+      <td id="data" >emgrFname</td>
+      <td id="data">:</td>
+      <td id="value">{{patientDetails.demographic?.emgrFname}}</td>
+      <td>  </td>
+      <td id="data">emgrLname</td>
+      <td id="data">:</td>
+      <td id="value">{{patientDetails.demographic?.emgrLname}}</td>
+    </tr>
+    <tr>
+      <td id="data" >emgrEmail</td>
+      <td id="data">:</td>
+      <td id="value">{{patientDetails.demographic?.emgrEmail}}</td>
+      <td>  </td>
+      <td id="data">emgrContactNo</td>
+      <td id="data">:</td>
+      <td id="value">{{patientDetails.demographic?.emgrContactNo}}</td>
+    </tr>
+    <tr>
+      <td id="data" >emgrRelation</td>
+      <td id="data">:</td>
+      <td id="value">{{patientDetails.demographic?.emgrRelation}}</td>
+      <td>  </td>
+      <td id="data">emgrAddress</td>
+      <td id="data">:</td>
+      <td id="value">{{patientDetails.demographic?.emgrAddress}}</td>
+    </tr>
+    <tr>
+      <td id="data" >Do you need access to Patient portal</td>
+      <td id="data">:</td>
+      <td colspan="2" id="value">{{patientDetails.demographic?.ppp}}</td>
+     
+    </tr>
+    
+  </table>
+  </mat-card>
+  <label id="allergy">AllergyInformation</label>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length!==0">
+    <ng-container matColumnDef="allergyType">
+      <th mat-header-cell *matHeaderCellDef>Allergy Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyType}} </td>
+    </ng-container>
+    <ng-container matColumnDef="allergyName">
+      <th mat-header-cell *matHeaderCellDef>Allergy Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="allergyDescription">
+      <th mat-header-cell *matHeaderCellDef>Allergy Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyDescription}} </td>
+    </ng-container>
+    <ng-container matColumnDef="allergyClinicalInformation">
+      <th mat-header-cell *matHeaderCellDef> Allergy ClinicalInformation</th>
+      <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyClinicalInformation}} </td>
+    </ng-container>
+    <ng-container matColumnDef="is Allergy Fatal">
+      <th mat-header-cell *matHeaderCellDef> is Allergy Fatal</th>
+      <td mat-cell *matCellDef="let element"> {{element.isAllergyFatal}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+  </table>
+  <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+    <mat-card-actions fxFlexFill>
+      <button mat-raised-button (click)="edit()" color="accent">
+        Edit
+      </button>
+    </mat-card-actions>
+    </div>
+  </div>
+  </mat-tab>
+  <mat-tab label="Visit History">
+  
+  </mat-tab>
+  </mat-tab-group>

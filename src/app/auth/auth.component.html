@@ -1,0 +1,95 @@
+
+<div class="bg-container">
+  <img class="wave" src="../../assets/Images/wave.svg" alt="" />
+
+  <div
+    class="container"
+    fxLayout="row "
+    fxLayoutAlign="center center"
+    fxLayoutGap="50px"
+    fxLayout.xs="column"
+    fxLayoutGap.xs="0"
+  >
+    <div class="img" fxflex="30">
+      <img src="../../assets/Images/undraw_medical_care_movn.svg" alt="" />
+    </div>
+
+    <div class="login-container" fxflex="70" fxLayout="column "
+    fxLayoutGap="3%" fxLayoutAlign="center center">
+      <mat-card >
+        <img class="avatar" src="../../assets/Images/avatar.svg" alt="" />
+        <form
+          
+          [formGroup]="loginForm"
+          (ngSubmit)="onFormSubmit()"
+        >
+          <div
+            fxLayout="row "
+            fxLayoutAlign="center center"
+            fxLayout.lt-sm="column"
+            fxLayoutGap="3%"
+          >
+            <mat-card-title><h1>Sign In !!</h1> </mat-card-title>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center" fxLayoutGap="3%">
+            <mat-form-field color="accent">
+              <input
+                id="userName"
+                matInput
+                type="text"
+                placeholder="UserName"
+                formControlName="username"
+              />
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutAlign="center center" fxLayoutGap="3%">
+            <mat-form-field color="accent">
+              <input
+                id="password"
+                matInput
+                type="password"
+                placeholder="Password"
+                formControlName="password"
+              />
+            </mat-form-field>
+          </div>
+
+          <div
+            fxLayout="row "
+            fxLayoutAlign="center center"
+            fxLayout.lt-sm="column"
+            fxLayoutGap="1%"
+          >
+            <mat-card-actions fxFlexFill>
+              <button color="accent" mat-raised-button type="submit" fxFlexFill>
+                Submit!
+              </button>
+            </mat-card-actions>
+          </div>
+
+          <div
+            fxLayout="row "
+            fxLayoutAlign="center center"
+            fxLayoutGap="1%"
+          >
+           
+
+            <mat-card-actions >
+              <button color="accent" mat-raised-button >
+                <a routerLink="/patient-signup"> patient-signup </a>
+              </button>
+
+              <button color="accent" mat-raised-button >
+                <a routerLink="/forgot-password"> forgot-password</a>
+              </button>
+              
+            </mat-card-actions>
+          </div>
+        </form>
+       
+      </mat-card>
+    </div>
+  </div>
+</div>

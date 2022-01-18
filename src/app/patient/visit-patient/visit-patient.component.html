@@ -1,0 +1,55 @@
+<div class="image">
+  <mat-tab-group>
+    <mat-tab label="Appointment info">
+      <table>
+        <tr>
+          <th>Visit Date :</th>
+          <td>{{ visitDate }}</td>
+          <br />
+        </tr>
+        <tr>
+          <th>Patient Id :</th>
+          <td>{{ data.patientId }}</td>
+          <br />
+        </tr>
+         <tr>
+          <th>Physician Id :</th>
+          <td>{{ physicianId }}</td>
+          <br />
+        </tr> 
+        <tr>
+          <th>Physician Name :</th>
+          <td>{{ data.physicianName }}</td>
+          <br />
+        </tr>
+        <tr>
+          <th>Appointment Id :</th>
+          <td>{{ data.appid }}</td>
+          <br />
+        </tr>
+        <tr>
+          <th>Title :</th>
+          <td>{{ data.title }}</td>
+          <br />
+        </tr>
+        <tr>
+          <th>Description :</th>
+          <td>{{ data.description }}</td>
+          <br />
+        </tr>
+        <tr>
+          <th>Appointment Date :</th>
+          <td>{{ data.appointmentDate }}</td>
+          <br />
+        </tr>
+        <tr>
+          <th>Time :</th>
+          <td>{{ data.time }}</td>
+          <br />
+        </tr>
+      </table>
+    </mat-tab>
+     <mat-tab label="Vital Signs">Content 2</mat-tab>
+   <!-- <mat-tab label="Third">Content 3</mat-tab> -->
+  </mat-tab-group>
+</div>

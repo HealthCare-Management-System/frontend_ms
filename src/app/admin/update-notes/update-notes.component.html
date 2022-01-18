@@ -1,0 +1,60 @@
+
+<div class="image">
+  <mat-card fxLayoutAlign="center center">
+  <form
+    [formGroup]="noteForm"
+    fxLayout="column wrap"
+    fxLayoutGap="3%"
+    (ngSubmit)="onFormSubmit()"
+  >
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+     
+      <mat-form-field color="accent">
+        <input
+          id="phy"
+          matInput
+          type="text"
+          placeholder="choose Reciever"
+          formControlName="receiverName"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent">
+        <textarea
+          id="atitle"
+          matInput
+          type="text"
+          placeholder="type msg"
+          formControlName="message"
+        ></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Urgency level</mat-label>
+        <select
+          matNativeControl
+          id="urgencyLevel"
+          formControlName="urgencyLevel"
+        >
+          <option value="" disabled selected></option>
+          <option value="Urgent">Urgent</option>
+          <option value="Not urgent">Not Urgent</option>
+        </select>
+      </mat-form-field>
+    </div>
+
+    <div
+      fxLayout="row "
+      fxLayoutAlign="center center"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="1%"
+    >
+      <mat-card-actions fxFlexFill>
+        <button color="accent" mat-raised-button type="submit" fxFlexFill>
+          Send!
+        </button>
+      </mat-card-actions>
+    </div>
+  </form>
+</mat-card>
+</div>

@@ -1,0 +1,91 @@
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++Active users++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<button
+  mat-raised-button
+  color="accent"
+  class="addUser"
+  (click)="onRegistration()"
+>
+  <mat-icon>add</mat-icon> Add Medication
+</button>
+<!--++++++++++++++++++++++++++++++++++++++++++++++++++++Active users++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<table
+  mat-table
+  [dataSource]="dataSource"
+  class="mat-elevation-z8"
+  width="100%"
+  matSort
+>
+  <!-- Position Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="drugName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>drugName</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <!-- <ng-container matColumnDef="role">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation</th>
+    <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+  </ng-container> -->
+
+  <ng-container matColumnDef="drugGenericName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      drugGenericName
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="drugBrandName">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      drugBrandName
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.status }}
+    </td></ng-container
+  >
+
+  <ng-container matColumnDef="drugForm">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      drugForm
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.lname }}
+    </td></ng-container
+  >
+
+  <ng-container matColumnDef="drugStrength">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      drugStrength
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.title }}
+    </td></ng-container
+  >
+
+  <ng-container matColumnDef="request">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button (click)="approveRequest(element)">
+        Approve
+      </button>
+    </td></ng-container
+  >
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: displayedColumns"
+    [hidden]="row.status !== 'NotApproved'"
+  ></tr>
+</table>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons
+></mat-paginator>

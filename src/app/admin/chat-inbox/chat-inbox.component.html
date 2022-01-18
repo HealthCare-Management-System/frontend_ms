@@ -1,0 +1,139 @@
+<div class="image">
+
+<mat-tab-group>
+  <mat-tab label="Send Notes">
+    <mat-card fxLayoutAlign="center center">
+      <form
+        [formGroup]="noteForm"
+        fxLayout="column wrap"
+        fxLayoutGap="3%"
+        (ngSubmit)="onFormSubmit()"
+      >
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <!-- <mat-form-field appearance="fill" color="accent">
+            <mat-label>Choose Date</mat-label>
+            <input
+              matInput
+              [matDatepicker]="picker"
+              formControlName="sendDate"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field> -->
+          <mat-form-field color="accent">
+            <input
+              id="phy"
+              matInput
+              type="text"
+              placeholder="choose Reciever"
+              formControlName="receiverName"
+            />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field color="accent">
+            <textarea
+              id="atitle"
+              matInput
+              type="text"
+              placeholder="type msg"
+              formControlName="message"
+            ></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Urgency level</mat-label>
+            <select
+              matNativeControl
+              id="urgencyLevel"
+              formControlName="urgencyLevel"
+            >
+              <option value="" disabled selected></option>
+              <option value="Urgent">Urgent</option>
+              <option value="Not urgent">Not Urgent</option>
+            </select>
+          </mat-form-field>
+        </div>
+
+        <div
+          fxLayout="row "
+          fxLayoutAlign="center center"
+          fxLayout.lt-sm="column"
+          fxLayoutGap="1%"
+        >
+          <mat-card-actions fxFlexFill>
+            <button color="accent" mat-raised-button type="submit" fxFlexFill>
+              Send!
+            </button>
+          </mat-card-actions>
+        </div>
+      </form>
+    </mat-card>
+  </mat-tab>
+
+  <mat-tab label="Recieved Notes">
+    <table mat-table [dataSource]="chatdata" class="mat-elevation-z8" >
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.notesId }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="sendDate">
+        <th mat-header-cell *matHeaderCellDef>Date</th>
+        <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="senderName">
+        <th mat-header-cell *matHeaderCellDef>SenderName</th>
+        <td mat-cell *matCellDef="let element">{{ element.senderName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="message">
+        <th mat-header-cell *matHeaderCellDef>Message</th>
+        <td mat-cell *matCellDef="let element">{{ element.message }}</td>
+      </ng-container>
+      <ng-container matColumnDef="urgencyLevel">
+        <th mat-header-cell *matHeaderCellDef>UrgencyLevel</th>
+        <td mat-cell *matCellDef="let element">{{ element.urgencyLevel }}</td>
+      </ng-container>
+      <ng-container matColumnDef="isDeleted">
+        <th mat-header-cell *matHeaderCellDef>IsDeleted</th>
+        <td mat-cell *matCellDef="let element">{{ element.deleted }}</td>
+      </ng-container>
+      <ng-container matColumnDef="isRead">
+        <th mat-header-cell *matHeaderCellDef>isRead</th>
+        <td mat-cell *matCellDef="let element">{{ element.read }}</td>
+      </ng-container>
+      <ng-container matColumnDef="reply">
+        <th mat-header-cell *matHeaderCellDef>Reply</th>
+        <td mat-cell *matCellDef="let element">{{ element.reply }}</td>
+      </ng-container>
+      <ng-container matColumnDef="ReplySender">
+        <th mat-header-cell *matHeaderCellDef>reply</th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="replyNote(element)"
+          >
+            reply
+          </button>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>action</th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button color="warn" (click)="deleteNotes(element)">
+            Delete
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns1"></tr>
+    </table>
+  </mat-tab>
+</mat-tab-group>
+</div>

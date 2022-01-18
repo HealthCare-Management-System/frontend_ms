@@ -1,0 +1,17 @@
+#b1 {
+  border: 1px solid pink;
+  border-radius: 15px;
+  box-shadow: 0 0 8px rgb(207, 207, 207);
+  background-color: #ff5b85;
+  color:white;
+}
+
+span{
+  color:#e90941
+}
+
+.image{
+  height:40em; background-size:cover; width:auto;
+  background-image:url("https://www.chula.ac.th/wp-content/uploads/2020/07/im_020763_36902_3-copy-1024x538.jpg");
+  background-position:50% 50%;
+}

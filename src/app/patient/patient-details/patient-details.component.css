@@ -1,0 +1,54 @@
+@media screen and (min-width: 700px)
+{
+    mat-card {
+    max-width: 80%;
+    color:#ff5b85;
+    margin: 2em auto;
+    text-align: center;
+    margin-bottom: 10%;
+    
+  }
+}
+@media screen and (max-width: 700px)
+{
+    mat-card {
+    max-width: 90%;
+    color:#ff5b85;
+    margin: 2em auto;
+    text-align: center;
+    margin-bottom: 10%;
+    height: auto;
+  }
+}
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  :host {
+    background-color: #064E89; 
+  
+  }
+
+  .bodybg-color {
+    background-color: #064E89; 
+}
+td{
+  text-align: left;
+}
+#data{
+ color:#ff5b85;
+}
+#heading{
+  color:lightseagreen
+}
+#value{
+  color:black
+}
+ 
+table{
+  width:100%
+}
+
+
+
+

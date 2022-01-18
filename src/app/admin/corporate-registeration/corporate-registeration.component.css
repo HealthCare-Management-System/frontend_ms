@@ -1,0 +1,63 @@
+
+
+@media screen and (min-width: 700px)
+{
+    mat-card {
+    max-width: 60%;
+    margin: 2em auto;
+    color:#ff5b85;
+    text-align: center;
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 700px)
+{
+    mat-card {
+    max-width: 90%;
+    margin: 2em auto;
+    text-align: center;
+    color:#ff5b85;
+    margin-bottom: 10%;
+  }
+}
+
+
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  :host {
+    background-color: #064E89; 
+  
+  }
+
+  .bodybg-color {
+    background-color: #064E89; 
+}
+
+  /* mat-card {
+    background-color: #064E89; 
+    color:aliceblue; 
+} */
+
+
+
+
+
+
+/* ::ng-deep input.mat-input-element {
+    color: aliceblue;
+  }
+  
+
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label  {
+    color: aliceblue;
+  }
+  
+
+  ::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: aliceblue;
+  } */
+

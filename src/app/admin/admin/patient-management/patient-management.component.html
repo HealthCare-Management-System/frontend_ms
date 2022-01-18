@@ -1,0 +1,232 @@
+<!-- <input type="text" [(ngModel)]="strString" />
+<button (click)="onSearch()" mat-raised-button color="accent">Search</button>
+
+<button mat-raised-button color="accent" class="addUser">
+  <a [routerLink]="['../registration']" color="white"> Add Physician/Nurse </a>
+</button> -->
+<!-- <button (click)="onActiveClick">Active </button>
+<button(click)="onDeactiveClick">Deactive </button>
+<button (click)="onBlockClick">Block </button> -->
+<mat-tab-group>
+  <!--++++++++++++++++++++++++++++++++++++++++++++++++++++Active users++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <mat-tab label="View Active">
+    <!--++++++++++++++++++++++++++++++++++++++++++++++++++++Active users++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      width="100%"
+      matSort
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation</th>
+        <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.status }}
+        </td></ng-container
+      >
+
+      <ng-container matColumnDef="doj">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>DOJ</th>
+        <td mat-cell *matCellDef="let element">{{ element.doj }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Deactive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button (click)="changeStatusDeactive(element)">
+            Deactive
+          </button>
+        </td></ng-container
+      >
+      <ng-container matColumnDef="Block">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button (click)="changeStatusBlock(element)">
+            Block
+          </button>
+        </td></ng-container
+      >
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns"
+        [hidden]="row.status !== 'Active' || row.role !== 'PATIENT'"
+      ></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-tab>
+  <!--++++++++++++++++++++++++++++++++++++++++++++++++++++View Deactive+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <mat-tab label="View Deactive">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      width="100%"
+      matSort
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation</th>
+        <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.status }}
+        </td></ng-container
+      >
+
+      <ng-container matColumnDef="doj">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>DOJ</th>
+        <td mat-cell *matCellDef="let element">{{ element.doj }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            (click)="changeStatusActive(element)"
+            id="active"
+          >
+            Active
+          </button>
+        </td></ng-container
+      >
+
+      <ng-container matColumnDef="Block">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button (click)="changeStatusBlock(element)">
+            Block
+          </button>
+        </td></ng-container
+      >
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns_1"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns_1"
+        [hidden]="row.status !== 'Deactive' || row.role !== 'PATIENT'"
+      ></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-tab>
+  <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++View Blocked++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+  <mat-tab label="View Blocked">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      width="100%"
+      matSort
+    >
+      <!-- Position Column -->
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation</th>
+        <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.status }}
+        </td></ng-container
+      >
+
+      <ng-container matColumnDef="doj">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>DOJ</th>
+        <td mat-cell *matCellDef="let element">{{ element.doj }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="Active">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <button
+            mat-raised-button
+            (click)="changeStatusActive(element)"
+            id="active"
+          >
+            Active
+          </button>
+        </td></ng-container
+      >
+
+      <ng-container matColumnDef="Deactive">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-raised-button (click)="changeStatusDeactive(element)">
+            Deactive
+          </button>
+        </td></ng-container
+      >
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns_2"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns_2"
+        [hidden]="row.status !== 'Block' || row.role !== 'PATIENT'"
+      ></tr>
+    </table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-tab>
+</mat-tab-group>

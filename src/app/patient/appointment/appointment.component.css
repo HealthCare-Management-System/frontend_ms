@@ -1,0 +1,45 @@
+.image{
+  height:40em; background-size:cover; width:auto;
+  background-image:url("https://www.kauveryhospital.com/images/corona/covid_vaccine_banner.jpg");
+  background-position:50% 50%;
+}
+
+@media screen and (min-width: 700px)
+{
+    mat-card {
+    max-width: 60%;
+    color:#ff5b85;
+    margin: 2em auto;
+    text-align: center;
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 700px)
+{
+    mat-card {
+    max-width: 90%;
+    color:#ff5b85;
+    margin: 2em auto;
+    text-align: center;
+    margin-bottom: 10%;
+  }
+}
+
+mat-form-field{
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+
+  :host {
+    background-color: #064E89; 
+  
+  }
+
+  .bodybg-color {
+    background-color: #064E89; 
+}

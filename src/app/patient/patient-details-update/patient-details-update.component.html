@@ -1,0 +1,393 @@
+<mat-stepper linear #stepper *ngIf="!successMsg">
+  <mat-step [stepControl]="contactForm">
+    <ng-template matStepLabel>Update Personal Information</ng-template>
+    <mat-card fxLayoutAlign="center center">
+      <form fxLayout="column wrap" fxLayoutGap="3%" [formGroup]="contactForm">
+        <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="10%">
+          <div id="title-label">Gender* :</div>
+          <div layout="row">
+            <mat-radio-group aria-labelledby="title-label" formControlName="gender"
+              [ngModel]="patientDetails.demographic?.gender" required>
+              <mat-radio-button value="Male">Male</mat-radio-button>
+              <mat-radio-button value="Female">Female</mat-radio-button>
+              <mat-radio-button value="Others">Others</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <!-- <mat-form-field>
+              <input matInput [matDatepicker]="datepicker" placeholder="Date Of Birth"  [ngModel]="up.birthDate" formControlName="DOB"
+                  (dateChange)="CalAge($event)" required>
+              <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+              <mat-datepicker #datepicker></mat-datepicker>
+          </mat-form-field> -->
+          <mat-form-field>
+            <input matInput type="text" placeholder="Date Of Birth" [ngModel]="patientDetails.demographic?.birthDate"
+              required formControlName="DOB" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Age" [ngModel]="patientDetails.demographic?.age" required
+              formControlName="Age" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field>
+            <input matInput type="text" placeholder="Ethnicity" [ngModel]="patientDetails.demographic?.ethnicity"
+              formControlName="ethnicity" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Race" [ngModel]="patientDetails.demographic?.race"
+              formControlName="Race" required />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field>
+            <input matInput type="text" placeholder="LanguagesKnown" [ngModel]="patientDetails.demographic?.langKnown"
+              formControlName="langKnown" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" placeholder="Your Address" [ngModel]="patientDetails.demographic?.address"
+              formControlName="addr1" />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <div id="title-label"> Do you have any known allergies: </div>
+          <mat-radio-group formControlName="sel3" [ngModel]="patientDetails.demographic?.allergyCheck"
+            (ngModelChange)="onChange($event)" required>
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+          <mat-card-actions fxFlexFill>
+            <button color="accent" mat-raised-button matStepperNext>Next</button>
+          </mat-card-actions>
+        </div>
+      </form>
+    </mat-card>
+  </mat-step>
+  <mat-step [stepControl]="emergencyContactForm">
+    <mat-card fxLayoutAlign="center center">
+      <form [formGroup]="emergencyContactForm" (ngSubmit)="onSubmit()">
+        <ng-template matStepLabel>Update Emergency Information</ng-template>
+        <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="10%">
+          <div id="title-label">Title* :</div>
+          <div layout="row">
+            <mat-radio-group aria-labelledby="title-label" formControlName="emTitle"
+              [ngModel]="patientDetails.demographic?.emgrTitle" required>
+              <mat-radio-button value="Mr">Mr</mat-radio-button>
+              <mat-radio-button value="Miss">Miss</mat-radio-button>
+              <mat-radio-button value="Mrs">Mrs</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field>
+            <input id="fName" matInput type="text" placeholder="FirstName"
+              [ngModel]="patientDetails.demographic?.emgrFname" formControlName="emFirstName" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input id="lName" matInput type="text" placeholder="LastName"
+              [ngModel]="patientDetails.demographic?.emgrLname" formControlName="emLastName" required />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field>
+            <input id="fName" matInput type="text" placeholder="Email" [ngModel]="patientDetails.demographic?.emgrEmail"
+              formControlName="emEmail" />
+          </mat-form-field>
+
+          <mat-form-field>
+            <input id="lName" matInput type="text" placeholder="Mobile Number"
+              [ngModel]="patientDetails.demographic?.emgrContactNo" formControlName="emPhone" required />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <mat-form-field>
+            <input id="lName" matInput type="text" placeholder="Relation"
+              [ngModel]="patientDetails.demographic?.emgrRelation" formControlName="Relation" required />
+          </mat-form-field>
+          <mat-form-field>
+            <input id="lName" matInput type="text" placeholder="Address"
+              [ngModel]="patientDetails.demographic?.emgrAddress" formControlName="emAddress" required />
+          </mat-form-field>
+        </div>
+        <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+          <div id="title-label"> Do you need access to patient portal: </div>
+          <mat-radio-group formControlName="sel2" [ngModel]="patientDetails.demographic?.ppp" required>
+            <mat-radio-button value="yes">Yes</mat-radio-button>
+            <mat-radio-button value="no">No</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+          <button color="accent" mat-raised-button matStepperPrevious>Back</button>
+          <button color="accent" mat-raised-button matStepperNext
+            *ngIf="patientDetails.demographic?.allergyCheck==='yes'||this.contactForm.value.sel3==='yes'">Next</button>
+          <button color="accent" mat-raised-button
+            *ngIf="this.contactForm.value.sel3==='no'&&patientDetails.demographic?.allergyCheck==='no'"
+            type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-card>
+  </mat-step>
+  <mat-step [stepControl]="allergyForm"
+    *ngIf="patientDetails.demographic?.allergyCheck==='yes'||this.contactForm.value.sel3==='yes'">
+    <!-- <mat-card fxLayoutAlign="center center">
+      <form [formGroup]="allergyForm"> -->
+        <mat-card *ngIf="newAllergy==='yes'" fxLayoutAlign="center center">
+          <form [formGroup]="allergyForm">
+            <ng-template matStepLabel>Add Allergy Information</ng-template>
+            <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+              Select the Allergy Type:
+              <mat-form-field *ngIf="selectedType">
+                <mat-select formControlName="AllergyT" (ngModelChange)="onChangeType($event)">
+                  <mat-option *ngFor="let re of allergyType" value="{{re}}">{{
+                    re
+                    }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field *ngIf="selectedName">
+                <input type="text" matInput placeholder=" Enter The Allergy Type" formControlName="AllergyT" />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+              Select the Allergy Name:
+              <mat-form-field *ngIf="selectedValue||selectedType">
+                <mat-select formControlName="AllergyN" (ngModelChange)="onChangeName($event)">
+                  <mat-option *ngFor="let re of allergyName" value="{{ re}}">{{
+                    re
+                    }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field *ngIf="selectedName">
+                <input type="text" matInput placeholder="Allergy Name" formControlName="AllergyN" />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+              Select the Description:
+              <mat-form-field *ngIf="selectedValue||selectedType">
+                <mat-select formControlName="AllergyD">
+                  <mat-option *ngFor="let re of  AlDescription" value="{{ re}}">{{
+                    re
+                    }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field *ngIf="selectedName">
+                <input type="text" matInput placeholder="Allergy Description" formControlName="AllergyD" />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+              Select the Allergy Clinical Information:
+              <mat-form-field *ngIf="selectedValue||selectedType">
+                <mat-select formControlName="AllergyC">
+                  <mat-option *ngFor="let re of AlCLinicalInformation" value="{{ re}}">{{
+                    re
+                    }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field *ngIf="selectedName">
+                <input type="text" matInput placeholder="Allergy Clinical Information" formControlName="AllergyC" />
+              </mat-form-field>
+            </div>
+            <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="10%">
+              <div id="title-label">Is Allergy Fatal: </div>
+              <div layout="row">
+                <mat-radio-group aria-labelledby="title-label" formControlName="AllergyF">
+                  <mat-radio-button value="Yes">Yes</mat-radio-button>
+                  <mat-radio-button value="No">No</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            </div>
+            <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+              <mat-card-actions fxFlexFill>
+                <button color="accent" mat-raised-button (click)="reset()">Reset</button>
+                <button color="accent" mat-raised-button (click)="addMore()">addMore</button>
+                <button color="accent" mat-raised-button (click)="done()">Done</button>
+              </mat-card-actions>
+            </div>
+          </form>
+        </mat-card>
+        <ng-template matStepLabel>Update Allergy Information</ng-template>
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length!==0">
+          <ng-container matColumnDef="allergyType">
+            <th mat-header-cell *matHeaderCellDef>Allergy Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyType}} </td>
+          </ng-container>
+          <ng-container matColumnDef="allergyName">
+            <th mat-header-cell *matHeaderCellDef>Allergy Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyName}} </td>
+          </ng-container>
+          <ng-container matColumnDef="allergyDescription">
+            <th mat-header-cell *matHeaderCellDef>Allergy Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyDescription}} </td>
+          </ng-container>
+          <ng-container matColumnDef="allergyClinicalInformation">
+            <th mat-header-cell *matHeaderCellDef> Allergy ClinicalInformation</th>
+            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyClinicalInformation}} </td>
+          </ng-container>
+          <ng-container matColumnDef="is Allergy Fatal">
+            <th mat-header-cell *matHeaderCellDef> is Allergy Fatal</th>
+            <td mat-cell *matCellDef="let element"> {{element.isAllergyFatal}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-raised-button (click)="deleteAllergy(element)" color="accent">
+                Delete
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+          <mat-card-actions fxFlexFill>
+            <div>
+                  <button color="accent" mat-raised-button matStepperPrevious>Back</button><br>
+                  <button color="accent" mat-raised-button (click)="addNewAllergy()">addAllergy</button><br>
+
+                   <button color="accent" mat-raised-button (click)="submitWithAllergy()"
+                      *ngIf="dataSource.length!==0||newAllergy==='no'">Submit</button><br>
+                      <button color="accent" mat-raised-button  (click)="deleteAllAllergis()">DeleteAll</button>
+
+                    </div>
+          </mat-card-actions>
+        </div>
+      <!-- </form>
+    </mat-card> -->
+    
+  </mat-step>
+</mat-stepper>
+<div *ngIf="successMsg">
+  <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%">
+    <mat-card-title id="heading"> {{successMsg}} </mat-card-title>
+  </div>
+  <br>
+  <table>
+    <tr>
+      <td id="heading" colspan="4">Your Details:</td>
+    </tr>
+    <tr>
+      <td id="data">Date Of Birth</td>
+      <td id="data">:</td>
+      <td id="value">{{this.contactForm.value.DOB}}</td>
+      <td>  </td>
+      <td id="data">Age</td>
+      <td id="data">:</td>
+      <td id="value">{{this.contactForm.value.Age}}</td>
+    </tr>
+    
+    <tr>
+      <td id="data">Race</td>
+      <td id="data">:</td>
+      <td id="value">{{this.contactForm.value.Race}}</td>
+      <td>  </td>
+      <td id="data">Ethnicity</td>
+      <td id="data">:</td>
+      <td id="value">{{this.contactForm.value.ethnicity}}</td>
+    </tr>
+    <tr>
+      <td id="data" >Gender</td>
+      <td id="data">:</td>
+      <td id="value">{{this.contactForm.value.gender}}</td>
+      <td>  </td>
+      <td id="data">langKnown</td>
+      <td id="data">:</td>
+      <td id="value">{{this.contactForm.value.langKnown}}</td>
+    </tr>
+    <tr>
+      <td id="data">address</td>
+      <td id="data">:</td>
+      <td id="value">{{this.contactForm.value.addr1}}</td>
+    </tr>
+    <tr>
+      <td id="heading" colspan="4">Emergency Contact Details:</td>
+    </tr>
+    <tr>
+      <td id="data" >emgrFname</td>
+      <td id="data">:</td>
+      <td id="value">{{this.emergencyContactForm.value.emFirstName}}</td>
+      <td>  </td>
+      <td id="data">emgrLname</td>
+      <td id="data">:</td>
+      <td id="value">{{this.emergencyContactForm.value.emLastName}}</td>
+    </tr>
+    <tr>
+      <td id="data" >emgrEmail</td>
+      <td id="data">:</td>
+      <td id="value">{{this.emergencyContactForm.value.emEmail}}</td>
+      <td>  </td>
+      <td id="data">emgrContactNo</td>
+      <td id="data">:</td>
+      <td id="value">{{this.emergencyContactForm.value.emPhone}}</td>
+    </tr>
+    <tr>
+      <td id="data" >emgrRelation</td>
+      <td id="data">:</td>
+      <td id="value">{{this.emergencyContactForm.value.Relation}}</td>
+      <td>  </td>
+      <td id="data">emgrAddress</td>
+      <td id="data">:</td>
+      <td id="value">{{this.emergencyContactForm.value.emAddress}}</td>
+    </tr>
+    <tr>
+      <td id="data" >Do you need access to Patient portal</td>
+      <td id="data">:</td>
+      <td colspan="2" id="value">{{this.emergencyContactForm.value.sel2}}</td>
+     
+    </tr>
+    <tr>
+      <td id="data" >Do you have allergies</td>
+      <td id="data">:</td>
+      <td colspan="2" id="value">{{this.contactForm.value.sel3}}</td>
+
+    </tr>
+</table>
+<br>
+<div fxLayout="row " fxLayoutAlign="right center" fxLayout.lt-sm="column" fxLayoutGap="3%">
+  <label id="heading"> Allergy Information :</label>
+</div>
+<br>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length!==0">
+  <ng-container matColumnDef="allergyType">
+    <th mat-header-cell *matHeaderCellDef>Allergy Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyType}} </td>
+  </ng-container>
+  <ng-container matColumnDef="allergyName">
+    <th mat-header-cell *matHeaderCellDef>Allergy Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyName}} </td>
+  </ng-container>
+  <ng-container matColumnDef="allergyDescription">
+    <th mat-header-cell *matHeaderCellDef>Allergy Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyDescription}} </td>
+  </ng-container>
+  <ng-container matColumnDef="allergyClinicalInformation">
+    <th mat-header-cell *matHeaderCellDef> Allergy ClinicalInformation</th>
+    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyClinicalInformation}} </td>
+  </ng-container>
+  <ng-container matColumnDef="is Allergy Fatal">
+    <th mat-header-cell *matHeaderCellDef> is Allergy Fatal</th>
+    <td mat-cell *matCellDef="let element"> {{element.isAllergyFatal}} </td>
+  </ng-container>
+  <!-- <ng-container matColumnDef="Delete">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button (click)="deleteAllergy(element)" color="accent">
+        Delete
+      </button>
+    </td>
+  </ng-container> -->
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+</table>
+<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+  <mat-card-actions fxFlexFill>
+    <button mat-raised-button (click)="goBack()" color="accent">
+      ok
+    </button>
+  </mat-card-actions>
+</div>
+</div>

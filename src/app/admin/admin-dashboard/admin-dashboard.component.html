@@ -1,0 +1,230 @@
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<app-header></app-header>
+<mat-drawer-container class="example-container" autosize style="height: 100%">
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened>
+    <img
+      src="data:image/png;base64,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"
+    />
+
+    <mat-accordion>
+      <mat-expansion-panel
+        *ngIf="
+          loggedinUser
+            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            : false
+        "
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Corporate User Management </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p>
+          <a [routerLink]="['registration']"> Add Physician/Nurse </a>
+        </p>
+        <p>
+          <a [routerLink]="['user-management']"> User Management</a>
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        *ngIf="
+          loggedinUser
+            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            : false
+        "
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Patient Management System </mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- 
+        <p>
+          <a [routerLink]="['active-patients']"> Active Patients </a>
+        </p>
+        <p>
+          <a [routerLink]="['deactive-patients']"> DeActive Patients</a>
+        </p>
+        <p>
+          <a [routerLink]="['block-patients']">Blocked Patients </a>
+        </p> -->
+
+        <p>
+          <a [routerLink]="['approve-requests']"> Approve Requests </a>
+        </p>
+
+        <p>
+          <a [routerLink]="['patient-Management']"> Patient Management </a>
+        </p>
+        <p>
+          <a [routerLink]="['patient-registration']"> Add Patient </a>
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        *ngIf="
+          loggedinUser
+            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            : false
+        "
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Medication Management </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p>
+          <a [routerLink]="['medication']"> View/Add Medication Details </a>
+        </p>
+        <p>
+          <a [routerLink]="['diagnosis']"> View/Add Diagonsis Details</a>
+        </p>
+        <p>
+          <a [routerLink]="['procedure']"> View/Add Procedure Details</a>
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        *ngIf="
+          loggedinUser
+            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            : false
+        "
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Admin </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <p>
+          <a [routerLink]="['active']"> Add Physician/Nurse </a>
+        </p>
+        <p>
+          <a [routerLink]="['scheduler']"> Scheduler</a>
+        </p>
+        <p>
+          <a [routerLink]="['status1']">Employee Management </a>
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        *ngIf="
+          loggedinUser
+            ? loggedinUser.role.toLocaleLowerCase() == 'physician'
+              ? true
+              : false
+            : false
+        "
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Physician </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <a [routerLink]="[{ outlets: { second: ['registration'] } }]">
+            View Profile
+          </a>
+        </p>
+      </mat-expansion-panel>
+
+       
+<mat-expansion-panel
+*ngIf="
+  loggedinUser
+    ? (loggedinUser.role.toLocaleLowerCase() == 'physician'||loggedinUser.role.toLocaleLowerCase() == 'nurse')
+      ? true
+      : false
+    : false
+"
+hideToggle
+>
+<mat-expansion-panel-header>
+  <mat-panel-title> Patient Vital/Diagnosis </mat-panel-title>
+</mat-expansion-panel-header>
+<p>
+  <a [routerLink]="['patient-diagnosis']"> Patient-Visit </a>
+</p>
+<p>
+  <button type="button" (click)="routeinmethod()">Visit button</button>
+</p>
+</mat-expansion-panel>
+      
+      <mat-expansion-panel
+        *ngIf="
+          loggedinUser
+            ? loggedinUser.role.toLocaleLowerCase() == 'nurse'
+              ? true
+              : false
+            : false
+        "
+        hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title> Nurse </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <a [routerLink]="[{ outlets: { second: ['registration'] } }]">
+            View Profile
+          </a>
+        </p>
+
+        <p>
+          <a [routerLink]="['nurse-patient-info']"> Add Patient-Visit-Info </a>
+        </p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Patients </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <a [routerLink]="[{ outlets: { second: ['registration'] } }]">
+            View Patients
+          </a>
+        </p>
+        <p>
+          <a [routerLink]="['patient-registration']"> Add Patient </a>
+        </p>
+      </mat-expansion-panel>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <span class="material-icons" [routerLink]="['inbox']">inbox</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- <p>
+          <a [routerLink]="['inbox']"> View Inbox </a>
+        </p>
+        <p>
+          <a [routerLink]="['chat-inbox']"> Notes </a>
+        </p>
+        <p>
+          <a [routerLink]="['new-inbox']"> New Inbox </a>
+        </p> -->
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Scheduling </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <a [routerLink]="[{ outlets: { second: ['registration'] } }]">
+            View Calender
+          </a>
+        </p>
+        <p>
+          <a [routerLink]="[{ outlets: { second: ['registration'] } }]">
+            Schedule
+          </a>
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <button id="b1" type="button" mat-button (click)="drawer.toggle()">
+      <mat-icon>compare_arrows</mat-icon>
+    </button>
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
+<!-- <app-footer></app-footer> -->

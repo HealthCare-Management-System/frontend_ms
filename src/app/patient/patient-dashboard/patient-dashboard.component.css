@@ -1,0 +1,9 @@
+.image{
+    height:40em; background-size:cover; width:auto;
+    background-image:url("https://www.chula.ac.th/wp-content/uploads/2020/07/7measures-100-1.jpg");
+    background-position:50% 50%;
+  }
+  span{
+    color:#e90941
+  }
+  

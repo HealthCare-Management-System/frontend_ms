@@ -1,0 +1,394 @@
+<mat-card fxLayoutAlign="center center">
+  <form
+    [formGroup]="contactForm"
+    fxLayout="column wrap"
+    fxLayoutGap="3%"
+    (ngSubmit)="onFormSubmit()"
+  >
+    <div
+      fxLayout="row "
+      fxLayoutAlign="center center"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="3%"
+    >
+      <mat-card-title><h1>Book Appointments !!</h1> </mat-card-title>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent">
+        <mat-select #cricket (change)="update($event)">
+          <mat-option value="default" disabled> Select a physician</mat-option>
+          <mat-option
+            *ngFor="let physician of physicianName"
+            [value]="physician"
+          >
+            {{ physician }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <p>You selected {{ selected }}</p> -->
+    </div>
+    <div
+      fxLayout="row "
+      fxLayoutAlign="center center"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="1%"
+    >
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-card-actions fxFlexFill>
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="openModal('custom-modal-1')"
+          >
+            Submit!
+          </button>
+          ||
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="openModal('custom-modal-2')"
+          >
+            Edit
+          </button>
+          ||
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="openModal('custom-modal-3')"
+          >
+            Delete
+          </button>
+          ||
+        </mat-card-actions>
+      </div>
+    </div>
+  </form>
+</mat-card>
+
+<!----------Modal display------------------------------------------------------------------------------------------------------------->
+
+<jw-modal id="custom-modal-1">
+  <mat-card fxLayoutAlign="center center">
+    <form
+      [formGroup]="contactForm"
+      fxLayout="column wrap"
+      fxLayoutGap="3%"
+      (ngSubmit)="onFormSubmit()"
+    >
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="3%"
+      >
+        <mat-card-title><h1>Book Appointments !!</h1> </mat-card-title>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="atitle"
+            matInput
+            type="text"
+            placeholder="Meeting Title"
+            formControlName="title"
+          />
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <textarea
+            matInput
+            placeholder="Descrption"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field appearance="fill" color="accent">
+          <mat-label>Choose Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateCreated"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <mat-select #cricket (change)="update($event)">
+            <mat-option value="default" disabled>
+              Select a physician</mat-option
+            >
+            <mat-option
+              *ngFor="let availableSlots of availableTimeSlots"
+              [value]="availableSlots"
+            >
+              {{ availableSlots }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <mat-select #cricket (change)="update($event)">
+            <mat-option value="default" disabled> Select a patient Id</mat-option>
+            <mat-option
+              *ngFor="let patientid of patientId"
+              [value]="patientid"
+            >
+              {{ patientid }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+       
+      </div>
+
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="1%"
+      >
+        <mat-card-actions fxFlexFill>
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="onCreate()"
+          >
+            Create
+          </button>
+          ||
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="onUpdate()"
+          >
+            Update
+          </button>
+          ||
+
+          <p>{{ message }}</p>
+          <p></p
+        ></mat-card-actions>
+      </div>
+    </form>
+  </mat-card>
+</jw-modal>
+
+
+<!---------------------------------------------------Second modal------------------------------------------------------------------------------------------>
+
+<jw-modal id="custom-modal-2">
+  <mat-card fxLayoutAlign="center center">
+    <form
+      [formGroup]="contactForm"
+      fxLayout="column wrap"
+      fxLayoutGap="3%"
+      (ngSubmit)="onFormSubmit()"
+    >
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="3%"
+      >
+        <mat-card-title><h1>Edit Appointment !!</h1> </mat-card-title>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="title"
+            matInput
+            type="text"
+            placeholder="Meeting Title"
+            formControlName="title"
+          />
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <textarea
+            matInput
+            placeholder="Descrption"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field appearance="fill" color="accent">
+          <mat-label>Choose Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateCreated"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <mat-select #cricket (change)="update($event)">
+            <mat-option value="default" disabled>
+              Select a physician</mat-option
+            >
+            <mat-option
+              *ngFor="let availableSlots of availableTimeSlots"
+              [value]="availableSlots"
+            >
+              {{ availableSlots }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="1%"
+      >
+        <mat-card-actions fxFlexFill>
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="onCreate()" disabled
+          >
+            Create
+          </button>
+          ||
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="onUpdate()"
+          >
+            Update
+          </button>
+          ||
+
+          <p>{{ message }}</p>
+          <p></p
+        ></mat-card-actions>
+      </div>
+    </form>
+  </mat-card>
+</jw-modal>
+
+
+
+
+
+
+<!---------------------------------------------------Third modal------------------------------------------------------------------------------------------>
+
+<!-- <jw-modal id="custom-modal-3">
+  <mat-card fxLayoutAlign="center center">
+    <form
+      [formGroup]="contactForm"
+      fxLayout="column wrap"
+      fxLayoutGap="3%"
+      (ngSubmit)="onFormSubmit()"
+    >
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="3%"
+      >
+        <mat-card-title><h1>Edit Appointment !!</h1> </mat-card-title>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="title"
+            matInput
+            type="text"
+            placeholder="Meeting Title"
+            formControlName="title"
+          />
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <textarea
+            matInput
+            placeholder="Descrption"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field appearance="fill" color="accent">
+          <mat-label>Choose Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="dateCreated"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <mat-select #cricket (change)="update($event)">
+            <mat-option value="default" disabled>
+              Select a physician</mat-option
+            >
+            <mat-option
+              *ngFor="let availableSlots of availableTimeSlots"
+              [value]="availableSlots"
+            >
+              {{ availableSlots }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="1%"
+      >
+        <mat-card-actions fxFlexFill>
+          <button
+            color="accent"
+            mat-raised-button
+            type="submit"
+            fxFlexFill
+            (click)="onDelete()"
+          >
+            Delete
+          </button>
+          
+         
+
+          <p>{{ message }}</p>
+          <p></p
+        ></mat-card-actions>
+      </div>
+    </form>
+  </mat-card>
+</jw-modal> -->
+
