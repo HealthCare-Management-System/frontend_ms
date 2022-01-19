@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Roles } from '../models/role-enum';
 import { User } from '../models/user.model';
 import { AuthServiceService } from '../service/auth-service.service';
 
@@ -61,16 +62,16 @@ export class AuthComponent implements OnInit {
     if((this.loggedinUser != null) || (this.loggedinUser != undefined) )  
     {  
 
-      if (this.loggedinUser?.role?.toLocaleLowerCase() == 'admin') {
+      if (this.loggedinUser?.role?.toUpperCase() == Roles.ADMIN) {
         this.router.navigate(['/admin/dashboard']);
       }
-      if (this.loggedinUser?.role?.toLocaleLowerCase() == 'physician') {
+      if (this.loggedinUser?.role?.toUpperCase() == Roles.PHYSICIAN) {
         this.router.navigate(['/admin/dashboard']);
       }
-      if (this.loggedinUser?.role?.toLocaleLowerCase() == 'nurse') {
+      if (this.loggedinUser?.role?.toUpperCase() == Roles.NURSE) {
         this.router.navigate(['/admin/dashboard']);
       }
-      if (this.loggedinUser?.role?.toLocaleLowerCase() == 'patient') {
+      if (this.loggedinUser?.role?.toUpperCase() == Roles.PATIENT) {
         this.router.navigate(['/patient/dashboard']);
       } 
     }  

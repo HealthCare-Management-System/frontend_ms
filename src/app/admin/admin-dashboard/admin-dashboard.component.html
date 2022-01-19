@@ -10,7 +10,7 @@
       <mat-expansion-panel
         *ngIf="
           loggedinUser
-            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            ? loggedinUser.role.toLocaleLowerCase() == 'ct_admin'
             : false
         "
         hideToggle
@@ -30,7 +30,7 @@
       <mat-expansion-panel
         *ngIf="
           loggedinUser
-            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            ? loggedinUser.role.toLocaleLowerCase() == 'ct_admin'
             : false
         "
         hideToggle
@@ -64,7 +64,7 @@
       <mat-expansion-panel
         *ngIf="
           loggedinUser
-            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            ? loggedinUser.role.toLocaleLowerCase() == 'ct_admin'
             : false
         "
         hideToggle
@@ -87,7 +87,7 @@
       <mat-expansion-panel
         *ngIf="
           loggedinUser
-            ? loggedinUser.role.toLocaleLowerCase() == 'admin'
+            ? loggedinUser.role.toLocaleLowerCase() == 'ct_admin'
             : false
         "
         hideToggle
@@ -110,7 +110,7 @@
       <mat-expansion-panel
         *ngIf="
           loggedinUser
-            ? loggedinUser.role.toLocaleLowerCase() == 'physician'
+            ? loggedinUser.role.toLocaleLowerCase() == 'ct_physician'
               ? true
               : false
             : false
@@ -131,7 +131,7 @@
 <mat-expansion-panel
 *ngIf="
   loggedinUser
-    ? (loggedinUser.role.toLocaleLowerCase() == 'physician'||loggedinUser.role.toLocaleLowerCase() == 'nurse')
+    ? (loggedinUser.role.toLocaleLowerCase() == 'ct_physician'||loggedinUser.role.toLocaleLowerCase() == 'ct_nurse')
       ? true
       : false
     : false
@@ -152,7 +152,7 @@ hideToggle
       <mat-expansion-panel
         *ngIf="
           loggedinUser
-            ? loggedinUser.role.toLocaleLowerCase() == 'nurse'
+            ? loggedinUser.role.toLocaleLowerCase() == 'ct_nurse'
               ? true
               : false
             : false
