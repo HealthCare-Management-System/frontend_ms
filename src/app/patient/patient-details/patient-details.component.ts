@@ -98,7 +98,7 @@ export class PatientDetailsComponent implements OnInit {
     console.log("to get single coulumn");
     this.allergyType = [...new Set(master.map((item:any) => item.allergyType))];
     this.allergyType.push('Others')//to get distinct type from repeated values
-    this.AlCLinicalInformation=[...new Set(master.map((item:any) => item.allergyClinicalInformation))];
+    //this.AlCLinicalInformation=[...new Set(master.map((item:any) => item.allergyClinicalInformation))];
     // this.AlDescription=[...new Set(master.map((item:any) => item.allergyDescription))];
     console.log(this.allergyType);
     
@@ -149,28 +149,45 @@ export class PatientDetailsComponent implements OnInit {
       }
       }
       this.AlDescription=[...new Set(this.AlDescription.map((item:any) => item))];
+      console.log(this.AlDescription);
+  }
+  onChangeDescription(event:any){
+    this.fetchAllergyClinicalInformtion(this.master,event);
+  }
+  fetchAllergyClinicalInformtion(master:any, event: any) {
+    for(var m of master){
+      if(m.allergyDescription.match(event)){
+        this.AlCLinicalInformation.push(m.allergyClinicalInformation);
+      }
+      }
+      this.AlCLinicalInformation=[...new Set(this.AlCLinicalInformation.map((item:any) => item))];
+      console.log(this.AlCLinicalInformation);
   }
   
   addMore(){
-    
+    console.log("hi ... from addmore()");
     let allergyN=this.allergyForm.value.AllergyN;
     let allergyT=this.allergyForm.value.AllergyT;
     let allergyD=this.allergyForm.value.AllergyD;
     let allergyC=this.allergyForm.value.AllergyC;
     let allergyF=this.allergyForm.value.AllergyF;
-   let obj=this.getMasterAllergyId(this.master,allergyN,allergyT,allergyD,allergyC);
+   let obj=this.getMasterAllergyId(this.master,allergyT,allergyN,allergyD,allergyC);
+   console.log(obj);
     let allergyObj:Allergy=new Allergy(obj,allergyF);
     this.moreAllergyList.push(allergyObj);
    this.reset();
   }
-  getMasterAllergyId(master: any, allergyN: any, allergyT: any, allergyD: any, allergyC: any) :MasterAllergy{
+  getMasterAllergyId(master: any, allergyT: any, allergyN: any, allergyD: any, allergyC: any) :MasterAllergy{
     let id!:number;
-    let obj=new MasterAllergy(allergyN,allergyT,allergyD,allergyC);
+    
+    let obj=new MasterAllergy(allergyT,allergyN,allergyD,allergyC);
+    console.log(this.obj);
     for(var m of master){
       if(m.allergyType.match(allergyT)&&m.allergyClinicalInformation.match(allergyC)&&m.allergyDescription.match(allergyD)&&m.allergyName.match(allergyN))
       {        obj.masterallergyId=m.masterallergyId;
       }
     }
+    console.log(this.obj);
     return obj;
   }
   reset(){
@@ -216,7 +233,7 @@ export class PatientDetailsComponent implements OnInit {
     let allergyD=this.allergyForm.value.AllergyD;
     let allergyC=this.allergyForm.value.AllergyC;
     let allergyF=this.allergyForm.value.AllergyF;
-    let objA=this. getMasterAllergyId(this.master,allergyN,allergyT,allergyD,allergyC);
+    let objA=this. getMasterAllergyId(this.master,allergyT,allergyN,allergyD,allergyC);
     let allergyObj:Allergy=new Allergy(objA,allergyF);
     console.log("the allergy");
    this.moreAllergyList.push(allergyObj);

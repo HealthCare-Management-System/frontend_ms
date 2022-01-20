@@ -4,11 +4,11 @@ import { Demographic } from "./demographic.model";
 import { User } from "./user.model";
 
 export class PatientDetails{
-    patientDetails!:number;
+    id!:number;
     constructor(
        
         public demographic:Demographic|undefined|null,
-        public employeeId:User|undefined|null,
+        public user:User|undefined|null,
         public allergies:Allergy[]|undefined|null,
     ){}
 }
