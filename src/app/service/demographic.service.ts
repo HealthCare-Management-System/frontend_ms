@@ -8,7 +8,7 @@ import { User } from '../models/user.model';
 
 @Injectable({ providedIn: 'root' })
 export class DemographicService {
-    apiURL = 'http://localhost:8000';
+    apiURL = 'http://localhost:8080/patienturl/patientdetails';
     httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ export class DemographicService {
       savePatientDemographic(demographic:PatientDetails): Observable<PatientDetails> {
         console.log("from services");
         console.log(demographic);
-          return this.http.post<PatientDetails>('http://localhost:8080/PatientDetails', JSON.stringify(demographic), this.httpOptions)
+          return this.http.post<PatientDetails>(this.apiURL, JSON.stringify(demographic), this.httpOptions)
           .pipe(
            retry(1),
             catchError(this.handleError)
@@ -42,7 +42,7 @@ export class DemographicService {
         }
         getPatientDemographicsById(userId:number|null|undefined): Observable<PatientDetails> {
           return this.http
-            .get<PatientDetails>('http://localhost:8080/PatientDetails/user/'+userId)
+            .get<PatientDetails>('http://localhost:8080/patienturl/patientdetails/user/'+userId)
             .pipe(retry(1), catchError(this.handleError));
         }
         
@@ -74,7 +74,7 @@ export class DemographicService {
         console.log(id);
         return this.http
           .patch<PatientDetails>(
-            'http://localhost:8080/PatientDetails/update/' + id,
+            'http://localhost:8080/patienturl/patientdetails/update/' + id,
             JSON.stringify(demo),
             this.httpOptions
           )
