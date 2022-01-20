@@ -86,7 +86,7 @@ export class DeactivePatientsComponent implements OnInit, AfterViewInit {
 
 
   loadusers() {
-    return this.authservice.getUsersBasedOnRoleAndStatus("PATIENT","Deactive").subscribe((data: {}) => {
+    return this.authservice.getUsersBasedOnRoleAndStatus("CT_PATIENT","Deactive").subscribe((data: {}) => {
       this.lockUnlockUsers = data;
        
       console.log("Printing lockunlock"+this.lockUnlockUsers)

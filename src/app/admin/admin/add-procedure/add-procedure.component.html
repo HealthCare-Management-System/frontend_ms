@@ -1,65 +1,66 @@
 <mat-card fxLayoutAlign="center center">
-    <form
-      [formGroup]="contactForm"
-      fxLayout="column wrap"
+  <form
+    [formGroup]="contactForm"
+    fxLayout="column wrap"
+    fxLayoutGap="3%"
+    (ngSubmit)="onFormSubmit()"
+  >
+    <div
+      fxLayout="row "
+      fxLayoutAlign="center center"
+      fxLayout.lt-sm="column"
       fxLayoutGap="3%"
-      (ngSubmit)="onFormSubmit()"
     >
-      <div
-        fxLayout="row "
-        fxLayoutAlign="center center"
-        fxLayout.lt-sm="column"
-        fxLayoutGap="3%"
-      >
-        <mat-card-title> Add Diagnosis </mat-card-title>
-      </div>
-  
-      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
-        <mat-form-field color="accent">
-          <input
-            id="diagnosisCode"
-            matInput
-            type="text"
-            placeholder="Enter diagnosisCode"
-            formControlName="diagnosisCode"
-          />
-        </mat-form-field>
-        <mat-form-field color="accent">
-          <input
-            id="diagnosisDescription"
-            matInput
-            type="text"
-            placeholder="Enter diagnosisDescription"
-            formControlName="diagnosisDescription"
-          />
-        </mat-form-field>
-      </div>
-  
-      <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
-        <mat-form-field color="accent" class="example-full-width">
-          <mat-label>Is diagnosis Is Depricated</mat-label>
-          <mat-select formControlName="diagnosisIsDepricated2">
-            <mat-option
-              [value]="diagnosisIsDepricated"
-              *ngFor="let diagnosisIsDepricated of diagnosisIsDepricated1"
-              >{{ diagnosisIsDepricated }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-  
-      <div
-        fxLayout="row "
-        fxLayoutAlign="center center"
-        fxLayout.lt-sm="column"
-        fxLayoutGap="1%"
-      >
-        <mat-card-actions fxFlexFill>
-          <button color="accent" mat-raised-button type="submit" fxFlexFill>
-            Submit!
-          </button>
-        </mat-card-actions>
-      </div>
-    </form>
-  </mat-card>
-  
+      <mat-card-title> Add Procedure </mat-card-title>
+    </div>
+
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent">
+        <input
+          id="procedureCode"
+          matInput
+          type="text"
+          placeholder="Enter procedureCode"
+          formControlName="procedureCode"
+        />
+      </mat-form-field>
+      <mat-form-field color="accent">
+        <input
+          id="procedureDescription"
+          matInput
+          type="text"
+          placeholder="Enter procedureDescription"
+          formControlName="procedureDescription"
+        />
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent" class="example-full-width">
+        <mat-label>Is procedure Is Depricated</mat-label>
+        <mat-select formControlName="procedureDepricated2">
+          <mat-option
+            [value]="procedureDepricated"
+            *ngFor="let procedureDepricated of procedureDepricated1"
+            >{{ procedureDepricated }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+   
+
+    <div
+      fxLayout="row "
+      fxLayoutAlign="center center"
+      fxLayout.lt-sm="column"
+      fxLayoutGap="1%"
+    >
+      <mat-card-actions fxFlexFill>
+        <button color="accent" mat-raised-button type="submit" fxFlexFill>
+          Submit!
+        </button>
+      </mat-card-actions>
+    </div>
+  </form>
+</mat-card>
+
