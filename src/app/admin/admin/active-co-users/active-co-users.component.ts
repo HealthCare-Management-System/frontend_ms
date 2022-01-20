@@ -72,17 +72,8 @@ export class ActiveCoUsersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  ngOnInit(): void {
-     this.authservice.getCorporateActiveUsers('Active').subscribe((data: {}) => {
-      this.lockUnlockUsers = data;
-      this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
-      this.lockUnlockUsers.splice(0, 1);
-    });
-    console.log('printing data');
-    console.log(this.dataSource);
-
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+  ngOnInit() {
+     this.loadusers();
   }
   ngAfterViewInit() {
    
@@ -94,6 +85,16 @@ export class ActiveCoUsersComponent implements OnInit, AfterViewInit {
 
 
   loadusers() {
+    return this.authservice.getCorporateActiveUsers('Active').subscribe((data: {}) => {
+      this.lockUnlockUsers = data;
+      this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
+      this.lockUnlockUsers.splice(0, 1);
+    });
+    console.log('printing data');
+    console.log(this.dataSource);
+
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
     
   }
 
