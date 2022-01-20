@@ -88,8 +88,8 @@ export class PatientSignupComponent implements OnInit {
       ]),
       formControlPhone: new FormControl('', [
         Validators.required,
-        Validators.minLength(8),
-        Validators.maxLength(8),
+        Validators.minLength(10),
+        Validators.maxLength(10),
       ]),
 
       title: new FormControl('', [Validators.required]),
