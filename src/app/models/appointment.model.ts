@@ -9,6 +9,7 @@ export class APPOINTMENT{
     "time": string;
     "patientIdInfo":PatientDetails | null | undefined;
     "physicianIdInfo":User;
+   
     constructor(){
       
     }

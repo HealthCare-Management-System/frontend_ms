@@ -31,15 +31,18 @@ export class InboxService {
    getBookingByPhysicianName(name:any):Observable<APPOINTMENT>{
      return this.http.get<APPOINTMENT>(this.apiURL+'app/'+name);
    }
-  getBookingByPhysician(id:any):Observable<APPOINTMENT>{
-    return this.http.get<APPOINTMENT>(this.apiURL+'physician/'+id);
+  getBookingByPhysicianById(id:any):Observable<APPOINTMENT>{
+    return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments/physician/'+id);
+  }
+  getBookingByPatientById(id:any):Observable<APPOINTMENT>{
+    return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments/patient/'+id);
   }
 
   getAllBooking(): Observable<APPOINTMENT> {
-    return this.http.get<APPOINTMENT>(this.apiURL);
+    return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments');
   }
    getBookingById(id:any){
-     return this.http.get<APPOINTMENT>(this.apiURL+id);
+     return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments/'+id);
    }
 
   deleteById(id: number) {

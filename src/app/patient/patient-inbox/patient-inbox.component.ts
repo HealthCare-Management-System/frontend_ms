@@ -16,16 +16,24 @@ import { ProfileComponent } from '../profile/profile.component';
 })
 export class PatientInboxComponent implements OnInit {
   displayedColumns: string[] = [
-   
+    'id',
     'title',
     'description',
-    'physician',
+    'physicianId',
     'date',
+    'patientId',
     'time',
-    'patientDetails',
+   
+    'updateBooking',
     'editHistory',
+    
+    'patientDetails',
   ];
-  index: string[] = [ 'title', 'description', 'physician', 'date', 'time'];
+  // index: string[] = [ 'id','title', 'description', 'physician','patientId', 'date', 'time',
+  // 'updateBooking',
+  // 'editHistory',
+  
+  // 'patientDetails'];
 
   inboxdata: any = [];
   loggedinUser: User | null | undefined;
@@ -50,9 +58,10 @@ export class PatientInboxComponent implements OnInit {
   }
 
   loadusers() {
-    return this.bookservice.getBookingByPatient(this.loggedinUser?.empid).subscribe((data: {}) => {
+    return this.inboxservice.getBookingByPatientById(this.loggedinUser?.id).subscribe((data) => {
       this.inboxdata = data;
-
+     console.log("hello in inbox");
+     console.log(data);
     
     });
   }

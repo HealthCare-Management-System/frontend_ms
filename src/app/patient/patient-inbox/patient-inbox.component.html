@@ -2,30 +2,37 @@
 <button  mat-raised-button  color="accent" class="addUser"> <a [routerLink]="['../']"> Go back to home page</a> </button>
 <button  mat-raised-button  color="accent" class="addUser"> <a [routerLink]="['../visit-patient']"> Go to Patient Visit History  </a> </button>
 <table mat-table [dataSource]="inboxdata" class="mat-elevation-z8">
-
-
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef>Meeting Title</th>
-    <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>Id</th>
+    <td mat-cell *matCellDef="let element">{{ element.appid }}</td>
   </ng-container>
-
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef>Description</th>
-    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="physician">
-    <th mat-header-cell *matHeaderCellDef>Physician</th>
-    <td mat-cell *matCellDef="let element">{{ element.physicianName}}</td>
-  </ng-container>
-  <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef>Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.appointmentDate }}</td>
-  </ng-container>
-  <ng-container matColumnDef="time">
-    <th mat-header-cell *matHeaderCellDef>Time</th>
-    <td mat-cell *matCellDef="let element">{{ element.time }}</td>
-  </ng-container>
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef>Meeting Title</th>
+      <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+    </ng-container>       
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let element" mat-sort="desc">
+        {{ element.appointmentDate }} </td>
+    </ng-container>
+    <ng-container matColumnDef="time">
+      <th mat-header-cell *matHeaderCellDef>Time</th>
+      <td mat-cell *matCellDef="let element">{{ element.time }}</td>
+    </ng-container>
+    <ng-container matColumnDef="patientId">
+      <th mat-header-cell *matHeaderCellDef>PatientId</th>
+      <td mat-cell *matCellDef="let element">{{element.patientIdInfo.id}}</td>
+    </ng-container>
+    <ng-container matColumnDef="physicianId">
+      <th mat-header-cell *matHeaderCellDef>Physician</th>
+      <td mat-cell *matCellDef="let element">
+        {{element.physicianIdInfo.email }}
+      </td>
+    </ng-container>
   <ng-container matColumnDef="patientDetails">
     <th mat-header-cell *matHeaderCellDef>PatientDetails</th>
     <td mat-cell *matCellDef="let element" color="accent">

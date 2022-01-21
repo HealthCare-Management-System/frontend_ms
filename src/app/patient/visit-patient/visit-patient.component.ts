@@ -22,19 +22,12 @@ export class VisitPatientComponent implements OnInit {
     public authservice:AuthServiceService
   ) { }
   visitDate:Date | undefined;
-  patientId!:string|null|undefined;
-  patientName!:string|null|undefined;
-  physicianId!:string|null|undefined;
-  physicianName!:string|null|undefined;
 
   ngOnInit(): void {
     this.loggedinUser=this.authservice.isLoggedIn();
-    this.visitDate=new Date();
-    this.physicianId=this.loggedinUser?.empid;
-    this.physicianName=this.loggedinUser?.name;
-    this.id=this.route.snapshot.params['id'];
+    this.visitDate=new Date();      
     this.id=this.route.snapshot.params['appid'];
-      this.getOne();
+         this.getOne();
     
    
   }
@@ -42,8 +35,8 @@ export class VisitPatientComponent implements OnInit {
     this.bookservice.getBookingById(this.id).subscribe(data=>
       {  
         this.data=data;
-        console.log(data);
-      })
+         console.log("__________________________"+this.data.title);
+      });
    
   }
     
