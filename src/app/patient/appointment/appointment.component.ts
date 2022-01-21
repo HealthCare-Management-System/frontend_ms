@@ -24,6 +24,8 @@ export class AppointmentComponent implements OnInit {
   list!: string[];
   contactForm: FormGroup = new FormGroup({});
 
+  physicianForm: FormGroup = new FormGroup({});
+
   loggedinUser: User | null | undefined;
   patientInfo!: PatientDetails;
 
@@ -33,7 +35,7 @@ export class AppointmentComponent implements OnInit {
 
   physicians: any = [];
   physicianName: any = [];
-  selectedPhysician: User | any = '';
+  selectedPhysician: User | any;
   constructor(
     public fb: FormBuilder,
     private bookservice: AppointmentService,
@@ -54,14 +56,22 @@ export class AppointmentComponent implements OnInit {
 
     this.contactForm = this.fb.group({
       title: ['', Validators.required],
+
       description: ['', Validators.required],
-      physicianName: ['', Validators.required],
+      physicianIdControl: ['', Validators.required],
       appointmentDate: ['', Validators.required],
       time: ['', Validators.required],
     });
   }
-  hangevaluesforphysician(){
-    this.selectPhysicianFromId(this.contactForm.value.contactForm);
+  selectPhysicianFromId(id: any) {
+    for (let phy of this.physicianInfoList) {
+      if (phy.id == id) {
+        this.selectedPhysician = phy;
+      }
+    }
+  }
+  changevaluesforphysician(){
+    this.selectPhysicianFromId(this.contactForm.value.physicianIdControl);
   }
   onFormSubmit() {
     console.log(this.contactForm);
@@ -70,11 +80,7 @@ export class AppointmentComponent implements OnInit {
     ob.description = this.contactForm.controls['description'].value;
     ob.appointmentDate = this.contactForm.controls['appointmentDate'].value;
     ob.time = this.contactForm.controls['time'].value;
-    this.patientservice
-      .getPatientDemographicsById(this.loggedinUser?.id)
-      .subscribe((data) => {
-        ob.patientId = data;
-      });
+    this.patientservice.getPatientDemographicsById(this.loggedinUser?.id).subscribe((data) => {ob.patientId = data;});
     ob.physicianId = this.selectedPhysician;
     console.log('entered data+++++++++++');
     console.log(ob);
@@ -83,13 +89,7 @@ export class AppointmentComponent implements OnInit {
     this.router.navigate(['/patient/dashboard/patient-inbox']);
   }
 
-  selectPhysicianFromId(id: any) {
-    for (let phy of this.physicianInfoList) {
-      if (phy.id == id) {
-        this.selectedPhysician = phy;
-      }
-    }
-  }
+  
   loadusers() {
     return this.authservice
       .getUsersBasedOnRoleAndStatus('CT_PHYSICIAN', 'Active')
