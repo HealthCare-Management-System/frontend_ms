@@ -15,6 +15,8 @@ import { Procedure } from '../models/procedure.model';
   providedIn: 'root',
 })
 export class AuthServiceService {
+
+ 
   private userSubject: BehaviorSubject<User | null> = new BehaviorSubject<any>(
     null
   );
@@ -61,6 +63,7 @@ export class AuthServiceService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
+  // authService.getUsersBasedOnRoleAndStatus(role,status) you need to call this to get users based on roles and status
   getUsersBasedOnRoleAndStatus(role: string, status: string): Observable<User> {
     return this.http
       .get<User>(this.apiURL + 'userurl/users/' + role + '/' + status)
@@ -96,7 +99,7 @@ export class AuthServiceService {
   addProcedure(ob: Procedure) : Observable<Procedure> {
     return this.http
       .post<Procedure>(
-        this.apiURL + '',
+        this.apiURL + 'patientvisiturl/procedure',
         JSON.stringify(Procedure),
         this.httpOptions
       )
@@ -106,7 +109,7 @@ export class AuthServiceService {
   addDiagnosis(ob: Diagnosis): Observable<Diagnosis> {
     return this.http
       .post<Diagnosis>(
-        this.apiURL + '',
+        this.apiURL + 'patientvisiturl/diagnosis',
         JSON.stringify(Diagnosis),
         this.httpOptions
       )
@@ -116,10 +119,29 @@ export class AuthServiceService {
   addMedication(ob: Medication): Observable<Medication> {
     return this.http
       .post<Medication>(
-        this.apiURL + '',
+        this.apiURL + 'patientvisiturl/medication',
         JSON.stringify(Medication),
         this.httpOptions
       )
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+// To display the diagnosis master data to display in Admin module 
+  getDiagnosisData() {
+    return this.http
+      .get<User>(this.apiURL + 'patientvisiturl/diagnosis')
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+
+  getProcedureData() {
+    return this.http
+      .get<User>(this.apiURL + 'patientvisiturl/procedure')
+      .pipe(retry(1), catchError(this.handleError));
+  }
+  getMedicationData() {
+    return this.http
+      .get<User>(this.apiURL + 'patientvisiturl/medication')
       .pipe(retry(1), catchError(this.handleError));
   }
 

@@ -24,7 +24,7 @@ export class MedicationComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  displayedColumns: string[] = ['id', 'drugName', 'drugGenericName', 'drugBrandName','drugForm','drugStrength','request'];
+  displayedColumns: string[] = ['id', 'drugName', 'drugGenericName', 'drugBrandName','drugForm','drugStrength'];
 
   listOfUsers: any = [];
   //dataSource!: MatTableDataSource<listOfUsers>;
@@ -56,7 +56,7 @@ export class MedicationComponent implements OnInit, AfterViewInit {
 
   loadusers() {
     return this.authservice
-      .getUsersBasedOnRoleAndStatus('PATIENT', 'NotApproved')
+      .getMedicationData()
       .subscribe((data: {}) => {
         this.listOfUsers = data;
         this.dataSource = new MatTableDataSource(this.listOfUsers);
