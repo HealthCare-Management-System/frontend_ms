@@ -1,5 +1,5 @@
 export class Diagnosis {
-  'id': number;
+ 'id':number;
   'diagnosisCode': string;
   'diagnosisDescription': string;
   'diagnosisIsDepricated': string;
