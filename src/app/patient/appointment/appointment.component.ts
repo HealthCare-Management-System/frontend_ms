@@ -26,13 +26,14 @@ export class AppointmentComponent implements OnInit {
 
   loggedinUser: User | null | undefined;
   patientInfo!: PatientDetails;
-  physicianInfoList: User[] | undefined = [];
+
+  physicianInfoList!: User[];
   physicianList: any[] | undefined;
   physician: any;
 
   physicians: any = [];
   physicianName: any = [];
-  selectedPhysician:User|null|undefined;
+  selectedPhysician: User | any = '';
   constructor(
     public fb: FormBuilder,
     private bookservice: AppointmentService,
@@ -42,7 +43,6 @@ export class AppointmentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getPatientId();
     this.loadusers();
     this.loggedinUser = this.authservice.isLoggedIn();
     this.getPhysician();
@@ -60,31 +60,35 @@ export class AppointmentComponent implements OnInit {
       time: ['', Validators.required],
     });
   }
-
+  hangevaluesforphysician(){
+    this.selectPhysicianFromId(this.contactForm.value.contactForm);
+  }
   onFormSubmit() {
     console.log(this.contactForm);
     let ob: APPOINTMENT = new APPOINTMENT();
-
     ob.title = this.contactForm.controls['title'].value;
     ob.description = this.contactForm.controls['description'].value;
     ob.appointmentDate = this.contactForm.controls['appointmentDate'].value;
     ob.time = this.contactForm.controls['time'].value;
-    ob.patientId = this.patientInfo;
-    ob.physicianId=this.selectedPhysician;
-          
-
+    this.patientservice
+      .getPatientDemographicsById(this.loggedinUser?.id)
+      .subscribe((data) => {
+        ob.patientId = data;
+      });
+    ob.physicianId = this.selectedPhysician;
     console.log('entered data+++++++++++');
     console.log(ob);
     this.bookservice.createBook(ob).subscribe();
     window.alert('Appointment booked successfully');
     this.router.navigate(['/patient/dashboard/patient-inbox']);
   }
-  getPatientId() {
-    return this.patientservice
-      .getPatientDemographicsById(this.loggedinUser?.id)
-      .subscribe((data) => {
-        this.patientInfo = data;
-      });
+
+  selectPhysicianFromId(id: any) {
+    for (let phy of this.physicianInfoList) {
+      if (phy.id == id) {
+        this.selectedPhysician = phy;
+      }
+    }
   }
   loadusers() {
     return this.authservice
@@ -97,13 +101,14 @@ export class AppointmentComponent implements OnInit {
         console.log(this.physicianName);
         this.physicians.splice(0, 1);
       });
-  };
+  }
   getPhysician() {
     return this.authservice
       .getUsersBasedOnRoleAndStatus('CT_PHYSICIAN', 'Active')
-      .subscribe((data:any) => {
-        this.physicianInfoList=data;
-        console.log("checking physician list");
-        console.log(this.physicianInfoList);        
+      .subscribe((data: any) => {
+        this.physicianInfoList = data;
+        console.log('checking physician list');
+        console.log(this.physicianInfoList);
       });
-}}
+  }
+}

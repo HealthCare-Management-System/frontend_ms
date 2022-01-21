@@ -7,8 +7,8 @@ export class APPOINTMENT{
     "description": string;
     "appointmentDate": string;
     "time": string;
-    "patientId":PatientDetails|null|undefined;
-    "physicianId":User|null|undefined;
+    "patientId":PatientDetails;
+    "physicianId":User;
     constructor(){
       
     }
