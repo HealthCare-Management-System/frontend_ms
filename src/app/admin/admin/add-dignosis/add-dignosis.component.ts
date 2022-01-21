@@ -12,7 +12,7 @@ import { Diagnosis } from 'src/app/models/Diagnosis.model';
   styleUrls: ['./add-dignosis.component.css'],
 })
 export class AddDignosisComponent implements OnInit {
-  diagnosisIsDepricated1: string[] = ['True', 'False'];
+  diagnosisIsDepricated1: string[] = ['true', 'false'];
 
   diagnosis?: Diagnosis;
 
@@ -38,7 +38,14 @@ export class AddDignosisComponent implements OnInit {
       this.contactForm.controls['diagnosisDescription'].value;
     ob.diagnosisIsDepricated =
       this.contactForm.controls['diagnosisIsDepricated2'].value;
+      console.log("printing dia data");
+      
     console.log(ob);
+    console.log(ob.diagnosisCode);
+    console.log(ob.diagnosisDescription);
+    console.log(ob.diagnosisIsDepricated);
+    console.log(ob);
+    
 
     this.authservice.addDiagnosis(ob).subscribe((data) => {
       this.diagnosis = data;

@@ -2,12 +2,13 @@
 <button
   mat-raised-button
   color="accent"
-  class="addUser"
+  class="popup"
   (click)="onRegistration()"
 >
   <mat-icon>add</mat-icon> Add Diagnosis
 </button>
 <!--++++++++++++++++++++++++++++++++++++++++++++++++++++Active users++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+<mat-card>
 <table
   mat-table
   [dataSource]="dataSource"
@@ -17,14 +18,14 @@
 >
   <!-- Position Column -->
   <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+    <th class = "tablehead" mat-header-cell *matHeaderCellDef mat-sort-header>Id.</th>
     <td mat-cell *matCellDef="let element">{{ element.id }}</td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="diagnosisCode">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>diagnosisCode</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <th class = "tablehead" mat-header-cell *matHeaderCellDef mat-sort-header>DiagnosisCode</th>
+    <td mat-cell *matCellDef="let element">{{ element.diagnosisCode }}</td>
   </ng-container>
 
   <!-- Weight Column -->
@@ -34,24 +35,24 @@
   </ng-container> -->
 
   <ng-container matColumnDef="diagnosisDescription">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      diagnosisDescription
+    <th class = "tablehead" mat-header-cell *matHeaderCellDef mat-sort-header>
+      DiagnosisDescription
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.diagnosisDescription }}</td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="diagnosisIsDepricated">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-      diagnosisIsDepricated
+    <th class = "tablehead" mat-header-cell *matHeaderCellDef mat-sort-header>
+      DiagnosisIsDepricated
     </th>
     <td mat-cell *matCellDef="let element">
-      {{ element.status }}
+      {{ element.diagnosisIsDepricated }}
     </td></ng-container
   >
 
   <ng-container matColumnDef="request">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+    <th class = "tablehead" mat-header-cell *matHeaderCellDef mat-sort-header></th>
     <td mat-cell *matCellDef="let element">
       <button mat-raised-button (click)="approveRequest(element)">
         Approve
@@ -63,7 +64,7 @@
   <tr
     mat-row
     *matRowDef="let row; columns: displayedColumns"
-    [hidden]="row.status !== 'NotApproved'"
+   
   ></tr>
 </table>
 
@@ -71,4 +72,4 @@
   [pageSizeOptions]="[5, 10, 20]"
   showFirstLastButtons
 ></mat-paginator>
-
+</mat-card>
