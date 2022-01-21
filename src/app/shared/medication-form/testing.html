@@ -1,0 +1,203 @@
+<form
+  [formGroup]="contactForm"
+  fxLayout="column wrap"
+  fxLayoutGap="3%"
+  (ngSubmit)="onFormSubmit()"
+  fxLayoutAlign="center center"
+>
+  <mat-card>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-card-title background-color="accent"
+        ><h1>Select Diagnosis</h1>
+      </mat-card-title>
+      <mat-form-field color="accent">
+        <mat-select
+          formControlName="diagnosisControl"
+          (selectionChange)="changevaluesfordiagnosis()"
+        >
+          <mat-option
+            *ngFor="let diagnosis of diagnosisList"
+            value="{{ diagnosis.id }}"
+            >{{ diagnosis.diagnosisCode }} --{{diagnosis.diagnosisDescription}}
+          </mat-option></mat-select
+        >
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent">
+        <input
+          id="C"
+          matInput
+          type="text"
+          placeholder="Diagnosis Code"
+          formControlName="code1"
+          value="{{selectedDiagnosis.diagnosisCode}}"
+          readonly
+        />
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input
+          id="D"
+          matInput
+          type="text"
+          placeholder="Diagnosis Description"
+          formControlName="description1"
+          value="{{selectedDiagnosis.diagnosisDescription}}"
+          readonly
+        />
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input
+          id="D"
+          matInput
+          type="text"
+          placeholder="Diagnosis Is Depricated"
+          formControlName="depricated1"
+          value="{{selectedDiagnosis.diagnosisIsDepricated}}"
+          readonly
+        />
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-card-title background-color="accent"
+        ><h1>Select Procedure</h1>
+      </mat-card-title>
+      <mat-form-field color="accent">
+        <mat-select
+          formControlName="procedureControl"
+          (selectionChange)="changevaluesforProcedure()"
+        >
+          <mat-option
+            *ngFor="let procedure of procedureList"
+            value="{{ procedure.id }}"
+            >{{ procedure.procedureCode }} --{{procedure.procedureDescription}}
+          </mat-option></mat-select
+        >
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent">
+        <input
+          id="C"
+          matInput
+          type="text"
+          placeholder="Procedure Code"
+          formControlName="code2"
+          value="{{selectedProcedure.procedureCode}}"
+        />
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input
+          id="D"
+          matInput
+          type="text"
+          placeholder="Procedure Description"
+          formControlName="description2"
+          value="{{selectedProcedure.procedureDescription}}"
+        />
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input
+          id="D"
+          matInput
+          type="text"
+          placeholder="Procedure Is Depricated"
+          formControlName="depricated2"
+          value="{{selectedProcedure.procedureDepricated}}"
+        />
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-card-title background-color="accent"
+        ><h1>Select Medication</h1>
+      </mat-card-title>
+      <mat-form-field color="accent">
+        <mat-select
+          formControlName="medicationControl"
+          (selectionChange)="changevaluesformedication()"
+        >
+          <mat-option
+            *ngFor="let medication of medicationList"
+            value="{{ medication.id }}"
+            >{{ medication.drugName }} --{{medication.drugBrandName}}
+          </mat-option></mat-select
+        >
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent">
+        <input
+          id="drugName"
+          matInput
+          type="text"
+          placeholder="Drug Name"
+          formControlName="drugname"
+          value="{{selectedMedication.drugName}}"
+        />
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input
+          id="drugBrandName"
+          matInput
+          type="text"
+          placeholder="Drug Brand Name"
+          formControlName="brandname"
+          value="{{selectedMedication.drugBrandName}}"
+        />
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input
+          id="drugGenericName"
+          matInput
+          type="text"
+          placeholder="Drug Generic Name"
+          formControlName="drugGenericName"
+          value="{{selectedMedication.drugGenericName}}"
+        />
+      </mat-form-field>
+
+    </div>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-form-field color="accent">
+        <input
+          id="drugForm"
+          matInput
+          type="text"
+          placeholder="Drug Form"
+          formControlName="drugForm"
+          value="{{selectedMedication.drugForm}}"
+        />
+      </mat-form-field>
+
+      <mat-form-field color="accent">
+        <input
+          id="drugStrength"
+          matInput
+          type="text"
+          placeholder="Drug Strength"
+          formControlName="drugStrength"
+          value="{{selectedMedication.drugStrength}}"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+      <mat-card-actions fxFlexFill>
+        <button color="accent" mat-raised-button type="submit" fxFlexFill>
+          Submit!
+        </button>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</form>

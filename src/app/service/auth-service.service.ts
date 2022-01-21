@@ -10,6 +10,7 @@ import jwt_decode from 'jwt-decode';
 import { lastValueFrom } from 'rxjs';
 import { Medication } from '../models/Medication.model';
 import { Diagnosis } from '../models/Diagnosis.model';
+import { Procedure } from '../models/procedure.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,7 +23,7 @@ export class AuthServiceService {
 
   currentloggedinUser?: User | null;
 
-  apiURL = 'http://localhost:8080';
+  apiURL = 'http://localhost:8080/';
 
 
 
@@ -62,7 +63,7 @@ export class AuthServiceService {
 
   getUsersBasedOnRoleAndStatus(role: string, status: string): Observable<User> {
     return this.http
-      .get<User>(this.apiURL + '/users/' + role + '/' + status)
+      .get<User>(this.apiURL + 'userurl/users/' + role + '/' + status)
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -78,25 +79,25 @@ export class AuthServiceService {
 
   getUserByEmail(email: string): Observable<User> {
     return this.http
-      .get<User>(this.apiURL + '/users/' + email)
+      .get<User>(this.apiURL + 'userurl/users/' + email)
       .pipe(retry(1), catchError(this.handleError));
   }
 
   createUser(user: User): Observable<User> {
     return this.http
       .post<User>(
-        this.apiURL + '/auth/signup',
+        this.apiURL + 'authurl/auth/signup',
         JSON.stringify(user),
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  addMedication(ob: Medication): Observable<Medication> {
+  addProcedure(ob: Procedure) : Observable<Procedure> {
     return this.http
-      .post<Medication>(
+      .post<Procedure>(
         this.apiURL + '',
-        JSON.stringify(Medication),
+        JSON.stringify(Procedure),
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.handleError));
@@ -107,6 +108,16 @@ export class AuthServiceService {
       .post<Diagnosis>(
         this.apiURL + '',
         JSON.stringify(Diagnosis),
+        this.httpOptions
+      )
+      .pipe(retry(1), catchError(this.handleError));
+  }
+
+  addMedication(ob: Medication): Observable<Medication> {
+    return this.http
+      .post<Medication>(
+        this.apiURL + '',
+        JSON.stringify(Medication),
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.handleError));
@@ -126,7 +137,7 @@ export class AuthServiceService {
   updateUserStatus(id: number, status: String): Observable<User> {
     return this.http
       .patch<User>(
-        this.apiURL + '/employees/' + id + '/' + status,
+        this.apiURL + 'userurl/users/' + id + '/' + status,
         JSON.stringify(status),
         this.httpOptions
       )
@@ -136,7 +147,7 @@ export class AuthServiceService {
 
   getCorporateActiveUsers(status: string) {
     return this.http
-      .get<User>(this.apiURL + '/users/corporate-user-list/' + status)
+      .get<User>(this.apiURL + 'userurl/users/corporate-user-list/' + status)
       .pipe(retry(1), catchError(this.handleError));
   }
 
@@ -149,7 +160,7 @@ export class AuthServiceService {
   authLogin(obj: LoginModel): Observable<LoginResponseModel> {
     return this.http
       .post<LoginResponseModel>(
-        this.apiURL + '/auth/login',
+        this.apiURL + 'authurl/auth/login',
         JSON.stringify(obj),
         this.httpOptions
       )
@@ -162,8 +173,9 @@ export class AuthServiceService {
     obj.password = pass;
 
     let apiCall = await lastValueFrom(this.authLogin(obj));
-
-    this.tokenStorage.saveToken(apiCall.token);
+    console.log("*******************")
+    console.log(apiCall);
+    this.tokenStorage.saveToken(apiCall.access_token);
     this.setLoggedInUser();
   }
 
@@ -191,9 +203,10 @@ export class AuthServiceService {
     let token: any = this.tokenStorage.getToken();
     if (token != null) {
       let tokenInfo = this.getDecodedAccessToken(token); // decode token
+      console.log("****************************");
       console.log(tokenInfo);
-
-      this.getUserByEmail(tokenInfo.sub).subscribe((data) => {
+      console.log("****************************");
+      this.getUserByEmail(tokenInfo.preferred_username).subscribe((data) => {
         this.userSubject.next(data);
         this.currentloggedinUser = data;
         this.tokenStorage.saveUser(data);

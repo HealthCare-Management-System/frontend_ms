@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Allergy, AllergyType, MasterAllergy } from 'src/app/models/allergy.model';
+
 import { Demographic } from 'src/app/models/demographic.model';
 import { User } from 'src/app/models/user.model';
 import { AllergyService } from 'src/app/service/allergy.service';
@@ -19,7 +19,7 @@ export class PatientDashboardComponent implements OnInit {
   loggedinUser?: User | null;
   selection!:string;
   patientDetails:any;
-  
+  masterAllergy:any;
   constructor(public dialog: MatDialog, private authservice: AuthServiceService, public demographicService: DemographicService, public allergyService: AllergyService) { }
 
   ngOnInit(): void {
@@ -38,11 +38,10 @@ export class PatientDashboardComponent implements OnInit {
         console.log(this.selection);
       }
      });
-   
-    
-  }
-  
-  
-  
-  
+    //  this.allergyService.getMasterAllergies().subscribe((data: any) => {
+    //   this.masterAllergy = data;
+    //   console.log(this.masterAllergy);
+    // });
+       
+  }  
 }

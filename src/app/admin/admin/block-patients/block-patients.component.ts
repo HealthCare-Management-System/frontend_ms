@@ -87,7 +87,7 @@ export class BlockPatientsComponent implements OnInit, AfterViewInit {
 
 
   loadusers() {
-    return this.authservice.getUsersBasedOnRoleAndStatus("PATIENT","Block").subscribe((data: {}) => {
+    return this.authservice.getUsersBasedOnRoleAndStatus("CT_PATIENT","Block").subscribe((data: {}) => {
       this.lockUnlockUsers = data;
        
       console.log("Printing lockunlock"+this.lockUnlockUsers)

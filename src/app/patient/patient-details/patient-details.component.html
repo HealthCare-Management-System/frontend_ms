@@ -181,7 +181,7 @@
                 <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
                     Select the Description:
                     <mat-form-field *ngIf="selectedValue||selectedType">
-                        <mat-select formControlName="AllergyD">
+                        <mat-select formControlName="AllergyD" (ngModelChange)="onChangeDescription($event)">
                             <mat-option *ngFor="let re of  AlDescription" value="{{ re}}">{{
                                 re
                                 }}</mat-option>

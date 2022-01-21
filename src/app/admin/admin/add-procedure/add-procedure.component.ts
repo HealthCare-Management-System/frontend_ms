@@ -4,7 +4,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Diagnosis } from 'src/app/models/Diagnosis.model';
+import { Procedure } from 'src/app/models/procedure.model';
+
 
 @Component({
   selector: 'app-add-procedure',
@@ -12,9 +13,9 @@ import { Diagnosis } from 'src/app/models/Diagnosis.model';
   styleUrls: ['./add-procedure.component.css']
 })
 export class AddProcedureComponent implements OnInit {
-  diagnosisIsDepricated1: string[] = ['True', 'False'];
+  procedureDepricated1: string[] = ['True', 'False'];
 
-  diagnosis?: Diagnosis;
+  procedure?: Procedure;
 
   contactForm: FormGroup = new FormGroup({});
 
@@ -25,26 +26,26 @@ export class AddProcedureComponent implements OnInit {
 
   ngOnInit(): void {
     this.contactForm = this.fb.group({
-      diagnosisCode: ['', Validators.required],
-      diagnosisDescription: ['', Validators.required],
-      diagnosisIsDepricated2: ['', Validators.required],
+      procedureCode: ['', Validators.required],
+      procedureDescription: ['', Validators.required],
+      procedureDepricated: ['', Validators.required],
     });
   }
 
   onFormSubmit() {
-    let ob: Diagnosis = new Diagnosis();
-    ob.diagnosisCode = this.contactForm.controls['diagnosisCode'].value;
-    ob.diagnosisDescription =
-      this.contactForm.controls['diagnosisDescription'].value;
-    ob.diagnosisIsDepricated =
-      this.contactForm.controls['diagnosisIsDepricated2'].value;
+    let ob: Procedure = new Procedure();
+    ob.procedureCode = this.contactForm.controls['procedureCode'].value;
+    ob.procedureDescription =
+      this.contactForm.controls['procedureDescription'].value;
+    ob.procedureDepricated =
+      this.contactForm.controls['procedureDepricated2'].value;
     console.log(ob);
 
-    this.authservice.addDiagnosis(ob).subscribe((data) => {
-      this.diagnosis = data;
+    this.authservice.addProcedure(ob).subscribe((data) => {
+      this.procedure = data;
     });
     this.contactForm.reset();
 
-    console.log(this.diagnosis);
+    console.log(this.procedure);
   }
 }

@@ -174,13 +174,13 @@ onSubmit(){
   // console.log(this.demographicObj);
     if(this.contactForm.value.sel3==='no'&&this.patientDetails.demographic?.allergyCheck==='no'){
     this.obj=new PatientDetails(this.demographicObj,this.loggedinUser,this.moreAllergyList);
-    this.obj.patientDetails=this.patientDetails.patientDetails;
+    this.obj.id=this.patientDetails.id;
     console.log("from component ts file");
    console.log(this.obj);
-   console.log(this.patientDetails.patientDetails);
+   console.log(this.patientDetails.id);
    console.log(this.obj);
    this.successMsg='Successfully Updated';
-  this.demographicService.updatePatientDetails(this.patientDetails.patientDetails,this.obj).subscribe();
+  this.demographicService.updatePatientDetails(this.patientDetails.id,this.obj).subscribe();
 }
   }
   addAllergy() {
@@ -205,7 +205,7 @@ deleteAllergy(element: Allergy){
     this.obj=new PatientDetails(this.demographicObj,this.loggedinUser,this.dataSource);
     console.log("the patient details with newly added allergies:");
     console.log(this.obj);
-this.demographicService.updatePatientDetails(this.patientDetails.patientDetails,this.obj).subscribe();
+this.demographicService.updatePatientDetails(this.patientDetails.id,this.obj).subscribe();
     this.successMsg='Successfully Updated';
     this.loadPatientDetails();
   }
@@ -251,7 +251,7 @@ this.demographicService.updatePatientDetails(this.patientDetails.patientDetails,
   }
   deleteAllAllergis(){
     
-      this.allergyService.deleteAllergiesByPatientId(this.patientDetails.patientDetails).subscribe( data => {
+      this.allergyService.deleteAllergiesByPatientId(this.patientDetails.id).subscribe( data => {
         console.log(data);
        // alert("successfully deleted");
         this.loadPatientDetails();

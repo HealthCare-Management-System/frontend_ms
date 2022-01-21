@@ -1,0 +1,7 @@
+
+export enum Roles{
+    ADMIN="CT_ADMIN",
+    PHYSICIAN="CT_PHYSICIAN",
+    NURSE="CT_NURSE",
+    PATIENT="CT_PATIENT"
+}

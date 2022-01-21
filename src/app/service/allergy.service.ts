@@ -2,12 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
-import { Allergy, AllergyClinicalInformation, AllergyName, AllergyType, MasterAllergy } from '../models/allergy.model';
+import { Allergy,  MasterAllergy } from '../models/allergy.model';
 //import { User } from '../models/user.model';
 @Injectable({ providedIn: 'root' })
 export class AllergyService {
     
-    apiURL = 'http://localhost:8000';
+    apiURL = 'http://localhost:8080/patienturl';
     httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export class AllergyService {
       }
       getMasterAllergies(): Observable<MasterAllergy> {
         return this.http
-          .get<MasterAllergy>('http://localhost:8080/masterAllergy')
+          .get<MasterAllergy>('http://localhost:8080/patienturl/masterAllergy')
           .pipe(retry(1), catchError(this.handleError));
       }
       deleteAllergy(id: number) {

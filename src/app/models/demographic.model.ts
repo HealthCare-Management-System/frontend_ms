@@ -18,7 +18,7 @@ export class Demographic{
         public emgrRelation:string,
         public emgrAddress:string,
         public ppp:string,
-        public allergyCheck:string,
+        public allergyCheck:string
        
     ){}
 }

@@ -30,6 +30,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SharedProfileComponent } from './shared-profile/shared-profile.component';
 import { PatientDiagnosisComponent } from './patient-diagnosis/patient-diagnosis.component';
 import { PatientSharedInfoComponent } from './patient-shared-info/patient-shared-info.component';
+import { VitalFormComponent } from './vital-form/vital-form.component';
+import { MedicationFormComponent } from './medication-form/medication-form.component';
 
 
 
@@ -41,6 +43,8 @@ import { PatientSharedInfoComponent } from './patient-shared-info/patient-shared
     SharedProfileComponent,
     PatientDiagnosisComponent,
     PatientSharedInfoComponent,
+    VitalFormComponent,
+    MedicationFormComponent,
   ],
   imports: [
  MatTabsModule,
