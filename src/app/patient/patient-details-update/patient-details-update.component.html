@@ -83,12 +83,12 @@
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
           <mat-form-field>
-            <input id="fName" matInput type="text" placeholder="FirstName"
+            <input  matInput type="text" placeholder="FirstName"
               [ngModel]="patientDetails.demographic?.emgrFname" formControlName="emFirstName" />
           </mat-form-field>
 
           <mat-form-field>
-            <input id="lName" matInput type="text" placeholder="LastName"
+            <input  matInput type="text" placeholder="LastName"
               [ngModel]="patientDetails.demographic?.emgrLname" formControlName="emLastName" required />
           </mat-form-field>
         </div>
@@ -250,7 +250,7 @@
 
                    <button color="accent" mat-raised-button (click)="submitWithAllergy()"
                       *ngIf="dataSource.length!==0||newAllergy==='no'">Submit</button><br>
-                      <button color="accent" mat-raised-button  (click)="deleteAllAllergis()">DeleteAll</button>
+                      <!-- <button color="accent" mat-raised-button  (click)="deleteAllAllergis()">DeleteAll</button> -->
 
                     </div>
           </mat-card-actions>

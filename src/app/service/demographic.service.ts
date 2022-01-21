@@ -15,15 +15,15 @@ export class DemographicService {
         })
       }
       constructor(private http: HttpClient) {}  
-    saveDemographic(demographic:Demographic): Observable<Demographic> {
-      console.log("from services");
-      console.log(demographic);
-        return this.http.post<Demographic>('http://localhost:8080/demographic', JSON.stringify(demographic), this.httpOptions)
-        .pipe(
-         retry(1),
-          catchError(this.handleError)
-        )
-      } 
+    // saveDemographic(demographic:Demographic): Observable<Demographic> {
+    //   console.log("from services");
+    //   console.log(demographic);
+    //     return this.http.post<Demographic>('http://localhost:8080/demographic', JSON.stringify(demographic), this.httpOptions)
+    //     .pipe(
+    //      retry(1),
+    //       catchError(this.handleError)
+    //     )
+    //   } 
       
       savePatientDemographic(demographic:PatientDetails): Observable<PatientDetails> {
         console.log("from services");
