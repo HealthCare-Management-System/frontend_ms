@@ -40,14 +40,25 @@ export class PatientDiagnosisComponent implements OnInit {
       (params) => (this.selectedMeeting = params.get('username'))
     );
    
-   // this.appointmentService.getAppointmentById(1);
     this.loggedinUser = this.authservice.isLoggedIn();
     console.log(this.loggedinUser);
 
+    this.authservice.getDiagnosisData().subscribe((data) =>{
+
+      this.diagnosisList=data;
+
+    });
+    this.authservice.getProcedureData().subscribe((data) =>{
+
+      this.procedureList=data;
+
+    });
+    this.authservice.getMedicationData().subscribe((data) =>{
+
+      this.medicationList=data;
+
+    });
     
-    this.setDiagnosisList();
-    this.setMedicationList();
-    this.setProcedureList();
   }
 
  
