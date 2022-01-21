@@ -142,6 +142,7 @@ export class PatientDetailsUpdateComponent implements OnInit {
     this.demographicService. getPatientDemographicsById(this.loggedinUser?.id).subscribe((data: any) => {
       this.patientDetails = data;
       console.log(this.patientDetails);
+      console.log(this.patientDetails.demographic?.emgrFname);
       this.dataSource=this.patientDetails.allergies;
       console.log(this.dataSource);
       console.log("fetching id");
