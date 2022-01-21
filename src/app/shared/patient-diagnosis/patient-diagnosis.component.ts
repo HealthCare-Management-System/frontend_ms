@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { APPOINTMENT } from 'src/app/models/appointment.model';
+import { Diagnosis } from 'src/app/models/Diagnosis.model';
+import { Medication } from 'src/app/models/Medication.model';
+import { Procedure } from 'src/app/models/procedure.model';
 import { User } from 'src/app/models/user.model';
 import { AppointmentService } from 'src/app/service/appointment.service';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
@@ -16,11 +19,15 @@ export class PatientDiagnosisComponent implements OnInit {
   meeting: APPOINTMENT | null | undefined;
   patient: User | null | undefined;
   selectedMeeting: String | null | undefined;
-  VitalSignForm: FormGroup = new FormGroup({});
-  contactForm: FormGroup = new FormGroup({});
+
+  selectedDiagnosis: Diagnosis|null|undefined;
+  selectedProcedure: Procedure|null|undefined;
+  selectedMedication: Medication|null|undefined;
+  diagnosisList: Diagnosis[]|any=[];
+  procedureList: Procedure[]|any=[];
+  medicationList: Medication[]|any=[];
 
   constructor(
-    public fb: FormBuilder,
     public authservice: AuthServiceService,
     private route: ActivatedRoute,
     private appointmentService: AppointmentService
@@ -32,57 +39,88 @@ export class PatientDiagnosisComponent implements OnInit {
     this.route.queryParamMap.subscribe(
       (params) => (this.selectedMeeting = params.get('username'))
     );
-    this.appointmentService.getAppointmentById(1);
+   
+   // this.appointmentService.getAppointmentById(1);
     this.loggedinUser = this.authservice.isLoggedIn();
     console.log(this.loggedinUser);
 
-    this.VitalSignForm = this.fb.group({
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
-      bloodpressure: ['', Validators.required],
-      bodytemperature: ['', Validators.required],
-      respirationrate: ['', Validators.required],
-    });
-
-    this.contactForm = this.fb.group({
-      code1: ['', Validators.required],
-      description1: ['', Validators.required],
-      depricated1: ['', Validators.required],
-      code2: ['', Validators.required],
-      description2: ['', Validators.required],
-      depricated2: ['', Validators.required],
-      id: ['', Validators.required],
-      name: ['', Validators.required],
-      genericname: ['', Validators.required],
-      brandname: ['', Validators.required],
-      form: ['', Validators.required],
-      strength: ['', Validators.required],
-    });
+    
+    this.setDiagnosisList();
+    this.setMedicationList();
+    this.setProcedureList();
   }
 
-  onVitalSignFormSubmit() {
-    let height = this.VitalSignForm.value.height;
-    let weight = this.VitalSignForm.value.weight;
-    let bloodpressure = this.VitalSignForm.value.bloodpressure;
-    let bodytemperature = this.VitalSignForm.value.bodytemperature;
-    let respirationrate = this.VitalSignForm.value.respirationrate;
+ 
+  
+  setDiagnosisList(){
+    let ob1: Diagnosis = new Diagnosis();
+    ob1.id=1;
+    ob1.diagnosisCode="11";
+    ob1.diagnosisDescription="aaa";
+    ob1.diagnosisIsDepricated="false";
 
-    console.log(this.VitalSignForm.value);
-  }
-  onFormSubmit() {
-    let code1 = this.contactForm.value.code1;
-    let description1 = this.contactForm.value.description1;
-    let depricated1 = this.contactForm.value.depricated1;
-    let code2 = this.contactForm.value.code2;
-    let description2 = this.contactForm.value.description2;
-    let depricated2 = this.contactForm.value.depricated2;
-    let id = this.contactForm.value.id;
-    let name = this.contactForm.value.name;
-    let genericname = this.contactForm.value.genericname;
-    let brandname = this.contactForm.value.brandname;
-    let form = this.contactForm.value.form;
-    let strength = this.contactForm.value.strength;
+    let ob2: Diagnosis = new Diagnosis();
+    ob2.id=2;
+    ob2.diagnosisCode="22";
+    ob2.diagnosisDescription="bbb";
+    ob2.diagnosisIsDepricated="false";
 
-    console.log(this.contactForm.value);
-  }
+    let ob3: Diagnosis = new Diagnosis();
+    ob3.id=3;
+    ob3.diagnosisCode="333";
+    ob3.diagnosisDescription="ccc";
+    ob3.diagnosisIsDepricated="false";
+
+
+    this.diagnosisList.push(ob1,ob2,ob3);
+   }
+   setProcedureList(){
+    let ob1: Procedure = new Procedure();
+    ob1.id=1;
+    ob1.procedureCode="11";
+    ob1.procedureDescription="aaapppp";
+    ob1.procedureDepricated="false";
+
+    let ob2: Procedure = new Procedure();
+    ob2.id=2;
+    ob2.procedureCode="22";
+    ob2.procedureDescription="bbbppp";
+    ob2.procedureDepricated="false";
+
+    let ob3: Procedure = new Procedure();
+    ob3.id=3;
+    ob3.procedureCode="333";
+    ob3.procedureDescription="cccppp";
+    ob3.procedureDepricated="false";
+
+
+    this.procedureList.push(ob1,ob2,ob3);
+   }
+   setMedicationList(){
+    let ob1: Medication = new Medication();
+    ob1.id=1;
+    ob1.drugName="11";
+    ob1.drugForm="aaa";
+    ob1.drugBrandName="aaaaa";
+    ob1.drugGenericName="aaaaa";
+    ob1.drugStrength="1";
+
+    let ob2: Medication = new Medication();
+    ob2.id=2;
+    ob2.drugName="22";
+    ob2.drugForm="bbb";
+    ob2.drugBrandName="bbbb";
+    ob2.drugGenericName="bbbb";
+    ob2.drugStrength="2";
+
+    let ob3: Medication = new Medication();
+    ob3.id=3;
+    ob3.drugName="33";
+    ob3.drugForm="ccc";
+    ob3.drugBrandName="ccccc";
+    ob3.drugGenericName="cccc";
+    ob3.drugStrength="3";
+    this.medicationList.push(ob1,ob2,ob3);
+   }
+
 }

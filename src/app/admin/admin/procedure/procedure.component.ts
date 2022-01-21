@@ -30,7 +30,7 @@ export class ProcedureComponent implements OnInit, AfterViewInit {
     'procedureCode',
     'procedureDescription',
     'procedureDepricated',
-    'request',
+    
   ];
 
   listOfUsers: any = [];
@@ -63,7 +63,7 @@ export class ProcedureComponent implements OnInit, AfterViewInit {
 
   loadusers() {
     return this.authservice
-      .getUsersBasedOnRoleAndStatus('PATIENT', 'NotApproved')
+      .getProcedureData()
       .subscribe((data: {}) => {
         this.listOfUsers = data;
         this.dataSource = new MatTableDataSource(this.listOfUsers);
