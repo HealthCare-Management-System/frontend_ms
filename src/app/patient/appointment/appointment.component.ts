@@ -80,8 +80,8 @@ export class AppointmentComponent implements OnInit {
     ob.description = this.contactForm.controls['description'].value;
     ob.appointmentDate = this.contactForm.controls['appointmentDate'].value;
     ob.time = this.contactForm.controls['time'].value;
-    this.patientservice.getPatientDemographicsById(this.loggedinUser?.id).subscribe((data) => {ob.patientId = data;});
-    ob.physicianId = this.selectedPhysician;
+    this.patientservice.getPatientDemographicsById(this.loggedinUser?.id).subscribe((data) => {ob.patientIdInfo= data;});
+    ob.physicianIdInfo = this.selectedPhysician;
     console.log('entered data+++++++++++');
     console.log(ob);
     this.bookservice.createBook(ob).subscribe();
