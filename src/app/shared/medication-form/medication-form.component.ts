@@ -21,9 +21,9 @@ export class MedicationFormComponent implements OnInit {
   @Input()
   medicationList: Medication[] | any;
 
-  selectedDiagnosis: Diagnosis[] | any="";
-  selectedProcedure: Diagnosis[] | any="";
-  selectedMedication: Diagnosis[] | any="";
+  selectedDiagnosis: Diagnosis | any="";
+  selectedProcedure: Diagnosis | any="";
+  selectedMedication: Diagnosis | any="";
 
   contactForm: FormGroup = new FormGroup({});
 
