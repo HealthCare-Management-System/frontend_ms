@@ -46,12 +46,6 @@ export class VisitPatientComponent implements OnInit {
       })
    
   }
-     getVitalSigns(){
-       this.bookservice.getVitalSignsByPatientId(this.patientId).subscribe(response=>{
-         this.response=response;
-         console.log(response);
-       })
-     }
-     
+    
 
 }
