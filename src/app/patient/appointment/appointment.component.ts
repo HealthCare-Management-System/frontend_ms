@@ -33,7 +33,7 @@ export class AppointmentComponent implements OnInit {
   contactForm: FormGroup = new FormGroup({});
 
   physicianForm: FormGroup = new FormGroup({});
-
+  patientInfoId1: PatientDetails | null | undefined;
   loggedinUser: User | null | undefined;
   patientInfo!: PatientDetails;
 
@@ -57,15 +57,9 @@ export class AppointmentComponent implements OnInit {
     this.loadusers();
     this.loggedinUser = this.authservice.isLoggedIn();
     this.getPhysician();
-    this.patientservice
-      .getPatientDemographicsById(this.loggedinUser?.id)
-      .subscribe((data) => {
-        this.patientInfo = data;
-      });
-
+    this.getPatientData();
     this.contactForm = this.fb.group({
       title: ['', Validators.required],
-
       description: ['', Validators.required],
       physicianIdControl: ['', Validators.required],
       appointmentDate: ['', Validators.required],
@@ -82,6 +76,16 @@ export class AppointmentComponent implements OnInit {
 
 =======
       time: ['', Validators.required],
+    });
+  }
+
+  getPatientData() {
+    return this.patientservice.getPatientDemographicsById(3).subscribe((data) => {
+      this.patientInfoId1 = data;
+      console.log("print the patient details ");
+      
+    console.log(this.patientInfoId1);
+
     });
   }
   selectPhysicianFromId(id: any) {
@@ -102,13 +106,13 @@ export class AppointmentComponent implements OnInit {
     ob.description = this.contactForm.controls['description'].value;
     ob.appointmentDate = this.contactForm.controls['appointmentDate'].value;
     ob.time = this.contactForm.controls['time'].value;
-    this.patientservice.getPatientDemographicsById(this.loggedinUser?.id).subscribe((data) => {ob.patientIdInfo= data;});
+    ob.patientIdInfo=this.patientInfoId1;
     ob.physicianIdInfo = this.selectedPhysician;
     console.log('entered data+++++++++++');
     console.log(ob);
     this.bookservice.createBook(ob).subscribe();
-    window.alert('Appointment booked successfully');
-    this.router.navigate(['/patient/dashboard/patient-inbox']);
+   // window.alert('Appointment booked successfully');
+    //this.router.navigate(['/patient/dashboard/patient-inbox']);
   }
 
   
