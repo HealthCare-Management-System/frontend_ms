@@ -37,7 +37,8 @@ export class AppointmentComponent implements OnInit {
   physicianInfoList!: User[];
   physicianList: any[] | undefined;
   physician: any;
-
+  patientInfoId1: PatientDetails | null | undefined;
+  getIdOfLoggedinUser!:number|undefined;
   physicians: any = [];
   physicianName: any = [];
   selectedPhysician: User | any;
@@ -51,9 +52,22 @@ export class AppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadusers();
+console.log("printing the id "+this.loggedinUser?.id);
+this.getIdOfLoggedinUser= this.loggedinUser?.id;
+  this.getPatientData();
     this.loggedinUser = this.authservice.isLoggedIn();
     this.getPhysician();
+<<<<<<< HEAD
     this.getPatientData();
+=======
+
+    // this.patientservice
+    //   .getPatientDemographicsById(this.loggedinUser?.id)
+    //   .subscribe((data) => {
+    //     this.patientInfo = data;
+    //   });
+
+>>>>>>> origin/inboxms
     this.contactForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -80,6 +94,24 @@ export class AppointmentComponent implements OnInit {
 
     });
   }
+
+
+  getPatientData() {
+    return this.patientservice.getPatientDemographicsById(2).subscribe((data) => {
+      this.patientInfoId1 = data;
+      console.log("print the patient details ");
+      
+    console.log(this.patientInfoId1);
+    
+
+     
+    });
+  }
+
+
+  // getPatientData(){
+  //   return this.patientservice.getPatientDemographicsById(this.loggedinUser?.id).subscribe((data) => {this.patientInfoId1 = data;});
+  // }
   selectPhysicianFromId(id: any) {
     for (let phy of this.physicianInfoList) {
       if (phy.id == id) {
@@ -90,6 +122,10 @@ export class AppointmentComponent implements OnInit {
   changevaluesforphysician(){
     this.selectPhysicianFromId(this.contactForm.value.physicianIdControl);
   }
+
+
+
+ 
   onFormSubmit() {
     console.log(this.contactForm);
     let ob: APPOINTMENT = new APPOINTMENT();
@@ -102,8 +138,13 @@ export class AppointmentComponent implements OnInit {
     console.log('entered data+++++++++++');
     console.log(ob);
     this.bookservice.createBook(ob).subscribe();
+<<<<<<< HEAD
    // window.alert('Appointment booked successfully');
     //this.router.navigate(['/patient/dashboard/patient-inbox']);
+=======
+   
+    this.router.navigate(['/patient/dashboard/patient-inbox']);
+>>>>>>> origin/inboxms
   }
 
   
