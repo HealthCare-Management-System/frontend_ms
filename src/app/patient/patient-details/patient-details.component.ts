@@ -1,5 +1,5 @@
 import { ContentObserver } from '@angular/cdk/observers';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Allergy, MasterAllergy } from 'src/app/models/allergy.model';
@@ -17,9 +17,13 @@ import { DemographicService } from 'src/app/service/demographic.service';
   styleUrls: ['./patient-details.component.css']
 })
 export class PatientDetailsComponent implements OnInit {
+  todisableWholePage!:string;
+  @Output() newItemEvent = new EventEmitter<string>();
+  @Input() toInformPatientDeatilsComponentFromAppointment!: string;
   contactForm!: FormGroup;
   allergyForm!:FormGroup;
   emergencyContactForm!:FormGroup;
+  display!:string;
   displayedColumns: string[] = ['allergyType', 'allergyName', 'allergyDescription', 'allergyClinicalInformation','is Allergy Fatal'];
   dataSource!: any;
   obj!:PatientDetails;
@@ -29,7 +33,7 @@ export class PatientDetailsComponent implements OnInit {
   loggedinUser:User|null|undefined;
   allergyObj!:Allergy[];
   confirmation!:string;
-  master!: MasterAllergy;
+  master!: any;
   moreAllergyList:any=[];
   AlCLinicalInformation :any[]=[];
   AlDescription:any[]=[];
@@ -49,7 +53,8 @@ export class PatientDetailsComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,private demographicService:DemographicService,private authservice: AuthServiceService, public router: Router,private allergyService:AllergyService) { }
 
   ngOnInit(): void {
-    
+    this.display='';
+    this. todisableWholePage='yes';
     this.allergyForm=this._formBuilder.group({
       AllergyN:['', Validators.required],
       AllergyT:['', Validators.required],
@@ -144,7 +149,7 @@ export class PatientDetailsComponent implements OnInit {
   }
   fetchAllergyDescription(master: any, event: any) {
     for(var m of master){
-      if(m.allergyName.match(event)){
+      if(m.allergyName.match(event)&&m.allergyType.match(this.allergyForm.value.AllergyT)){
         this.AlDescription.push(m.allergyDescription);
       }
       }
@@ -152,13 +157,23 @@ export class PatientDetailsComponent implements OnInit {
       console.log(this.AlDescription);
   }
   onChangeDescription(event:any){
+    console.log(event);
     this.fetchAllergyClinicalInformtion(this.master,event);
   }
   fetchAllergyClinicalInformtion(master:any, event: any) {
+    console.log(master);
     for(var m of master){
-      if(m.allergyDescription.match(event)){
+      
+      if(m.allergyDescription!==null){
+        console.log(m.allergyDescription);
+        if(m.allergyDescription.match(event)&&m.allergyName.match(this.allergyForm.value.AllergyN)&&m.allergyType.match(this.allergyForm.value.AllergyT)){
+        
         this.AlCLinicalInformation.push(m.allergyClinicalInformation);
+        console.log(m.allergyClinicalInformation);
       }
+      
+      }
+      
       }
       this.AlCLinicalInformation=[...new Set(this.AlCLinicalInformation.map((item:any) => item))];
       console.log(this.AlCLinicalInformation);
@@ -185,11 +200,15 @@ export class PatientDetailsComponent implements OnInit {
     for(var m of master){
       if(m.allergyType.match(allergyT)&&m.allergyClinicalInformation.match(allergyC)&&m.allergyDescription.match(allergyD)&&m.allergyName.match(allergyN))
       {        obj.masterallergyId=m.masterallergyId;
+        this.RemoveElementFromFetchedMasterArray(m.masterallergyId);
       }
     }
     console.log(this.obj);
-    return obj;
+    return obj; 
   }
+  RemoveElementFromFetchedMasterArray(key: number) {
+    this.master=this.master.filter((item :any)=> item.masterallergyId !== key);
+} 
   reset(){
     this.selectedType='yes';
     this.selectedName='';
@@ -248,7 +267,21 @@ export class PatientDetailsComponent implements OnInit {
     
   }
   
-  goBack(){
-    this.router.navigate(['/patient/dashboard/patient-profile']);
+  addNewItem() {
+    this.newItemEvent.emit("to call appointment component");
   }
+  goBack(){
+    if (this.toInformPatientDeatilsComponentFromAppointment === 'fromAppointment') {
+      this. todisableWholePage='';
+      this.addNewItem();
+    }
+    else {
+      this.router.navigate(['/patient/dashboard/patient-profile']);
+    }
+  }
+  
+}
+export class Datepicker {
+  // minDate = new Date(2017, 0, 1);
+  maxDate = new Date();
 }
