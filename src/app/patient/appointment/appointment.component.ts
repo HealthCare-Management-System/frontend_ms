@@ -19,10 +19,11 @@ import { AppointmentService } from '../../service/appointment.service';
   styleUrls: ['./appointment.component.css'],
 })
 export class AppointmentComponent implements OnInit {
-
+  toCheck!:string;
   list!:string[];
   contactForm: FormGroup = new FormGroup({});
-
+  toInformPatientDeatilsComponentFromAppointment!:string;
+  successMsg!:string;
   loggedinUser:User|null|undefined;
   constructor(
     public fb: FormBuilder,
@@ -38,13 +39,14 @@ export class AppointmentComponent implements OnInit {
       description: ['', Validators.required],
       physicianName: ['', Validators.required],
       appointmentDate: ['', Validators.required],
-      time: ['', Validators.required],
-    
-    
-      
+      time: ['', Validators.required],  
     });
-  
+    this.toInformPatientDeatilsComponentFromAppointment="fromAppointment";
    
+  }
+  addItem(newItem: string) {
+    this.successMsg=newItem;
+    console.log(this.successMsg);
   }
 
   onFormSubmit() {
