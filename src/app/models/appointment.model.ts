@@ -7,8 +7,13 @@ export class APPOINTMENT{
     "description": string;
     "appointmentDate": string;
     "time": string;
+<<<<<<< HEAD
     "patientIdInfo":PatientDetails |null |undefined;
+=======
+    "patientIdInfo":PatientDetails | null | undefined;
+>>>>>>> origin/inboxms
     "physicianIdInfo":User;
+   
     constructor(){
       
     }
