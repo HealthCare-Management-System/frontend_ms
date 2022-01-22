@@ -129,19 +129,19 @@ export class AuthServiceService {
 // To display the diagnosis master data to display in Admin module 
   getDiagnosisData() {
     return this.http
-      .get<User>(this.apiURL + 'patientvisiturl/diagnosis')
+      .get<Diagnosis>(this.apiURL + 'patientvisiturl/diagnosis')
       .pipe(retry(1), catchError(this.handleError));
   }
 
 
   getProcedureData() {
     return this.http
-      .get<User>(this.apiURL + 'patientvisiturl/procedure')
+      .get<Procedure>(this.apiURL + 'patientvisiturl/procedure')
       .pipe(retry(1), catchError(this.handleError));
   }
   getMedicationData() {
     return this.http
-      .get<User>(this.apiURL + 'patientvisiturl/medication')
+      .get<Medication>(this.apiURL + 'patientvisiturl/medication')
       .pipe(retry(1), catchError(this.handleError));
   }
 

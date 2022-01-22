@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PatientDetails } from 'src/app/models/PatientDetails.model';
+import { User } from 'src/app/models/user.model';
+import { VitalSign } from 'src/app/models/vitalsigns.model';
+import { VitalSignService } from 'src/app/service/vitalsigns.service';
 
 @Component({
   selector: 'app-vital-form',
@@ -9,7 +13,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class VitalFormComponent implements OnInit {
   VitalSignForm: FormGroup = new FormGroup({});
 
-  constructor(public fb: FormBuilder) {}
+  @Input()
+  patientInfoId:PatientDetails|null|undefined;
+  @Input()
+  employeeId:User|null|undefined;
+  @Input()
+  vitalSignId: VitalSign | null | undefined;
+
+  constructor(public fb: FormBuilder,
+    public vitalSignService:VitalSignService
+    ) {}
 
   ngOnInit(): void {
     this.VitalSignForm = this.fb.group({
@@ -22,12 +35,15 @@ export class VitalFormComponent implements OnInit {
   }
 
   onVitalSignFormSubmit() {
-    let height = this.VitalSignForm.value.height;
-    let weight = this.VitalSignForm.value.weight;
-    let bloodpressure = this.VitalSignForm.value.bloodpressure;
-    let bodytemperature = this.VitalSignForm.value.bodytemperature;
-    let respirationrate = this.VitalSignForm.value.respirationrate;
-
-    console.log(this.VitalSignForm.value);
+    let ob: VitalSign=new VitalSign();
+    ob.height = this.VitalSignForm.value.height;
+    ob.weight = this.VitalSignForm.value.weight;
+    ob.bloodPressure = this.VitalSignForm.value.bloodpressure;
+    ob.bodyTemperature = this.VitalSignForm.value.bodytemperature;
+    ob.respirationRate = this.VitalSignForm.value.respirationrate;
+    ob.employeeId=this.employeeId;
+    ob.patientInfoId=this.patientInfoId;
+    console.log(ob);
+    this.vitalSignService.saveVitalSign(ob).subscribe();
   }
 }

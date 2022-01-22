@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <app-patient-details-update (newItemEvent)="addItem($event)" [toInformPatientDeatilsComponentFromAppointment]="toInformPatientDeatilsComponentFromAppointment" *ngIf="toCheck"></app-patient-details-update>
 <app-patient-details (newItemEvent)="addItem($event)"[toInformPatientDeatilsComponentFromAppointment]="toInformPatientDeatilsComponentFromAppointment"  ></app-patient-details>
 <div class="image" *ngIf="successMsg" >
@@ -13,84 +14,108 @@
       fxLayout="row "
       fxLayoutAlign="center center"
       fxLayout.lt-sm="column"
+=======
+<div class="image">
+  <mat-card fxLayoutAlign="center center">
+    <form
+      [formGroup]="contactForm"
+      fxLayout="column wrap"
+>>>>>>> 76a98a9eaf49621edc6db2d3b1a93114b21f16c4
       fxLayoutGap="3%"
+      (ngSubmit)="onFormSubmit()"
     >
-      <mat-card-title><h1>Book Appointments</h1> </mat-card-title>
-    </div>
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
-      <mat-form-field color="accent">
-        <input
-          id="atitle"
-          matInput
-          type="text"
-          placeholder="Meeting Title"
-          formControlName="title"
-        />
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <textarea
-          matInput
-          placeholder="Descrption"
-          formControlName="description"
-        ></textarea>
-      </mat-form-field>
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="3%"
+      >
+        <mat-card-title><h1>Book Appointments</h1> </mat-card-title>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field color="accent">
+          <input
+            id="atitle"
+            matInput
+            type="text"
+            placeholder="Meeting Title"
+            formControlName="title"
+          />
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <textarea
+            matInput
+            placeholder="Descrption"
+            formControlName="description"
+          ></textarea>
+        </mat-form-field>
 
-      <mat-form-field color="accent">
-        <input
-          id="phy"
-          matInput
-          type="text"
-          placeholder="choose physician"
-          formControlName="physicianName"
-        />
-        <!-- <mat-label>physicianName*</mat-label>
+        <!-- <mat-form-field color="accent">
+          <input
+            id="phy"
+            matInput
+            type="text"
+            placeholder="choose physician"
+            formControlName="physicianName"
+          />
+        </mat-form-field> -->
 
-        <mat-select formControlName="physicianName">
+        <mat-form-field color="accent">
+          <mat-select  [(ngModel)]="selectedPhysician"
+          formControlName="physicianIdControl"
+            (selectionChange)="changevaluesforphysician()">
+            <mat-option value="default" disabled>
+              Select a physician</mat-option
+            >
+            <mat-option
+              *ngFor="let physician of physicianInfoList"
+              [value]="physician"
+             
+            >
+              {{ physician.name }}
+            </mat-option>
+           
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-          <mat-option
-
-            *ngFor="let physicianName of list"
-
-            value="{{ physicianName }}"
-
-            >{{ physicianName }}</mat-option></mat-select> -->
-      </mat-form-field>
-    </div>
-
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
-      <mat-form-field appearance="fill" color="accent">
-        <mat-label>Choose Date</mat-label>
-        <input
-          matInput
-          [matDatepicker]="picker"
-          formControlName="appointmentDate"
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field color="accent">
-        <input
-          id="a-time"
-          matInput
-          type="text"
-          placeholder="select time"
-          formControlName="time"
-        />
-      </mat-form-field>
-    </div>
-    <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%"></div>
-    <div
-      fxLayout="row "
-      fxLayoutAlign="center center"
-      fxLayout.lt-sm="column"
-      fxLayoutGap="1%"
-    >
-      <mat-card-actions fxFlexFill>
-        <button color="accent" mat-raised-button type="submit" fxFlexFill>
-           Book 
-        </button>
-      </mat-card-actions>
-    </div>
-  </form>
-</mat-card>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-form-field appearance="fill" color="accent">
+          <mat-label>Choose Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="appointmentDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field color="accent">
+          <input
+            id="a-time"
+            matInput
+            type="text"
+            placeholder="select time"
+            formControlName="time"
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%"></div>
+      <div
+        fxLayout="row "
+        fxLayoutAlign="center center"
+        fxLayout.lt-sm="column"
+        fxLayoutGap="1%"
+      >
+        <mat-card-actions fxFlexFill>
+          <button color="accent" mat-raised-button type="submit" fxFlexFill>
+            Book
+          </button>
+        </mat-card-actions>
+      </div>
+    </form>
+  </mat-card>
 </div>

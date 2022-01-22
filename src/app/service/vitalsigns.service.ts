@@ -13,7 +13,7 @@ export class VitalSignService {
   // users: User[] = [];
   // loggedinUser?: User;
 
-  apiURL = 'http://localhost:8000';
+  apiURL = 'http://localhost:8080/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -33,18 +33,17 @@ export class VitalSignService {
   // }
 
   
-  // getUser(id:number): Observable<User> {
-  //   return this.http.get<User>(this.apiURL + '/users/' + id)
-  //   .pipe(
-  //     retry(1),
-  //     catchError(this.handleError)
-  //   )
-  // }  
+  getVitalSignByPatientId(id:number): Observable<VitalSign> {
+    return this.http.get<VitalSign>(this.apiURL + 'vitalsignurl/vitalsigns/patient/' + id)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    )
+  }  
 
  
   saveVitalSign(vitalsign:VitalSign): Observable<VitalSign> {
-
-    return this.http.post<VitalSign>(this.apiURL + '/VitalSign', JSON.stringify(vitalsign), this.httpOptions)
+    return this.http.post<VitalSign>(this.apiURL + 'vitalsignurl/vitalsigns', JSON.stringify(vitalsign), this.httpOptions)
     .pipe(
      retry(1),
       catchError(this.handleError)
