@@ -21,20 +21,17 @@ import { AppointmentService } from '../../service/appointment.service';
   styleUrls: ['./appointment.component.css'],
 })
 export class AppointmentComponent implements OnInit {
-<<<<<<< HEAD
   toCheck!:string;
   list!:string[];
   contactForm: FormGroup = new FormGroup({});
   toInformPatientDeatilsComponentFromAppointment!:string;
   successMsg!:string;
   loggedinUser:User|null|undefined;
-=======
-  list!: string[];
-  contactForm: FormGroup = new FormGroup({});
+
 
   physicianForm: FormGroup = new FormGroup({});
   patientInfoId1: PatientDetails | null | undefined;
-  loggedinUser: User | null | undefined;
+ 
   patientInfo!: PatientDetails;
 
   physicianInfoList!: User[];
@@ -44,7 +41,6 @@ export class AppointmentComponent implements OnInit {
   physicians: any = [];
   physicianName: any = [];
   selectedPhysician: User | any;
->>>>>>> 76a98a9eaf49621edc6db2d3b1a93114b21f16c4
   constructor(
     public fb: FormBuilder,
     private bookservice: AppointmentService,
@@ -63,7 +59,6 @@ export class AppointmentComponent implements OnInit {
       description: ['', Validators.required],
       physicianIdControl: ['', Validators.required],
       appointmentDate: ['', Validators.required],
-<<<<<<< HEAD
       time: ['', Validators.required],  
     });
     this.toInformPatientDeatilsComponentFromAppointment="fromAppointment";
@@ -74,10 +69,7 @@ export class AppointmentComponent implements OnInit {
     console.log(this.successMsg);
   }
 
-=======
-      time: ['', Validators.required],
-    });
-  }
+ 
 
   getPatientData() {
     return this.patientservice.getPatientDemographicsById(3).subscribe((data) => {
@@ -98,7 +90,6 @@ export class AppointmentComponent implements OnInit {
   changevaluesforphysician(){
     this.selectPhysicianFromId(this.contactForm.value.physicianIdControl);
   }
->>>>>>> 76a98a9eaf49621edc6db2d3b1a93114b21f16c4
   onFormSubmit() {
     console.log(this.contactForm);
     let ob: APPOINTMENT = new APPOINTMENT();
