@@ -117,7 +117,7 @@ export class InboxComponent implements OnInit {
         });
     } else if (this.loggedinUser?.role === 'CT_PATIENT') {
       this.inboxservice
-        .getBookingByPatientById(this.loggedinUser?.empid)
+        .getBookingByPatientById(this.loggedinUser?.id)
         .subscribe((data) => {
           this.inboxdata = data;
         });

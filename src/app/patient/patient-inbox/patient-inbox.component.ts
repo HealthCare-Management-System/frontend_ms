@@ -58,11 +58,20 @@ export class PatientInboxComponent implements OnInit {
   }
 
   loadusers() {
-    return this.inboxservice.getBookingByPatientById(this.loggedinUser?.id).subscribe((data) => {
-      this.inboxdata = data;
-     console.log("hello in inbox");
-     console.log(data);
+    if (this.loggedinUser?.role === 'CT_PATIENT') {
+      this.inboxservice
+        .getBookingByPatientById(this.loggedinUser?.id)
+        .subscribe((data) => {
+          this.inboxdata = data;
+        });
+      }else{
+           window.alert("error");
+      }
+    // return this.inboxservice.getBookingByPatientById(this.loggedinUser?.id).subscribe((data) => {
+    //   this.inboxdata = data;
+    //  console.log("hello in inbox");
+    //  console.log(data);
     
-    });
+    // });
   }
 }
