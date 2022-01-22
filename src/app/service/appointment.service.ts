@@ -25,11 +25,7 @@ export class AppointmentService {
   createBook(book: APPOINTMENT): Observable<APPOINTMENT> {
     console.log('save booking' + book);
     return this.http.post<APPOINTMENT>(
-<<<<<<< HEAD
       'http://localhost:8080/appointmenturl/appointments',
-=======
-      'http://localhost:8080/appointmenturl/appointments/save',
->>>>>>> origin/inboxms
       JSON.stringify(book),
       this.httpOptions
     );

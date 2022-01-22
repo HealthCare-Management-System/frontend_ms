@@ -50,12 +50,10 @@ export class AppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadusers();
-    console.log('printing the id ' + this.loggedinUser?.id);
-    this.getIdOfLoggedinUser = this.loggedinUser?.id;
-    this.getPatientData();
+   
     this.loggedinUser = this.authservice.isLoggedIn();
     this.getPhysician();
-
+    this.getPatientData();
     this.contactForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
@@ -71,6 +69,8 @@ export class AppointmentComponent implements OnInit {
   }
 
   getPatientData() {
+    console.log("inside user get");
+    console.log(this.loggedinUser);
     return this.patientservice
       .getPatientDemographicsById(this.loggedinUser?.id)
       .subscribe((data) => {
