@@ -1,15 +1,18 @@
-export class VitalSign {
-    'height': number;
-    'weight': number;
-    'bloodpressure': number;
-    'bodytemperature': number;
-    'respirationrate': number;
+import { PatientDetails } from "./PatientDetails.model";
+import { User } from "./user.model";
 
-    constructor(height: number,weight: number,bloodpressure: number,bodytemperature: number,respirationrate: number){
-      this.height=height,
-      this.weight=weight,
-      this.bloodpressure=bloodpressure,
-      this.bodytemperature=bodytemperature,
-      this.respirationrate=respirationrate
+export class VitalSign {
+    'id'!:number;
+    'height': string;
+    'weight': string;
+    'bloodPressure': string;
+    'bodyTemperature': string;
+    'respirationRate': string;
+    'dateTime':string;
+    'patientInfoId':PatientDetails|null|undefined;
+    'employeeId':User|null|undefined;
+
+    constructor(){
+      
     }
   }
