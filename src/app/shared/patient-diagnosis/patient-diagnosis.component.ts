@@ -40,6 +40,9 @@ export class PatientDiagnosisComponent implements OnInit {
   employeeId: User | null | undefined;
   vitalSignId: VitalSign | null | undefined;
 
+  dataSource: any=[];
+  selection:any;
+
   vitalentered = false;
 
   constructor(
@@ -85,6 +88,14 @@ export class PatientDiagnosisComponent implements OnInit {
     this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
       this.patientInfoId = data;
       this.getVitalSignId(this.patientInfoId.id);
+      if(this.patientInfoId===null){
+        this.selection='no';
+        console.log(this.selection)
+      }else{
+        this.selection='yes';
+        console.log(this.selection);
+        this.dataSource=this.patientInfoId.allergies;
+      }
     });
   }
 
