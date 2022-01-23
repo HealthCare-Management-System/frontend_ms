@@ -9,6 +9,7 @@ export class VitalSign {
     'bodyTemperature': string;
     'respirationRate': string;
     'dateTime':string;
+    'meetingid':string|undefined;
     'patientInfoId':PatientDetails|null|undefined;
     'employeeId':User|null|undefined;
 
