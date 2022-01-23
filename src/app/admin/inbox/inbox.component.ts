@@ -9,7 +9,7 @@ import {
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { MatNoDataRow, MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APPOINTMENT } from 'src/app/models/appointment.model';
 import { NOTES } from 'src/app/models/chat.model';
 import { User } from 'src/app/models/user.model';
@@ -75,7 +75,8 @@ export class InboxComponent implements OnInit {
     private _bottomSheet: MatBottomSheet,
     public dialog: MatDialog,
     public noteservice: NotesService,
-    public authservice: AuthServiceService
+    public authservice: AuthServiceService,
+     public routerthing: Router
   ) {
     
   }
@@ -182,6 +183,11 @@ export class InboxComponent implements OnInit {
       alert('successfully deleted');
       this.loadData();
     });
+  }
+
+  routeinmethod(id:number){
+    alert(id);
+    this.routerthing.navigate(['admin/dashboard/patient-diagnosis'], { queryParams: { meetingid: id} });
   }
 
  
