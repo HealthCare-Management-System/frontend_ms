@@ -33,7 +33,7 @@ export class VitalSignService {
   // }
 
   
-  getVitalSignByPatientId(id:number): Observable<VitalSign> {
+  getVitalSignByPatientId(id:number|undefined): Observable<VitalSign> {
     return this.http.get<VitalSign>(this.apiURL + 'vitalsignurl/vitalsigns/patient/' + id)
     .pipe(
       retry(1),
