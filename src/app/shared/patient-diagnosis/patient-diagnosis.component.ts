@@ -52,7 +52,7 @@ export class PatientDiagnosisComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParamMap.subscribe(
-      (params) => (this.selectedMeeting = params.get('username'))
+      (params) => (this.selectedMeeting = params.get('meetingid'))
     );
 
     this.getPatientInfoId(2);
@@ -92,5 +92,9 @@ export class PatientDiagnosisComponent implements OnInit {
     this.vitalSignService.getVitalSignByPatientId(id).subscribe((data) => {
       this.vitalSignId = data;
     });
+  }
+
+  getMeetingId(id:number){
+    
   }
 }

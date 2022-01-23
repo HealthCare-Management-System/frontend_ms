@@ -58,6 +58,9 @@ export class PatientInboxComponent implements OnInit {
   }
 
   loadusers() {
+    console.log("hello in inbox before call");
+    console.log(this.loggedinUser);
+
     return this.inboxservice.getBookingByPatientById(this.loggedinUser?.id).subscribe((data) => {
       this.inboxdata = data;
      console.log("hello in inbox");
