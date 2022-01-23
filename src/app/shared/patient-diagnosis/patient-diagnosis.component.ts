@@ -40,8 +40,8 @@ export class PatientDiagnosisComponent implements OnInit {
   employeeId: User | null | undefined;
   vitalSignId: VitalSign | null | undefined;
 
-  dataSource: any=[];
-  selection:any;
+  dataSource: any = [];
+  selection: any;
 
   vitalentered = false;
 
@@ -54,12 +54,10 @@ export class PatientDiagnosisComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(
-      (params) => (this.selectedMeeting = params.get('meetingid'))
-    );
-
-    this.getPatientInfoId(2);
-
+    this.route.queryParamMap.subscribe((params) => {
+      this.selectedMeeting = params.get('meetingid');
+      this.getMeetingId(Number(this.selectedMeeting));
+    });
     this.loggedinUser = this.authservice.isLoggedIn();
     console.log(this.loggedinUser);
     this.employeeId = this.loggedinUser;
@@ -76,36 +74,38 @@ export class PatientDiagnosisComponent implements OnInit {
     this.checkVitalSignValue();
   }
 
-  checkVitalSignValue() {
-    this.getVitalSignId(this.patientInfoId!.id); 
-    if(this.vitalSignId !=null || this.vitalSignId != undefined){
-      this.vitalentered=true;
-    }
-
+  getMeetingId(id: number) {
+    this.appointmentService.getAppointmentById(id).subscribe((data) => {
+      this.meeting = data;
+      this.getPatientInfoId(this.meeting.patientIdInfo?.user?.id);
+    });
   }
 
-  getPatientInfoId(id: number) {
+  getPatientInfoId(id: number | undefined) {
     this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
       this.patientInfoId = data;
       this.getVitalSignId(this.patientInfoId.id);
-      if(this.patientInfoId===null){
-        this.selection='no';
-        console.log(this.selection)
-      }else{
-        this.selection='yes';
+      if (this.patientInfoId === null) {
+        this.selection = 'no';
         console.log(this.selection);
-        this.dataSource=this.patientInfoId.allergies;
+      } else {
+        this.selection = 'yes';
+        console.log(this.selection);
+        this.dataSource = this.patientInfoId.allergies;
       }
     });
   }
 
-  getVitalSignId(id: number) {
+  getVitalSignId(id: number | undefined) {
     this.vitalSignService.getVitalSignByPatientId(id).subscribe((data) => {
       this.vitalSignId = data;
     });
   }
 
-  getMeetingId(id:number){
-    
+  checkVitalSignValue() {
+    this.getVitalSignId(this.patientInfoId!.id);
+    if (this.vitalSignId != null || this.vitalSignId != undefined) {
+      this.vitalentered = true;
+    }
   }
 }

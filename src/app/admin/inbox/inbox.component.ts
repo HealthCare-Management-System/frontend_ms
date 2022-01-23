@@ -186,7 +186,6 @@ export class InboxComponent implements OnInit {
   }
 
   routeinmethod(id:number){
-    alert(id);
     this.routerthing.navigate(['admin/dashboard/patient-diagnosis'], { queryParams: { meetingid: id} });
   }
 
