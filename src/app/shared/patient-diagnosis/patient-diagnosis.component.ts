@@ -68,19 +68,19 @@ export class PatientDiagnosisComponent implements OnInit {
     ob1.id=1;
     ob1.diagnosisCode="11";
     ob1.diagnosisDescription="aaa";
-    ob1.diagnosisIsDepricated="false";
+    ob1.diagnosisIsDepricated=false;
 
     let ob2: Diagnosis = new Diagnosis();
     ob2.id=2;
     ob2.diagnosisCode="22";
     ob2.diagnosisDescription="bbb";
-    ob2.diagnosisIsDepricated="false";
+    ob2.diagnosisIsDepricated=false;
 
     let ob3: Diagnosis = new Diagnosis();
     ob3.id=3;
     ob3.diagnosisCode="333";
     ob3.diagnosisDescription="ccc";
-    ob3.diagnosisIsDepricated="false";
+    ob3.diagnosisIsDepricated=false;
 
 
     this.diagnosisList.push(ob1,ob2,ob3);
@@ -90,19 +90,19 @@ export class PatientDiagnosisComponent implements OnInit {
     ob1.id=1;
     ob1.procedureCode="11";
     ob1.procedureDescription="aaapppp";
-    ob1.procedureDepricated="false";
+    ob1.procedureDepricated=false;
 
     let ob2: Procedure = new Procedure();
     ob2.id=2;
     ob2.procedureCode="22";
     ob2.procedureDescription="bbbppp";
-    ob2.procedureDepricated="false";
+    ob2.procedureDepricated=false;
 
     let ob3: Procedure = new Procedure();
     ob3.id=3;
     ob3.procedureCode="333";
     ob3.procedureDescription="cccppp";
-    ob3.procedureDepricated="false";
+    ob3.procedureDepricated=false;
 
 
     this.procedureList.push(ob1,ob2,ob3);
