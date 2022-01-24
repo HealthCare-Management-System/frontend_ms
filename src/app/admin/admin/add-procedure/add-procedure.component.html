@@ -37,17 +37,16 @@
 
     <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
       <mat-form-field color="accent" class="example-full-width">
-        <mat-label>Is procedure Is Depricated</mat-label>
-        <mat-select formControlName="procedureDepricated2">
+        <mat-label>Is Procedure Depricated</mat-label>
+        <mat-select formControlName="procedureIsDepricated2">
           <mat-option
-            [value]="procedureDepricated"
-            *ngFor="let procedureDepricated of procedureDepricated1"
-            >{{ procedureDepricated }}
+            [value]="procedureIsDepricated"
+            *ngFor="let procedureIsDepricated of procedureIsDepricated1"
+            >{{ procedureIsDepricated }}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-   
 
     <div
       fxLayout="row "
@@ -63,4 +62,3 @@
     </div>
   </form>
 </mat-card>
-
