@@ -12,7 +12,7 @@ export class AppointmentService {
 
   currentloggedinUser?: APPOINTMENT | null;
 
-  apiURL = 'http://localhost:8080/appointments/';
+  apiURL = 'http://localhost:8080/appointmenturl/appointments/';
 
   httpOptions = {
     headers: new HttpHeaders({

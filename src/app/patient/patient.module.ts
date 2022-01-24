@@ -43,12 +43,14 @@ import { PatientDetailsComponent } from './patient-details/patient-details.compo
 import { PatientDetailsUpdateComponent } from './patient-details-update/patient-details-update.component';
 import { SchedulerComponent } from './scheduler/scheduler.component';
 import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { PatientDashboardDisplayComponent } from './patient-dashboard-display/patient-dashboard-display.component';
 
 const routes3: Routes = [
   {
     path: 'dashboard',
     component: PatientDashboardComponent,
     children: [
+      {path:'',component: PatientDashboardDisplayComponent},
       { path: 'patient-profile', component: ProfileComponent },
       { path: 'appointment', component: AppointmentComponent },
       { path: 'visit-patient', component: VisitPatientComponent },
@@ -58,6 +60,8 @@ const routes3: Routes = [
         path: 'patient-demographic-details',
         component: PatientDetailsComponent,
       },
+      {path:'patient-dashboard-diaplay',component: PatientDashboardDisplayComponent},
+      
       {
         path: 'patient-demographic-details-update',
         component: PatientDetailsUpdateComponent,
@@ -92,6 +96,7 @@ const routes3: Routes = [
     PatientDetailsComponent,
     PatientDetailsUpdateComponent,
     SchedulerComponent,
+    PatientDashboardDisplayComponent,
   ],
 
   imports: [

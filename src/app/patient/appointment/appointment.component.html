@@ -1,4 +1,17 @@
-<div class="image">
+<!-- <app-patient-details-update
+  (newItemEvent)="addItem($event)"
+  [toInformPatientDeatilsComponentFromAppointment]="
+    toInformPatientDeatilsComponentFromAppointment
+  "
+  *ngIf="false"
+></app-patient-details-update>
+<app-patient-details
+  (newItemEvent)="addItem($event)"
+  [toInformPatientDeatilsComponentFromAppointment]="
+    toInformPatientDeatilsComponentFromAppointment
+  "
+></app-patient-details> -->
+<div class="image" >
   <mat-card fxLayoutAlign="center center">
     <form
       [formGroup]="contactForm"
@@ -43,20 +56,20 @@
         </mat-form-field> -->
 
         <mat-form-field color="accent">
-          <mat-select  [(ngModel)]="selectedPhysician"
-          formControlName="physicianIdControl"
-            (selectionChange)="changevaluesforphysician()">
+          <mat-select
+            [(ngModel)]="selectedPhysician"
+            formControlName="physicianIdControl"
+            (selectionChange)="changevaluesforphysician()"
+          >
             <mat-option value="default" disabled>
               Select a physician</mat-option
             >
             <mat-option
               *ngFor="let physician of physicianInfoList"
               [value]="physician"
-             
             >
               {{ physician.name }}
             </mat-option>
-           
           </mat-select>
         </mat-form-field>
       </div>

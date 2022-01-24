@@ -21,18 +21,22 @@ import { AppointmentService } from '../../service/appointment.service';
   styleUrls: ['./appointment.component.css'],
 })
 export class AppointmentComponent implements OnInit {
+  toCheck!: string;
   list!: string[];
   contactForm: FormGroup = new FormGroup({});
+  toInformPatientDeatilsComponentFromAppointment!: string;
+  successMsg!: string;
+  loggedinUser: User | null | undefined;
 
   physicianForm: FormGroup = new FormGroup({});
   patientInfoId1: PatientDetails | null | undefined;
-  loggedinUser: User | null | undefined;
+
   patientInfo!: PatientDetails;
 
   physicianInfoList!: User[];
   physicianList: any[] | undefined;
   physician: any;
-
+  getIdOfLoggedinUser!: number | undefined;
   physicians: any = [];
   physicianName: any = [];
   selectedPhysician: User | any;
@@ -46,6 +50,7 @@ export class AppointmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadusers();
+   
     this.loggedinUser = this.authservice.isLoggedIn();
     this.getPhysician();
     this.getPatientData();
@@ -56,17 +61,23 @@ export class AppointmentComponent implements OnInit {
       appointmentDate: ['', Validators.required],
       time: ['', Validators.required],
     });
+    this.toInformPatientDeatilsComponentFromAppointment = 'fromAppointment';
+  }
+  addItem(newItem: string) {
+    this.successMsg = newItem;
+    console.log(this.successMsg);
   }
 
   getPatientData() {
-    return this.patientservice.getPatientDemographicsById(3).subscribe((data) => {
-      this.patientInfoId1 = data;
-      console.log("print the patient details ");
-      
-    console.log(this.patientInfoId1);
-
-    });
+    console.log("inside user get");
+    console.log(this.loggedinUser);
+    return this.patientservice
+      .getPatientDemographicsById(this.loggedinUser?.id)
+      .subscribe((data) => {
+        this.patientInfoId1 = data;
+      });
   }
+
   selectPhysicianFromId(id: any) {
     for (let phy of this.physicianInfoList) {
       if (phy.id == id) {
@@ -74,9 +85,10 @@ export class AppointmentComponent implements OnInit {
       }
     }
   }
-  changevaluesforphysician(){
+  changevaluesforphysician() {
     this.selectPhysicianFromId(this.contactForm.value.physicianIdControl);
   }
+
   onFormSubmit() {
     console.log(this.contactForm);
     let ob: APPOINTMENT = new APPOINTMENT();
@@ -84,16 +96,15 @@ export class AppointmentComponent implements OnInit {
     ob.description = this.contactForm.controls['description'].value;
     ob.appointmentDate = this.contactForm.controls['appointmentDate'].value;
     ob.time = this.contactForm.controls['time'].value;
-    ob.patientIdInfo=this.patientInfoId1;
+    ob.patientIdInfo = this.patientInfoId1;
     ob.physicianIdInfo = this.selectedPhysician;
     console.log('entered data+++++++++++');
     console.log(ob);
     this.bookservice.createBook(ob).subscribe();
-   // window.alert('Appointment booked successfully');
-    //this.router.navigate(['/patient/dashboard/patient-inbox']);
+    window.alert('Appointment booked successfully');
+    this.router.navigate(['/patient/dashboard/patient-inbox']);
   }
 
-  
   loadusers() {
     return this.authservice
       .getUsersBasedOnRoleAndStatus('CT_PHYSICIAN', 'Active')
@@ -102,7 +113,7 @@ export class AppointmentComponent implements OnInit {
         for (let phy of this.physicians) {
           this.physicianName.push(phy.name);
         }
-        console.log(this.physicianName);
+
         this.physicians.splice(0, 1);
       });
   }
@@ -111,8 +122,6 @@ export class AppointmentComponent implements OnInit {
       .getUsersBasedOnRoleAndStatus('CT_PHYSICIAN', 'Active')
       .subscribe((data: any) => {
         this.physicianInfoList = data;
-        console.log('checking physician list');
-        console.log(this.physicianInfoList);
       });
   }
 }

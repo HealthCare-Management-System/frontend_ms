@@ -1,4 +1,4 @@
-<mat-stepper linear #stepper *ngIf="!successMsg">
+<mat-stepper linear #stepper *ngIf="!successMsg&&todisableWholePage">
     <mat-step [stepControl]="contactForm">
         <ng-template matStepLabel>Add Personal Information</ng-template>
         <mat-card fxLayoutAlign="center center">
@@ -226,7 +226,7 @@
         </mat-card>
     </mat-step>
 </mat-stepper>
-<mat-card  *ngIf="successMsg" fxLayoutAlign="center center">
+<mat-card  *ngIf="successMsg&&todisableWholePage" fxLayoutAlign="center center">
     <table>
         <tr>
             <td id="heading" colspan="4"><h1>{{successMsg}}</h1></td>
@@ -318,37 +318,39 @@
         </div>
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
           <ng-container matColumnDef="allergyType">
-            <th mat-header-cell *matHeaderCellDef>Allergy Type </th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyType}} </td>
+            <th mat-header-cell *matHeaderCellDef id="tableheader">Allergy Type </th>
+            <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyType}} </td>
           </ng-container>
     
           <ng-container matColumnDef="allergyName">
-            <th mat-header-cell *matHeaderCellDef>Allergy Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyName}} </td>
+            <th mat-header-cell *matHeaderCellDef id="tableheader">Allergy Name </th>
+            <td mat-cell *matCellDef="let element" > {{element.masterId?.allergyName}} </td>
           </ng-container>
     
           <ng-container matColumnDef="allergyDescription">
-            <th mat-header-cell *matHeaderCellDef>Allergy Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyDescription}} </td>
+            <th mat-header-cell *matHeaderCellDef id="tableheader">Allergy Description </th>
+            <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyDescription}} </td>
           </ng-container>
     
           <ng-container matColumnDef="allergyClinicalInformation">
-            <th mat-header-cell *matHeaderCellDef> Allergy ClinicalInformation</th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyClinicalInformation}} </td>
+            <th mat-header-cell *matHeaderCellDef id="tableheader"> Allergy ClinicalInformation</th>
+            <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyClinicalInformation}} </td>
           </ng-container>
     
           <ng-container matColumnDef="is Allergy Fatal">
-            <th mat-header-cell *matHeaderCellDef > is Allergy Fatal</th>
+            <th mat-header-cell *matHeaderCellDef id="tableheader"> is Allergy Fatal</th>
             <td mat-cell *matCellDef="let element"> {{element.isAllergyFatal}} </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
             <mat-card-actions fxFlexFill>
+              <div style="align-items: center" fxLayoutAlign="center center">
               <button mat-raised-button (click)="goBack()" color="accent">
                 ok
               </button>
+              </div>
             </mat-card-actions>
           </div>
     </div>

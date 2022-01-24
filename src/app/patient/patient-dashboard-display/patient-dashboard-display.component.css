@@ -1,8 +1,11 @@
-@media screen and (min-width: 700px)
+#notification{
+    color:#ff5b85;
+  }
+  @media screen and (min-width: 700px)
 {
     mat-card {
-    max-width: 60%;
-    /* color:#ff5b85; */
+    max-width: 80%;
+    color:#ff5b85;
     margin: 2em auto;
     text-align: center;
     margin-bottom: 10%;
@@ -13,7 +16,7 @@
 {
     mat-card {
     max-width: 90%;
-    /* color:#ff5b85; */
+    color:#ff5b85;
     margin: 2em auto;
     text-align: center;
     margin-bottom: 10%;
@@ -32,23 +35,6 @@
   .bodybg-color {
     background-color: #064E89; 
 }
-
-.example-card {
-  max-width: 400px;
-}
-
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-
-mat-grid-tile {
-  background: palevioletred;
-}
-mat-grid-list{
-  width: auto;
-  height: inherit;
-}
 td{
   text-align: left;
 }
@@ -56,20 +42,19 @@ td{
  color:#ff5b85;
 }
 #heading{
-  color:lightseagreen;
-  font-size: medium;
-
+  color:lightseagreen
 }
-
+#value{
+  color:black
+}
+ 
 table{
   width:100%
 }
-#allergy{
-  text-align-last: center;
-  text-align: center;
-  font-size: medium;
-  color:lightseagreen
-}
+
+
+
+
 #tableheader{
   color:white;
   font-size: medium;
