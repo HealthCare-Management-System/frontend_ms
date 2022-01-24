@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models/user.model';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-corporate-registeration',
@@ -19,7 +20,8 @@ export class CorporateRegisterationComponent implements OnInit {
 
   constructor(
     private authservice: AuthServiceService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +44,7 @@ export class CorporateRegisterationComponent implements OnInit {
     ob.email = this.contactForm.controls['email'].value;
     ob.empid = this.contactForm.controls['empId'].value;
     ob.dob = this.contactForm.controls['dob'].value;
-    ob.role = this.contactForm.controls['role'].value;
+    ob.role = "ct_"+this.contactForm.controls['role'].value;
     ob.title = this.contactForm.controls['title'].value;
     ob.phone = '000000000';
     ob.status = 'Active';
@@ -56,7 +58,8 @@ export class CorporateRegisterationComponent implements OnInit {
     });
     this.contactForm.reset();
   
-    console.log(this.employee);
+    window.alert('Employee has been Registered successfully');
+    this.router.navigate(['/']);
   }
 
  

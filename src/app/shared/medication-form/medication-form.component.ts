@@ -5,6 +5,8 @@ import { Medication } from 'src/app/models/Medication.model';
 import { PatientVisit } from 'src/app/models/patientvisit.model';
 import { Procedure } from 'src/app/models/procedure.model';
 import { User } from 'src/app/models/user.model';
+import { VitalSign } from 'src/app/models/vitalsigns.model';
+import { PatientVisitServiceService } from 'src/app/service/patient-visit-service.service';
 
 @Component({
   selector: 'app-medication-form',
@@ -20,14 +22,19 @@ export class MedicationFormComponent implements OnInit {
   procedureList: Procedure[] | any;
   @Input()
   medicationList: Medication[] | any;
+  @Input()
+  vitalSignId: VitalSign | null | undefined;
 
-  selectedDiagnosis: Diagnosis[] | any="";
-  selectedProcedure: Diagnosis[] | any="";
-  selectedMedication: Diagnosis[] | any="";
+  selectedDiagnosis: Diagnosis | any = '';
+  selectedProcedure: Diagnosis | any = '';
+  selectedMedication: Diagnosis | any = '';
 
   contactForm: FormGroup = new FormGroup({});
 
-  constructor(public fb: FormBuilder) {}
+  constructor(
+    public fb: FormBuilder,
+    private patientVisitServiceService: PatientVisitServiceService
+  ) {}
 
   ngOnInit(): void {
     console.log('***inside medicination form***********');
@@ -45,7 +52,7 @@ export class MedicationFormComponent implements OnInit {
       code2: ['', Validators.required],
       description2: ['', Validators.required],
       depricated2: ['', Validators.required],
-      drugGenericName:['', Validators.required],
+      drugGenericName: ['', Validators.required],
       drugname: ['', Validators.required],
       brandname: ['', Validators.required],
       drugForm: ['', Validators.required],
@@ -54,44 +61,45 @@ export class MedicationFormComponent implements OnInit {
   }
 
   onFormSubmit() {
-    
-    let ob :PatientVisit= new PatientVisit();
-    ob.disgnosis=this.selectedDiagnosis;
-    ob.medication=this.selectedMedication;
-    ob.procedure=this.selectedProcedure;
-
+    let ob: PatientVisit = new PatientVisit();
+    ob.disgnosis = this.selectedDiagnosis;
+    ob.medication = this.selectedMedication;
+    ob.procedure = this.selectedProcedure;
+    ob.vitalSignId = this.vitalSignId;
+    ob.employeeId = this.loggedinUser;
     console.log(ob);
+    this.patientVisitServiceService.savePatientVisit(ob).subscribe();
   }
 
   selectDiagnosisFromId(id: string) {
     for (let diagnosis of this.diagnosisList) {
       if (diagnosis.id == id) {
-        this.selectedDiagnosis=diagnosis;
+        this.selectedDiagnosis = diagnosis;
       }
     }
   }
   selectProcedureFromId(id: string) {
     for (let procedure of this.procedureList) {
       if (procedure.id == id) {
-        this.selectedProcedure=procedure;
+        this.selectedProcedure = procedure;
       }
     }
   }
   selectMedicationFromId(id: string) {
     for (let medication of this.medicationList) {
       if (medication.id == id) {
-        this.selectedMedication=medication;
+        this.selectedMedication = medication;
       }
     }
   }
 
-  changevaluesfordiagnosis(){
+  changevaluesfordiagnosis() {
     this.selectDiagnosisFromId(this.contactForm.value.diagnosisControl);
   }
-  changevaluesforProcedure(){
+  changevaluesforProcedure() {
     this.selectProcedureFromId(this.contactForm.value.procedureControl);
   }
-  changevaluesformedication(){
+  changevaluesformedication() {
     this.selectMedicationFromId(this.contactForm.value.medicationControl);
   }
 }

@@ -1,3 +1,4 @@
+import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -8,7 +9,7 @@ import {
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { MatNoDataRow, MatTableDataSource } from '@angular/material/table';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APPOINTMENT } from 'src/app/models/appointment.model';
 import { NOTES } from 'src/app/models/chat.model';
 import { User } from 'src/app/models/user.model';
@@ -42,8 +43,9 @@ export class InboxComponent implements OnInit {
     'id',
     'title',
     'description',
-    'physician',
+    'physicianId',
     'date',
+    'patientId',
     'time',
     'patientDetails',
     'Actions',
@@ -73,23 +75,12 @@ export class InboxComponent implements OnInit {
     private _bottomSheet: MatBottomSheet,
     public dialog: MatDialog,
     public noteservice: NotesService,
-    public authservice: AuthServiceService
+    public authservice: AuthServiceService,
+     public routerthing: Router
   ) {
-    this.badgeCounter = 0;
+    
   }
-  incrementCount() {
-    this.badgeCounter++;
-  }
-  resetCount() {
-    this.badgeCounter = 0;
-  }
-  decreaseCount() {
-    if (this.badgeCounter < 0) return;
-    this.badgeCounter--;
-    if (this.badgeCounter == 0) {
-      this.hideMatBadge = true;
-    }
-  }
+ 
   ngOnInit(): void {
     this.loggedinUser = this.authservice.isLoggedIn();
   
@@ -100,8 +91,9 @@ export class InboxComponent implements OnInit {
 
       urgencyLevel: ['', Validators.required],
     });
-    this.loadusers();
-    this.loadData();
+   // this.getAllAppointment();
+     this.loadusers();
+    // this.loadData();
   }
   openProfile(element: APPOINTMENT) {
     console.log('i method');
@@ -113,20 +105,20 @@ export class InboxComponent implements OnInit {
 
   loadusers() {
     if (
-      this.loggedinUser?.role === 'NURSE'  
+      this.loggedinUser?.role === 'CT_NURSE'  
     ) {
       this.inboxservice.getAllBooking().subscribe((data) => {
         this.inboxdata = data;
       });
-    } else if (this.loggedinUser?.role === 'PHYSICIAN') {
+    } else if (this.loggedinUser?.role === 'CT_PHYSICIAN') {
       this.inboxservice
-        .getBookingByPhysicianName(this.loggedinUser?.name)
+        .getBookingByPhysicianById(this.loggedinUser?.id)
         .subscribe((data) => {
           this.inboxdata = data;
         });
-    } else if (this.loggedinUser?.role === 'PATIENT') {
+    } else if (this.loggedinUser?.role === 'CT_PATIENT') {
       this.inboxservice
-        .getBookingByPhysician(this.loggedinUser?.empid)
+        .getBookingByPatientById(this.loggedinUser?.empid)
         .subscribe((data) => {
           this.inboxdata = data;
         });
@@ -134,6 +126,17 @@ export class InboxComponent implements OnInit {
       window.alert('error');
     }
   }
+  getAllAppointment(){
+    return this.inboxservice.getAllBooking().subscribe((data:any)=>{
+      this.inboxdata=data;
+  // this.ing(this.inboxdata);
+      console.log("list of booking ");
+      console.log(data);
+    });
+  }
+  // ing(inboxdata: any) {
+  // for(var i)
+  // }
 
   deleteApp(element: APPOINTMENT) {
     console.log('deleting by id');
@@ -150,7 +153,7 @@ export class InboxComponent implements OnInit {
       .subscribe((data: {}) => {
         this.chatdata = data;
         console.log(this.chatdata);
-        this.resetCount();
+       
       });
   }
   onFormSubmit() {
@@ -165,7 +168,7 @@ export class InboxComponent implements OnInit {
     console.log(ob);
     this.noteservice.createNotes(ob).subscribe();
     window.alert('Msg send successfully');
-    this.incrementCount();
+  
     this.noteForm.reset();
   }
   replyNote(element: NOTES) {
@@ -180,6 +183,10 @@ export class InboxComponent implements OnInit {
       alert('successfully deleted');
       this.loadData();
     });
+  }
+
+  routeinmethod(id:number){
+    this.routerthing.navigate(['admin/dashboard/patient-diagnosis'], { queryParams: { meetingid: id} });
   }
 
  

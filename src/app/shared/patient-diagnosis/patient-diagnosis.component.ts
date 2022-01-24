@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { APPOINTMENT } from 'src/app/models/appointment.model';
 import { Diagnosis } from 'src/app/models/Diagnosis.model';
 import { Medication } from 'src/app/models/Medication.model';
+import { PatientDetails } from 'src/app/models/PatientDetails.model';
 import { Procedure } from 'src/app/models/procedure.model';
 import { User } from 'src/app/models/user.model';
+import { VitalSign } from 'src/app/models/vitalsigns.model';
 import { AppointmentService } from 'src/app/service/appointment.service';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { DemographicService } from 'src/app/service/demographic.service';
+import { VitalSignService } from 'src/app/service/vitalsigns.service';
 
 @Component({
   selector: 'app-patient-diagnosis',
@@ -20,107 +29,83 @@ export class PatientDiagnosisComponent implements OnInit {
   patient: User | null | undefined;
   selectedMeeting: String | null | undefined;
 
-  selectedDiagnosis: Diagnosis|null|undefined;
-  selectedProcedure: Procedure|null|undefined;
-  selectedMedication: Medication|null|undefined;
-  diagnosisList: Diagnosis[]|any=[];
-  procedureList: Procedure[]|any=[];
-  medicationList: Medication[]|any=[];
+  selectedDiagnosis: Diagnosis | null | undefined;
+  selectedProcedure: Procedure | null | undefined;
+  selectedMedication: Medication | null | undefined;
+  diagnosisList: Diagnosis[] | any = [];
+  procedureList: Procedure[] | any = [];
+  medicationList: Medication[] | any = [];
+
+  patientInfoId: PatientDetails | null | undefined;
+  employeeId: User | null | undefined;
+  vitalSignId: VitalSign | null | undefined;
+
+  dataSource: any = [];
+  selection: any;
+
+  vitalentered = false;
 
   constructor(
-    public authservice: AuthServiceService,
+    private authservice: AuthServiceService,
     private route: ActivatedRoute,
-    private appointmentService: AppointmentService
-  ) {
-
-  }
+    private appointmentService: AppointmentService,
+    private vitalSignService: VitalSignService,
+    private patientservice: DemographicService
+  ) {}
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(
-      (params) => (this.selectedMeeting = params.get('username'))
-    );
-   
-   // this.appointmentService.getAppointmentById(1);
+    this.route.queryParamMap.subscribe((params) => {
+      this.selectedMeeting = params.get('meetingid');
+      this.getMeetingId(Number(this.selectedMeeting));
+    });
     this.loggedinUser = this.authservice.isLoggedIn();
     console.log(this.loggedinUser);
+    this.employeeId = this.loggedinUser;
+    this.authservice.getDiagnosisData().subscribe((data) => {
+      this.diagnosisList = data;
+    });
+    this.authservice.getProcedureData().subscribe((data) => {
+      this.procedureList = data;
+    });
+    this.authservice.getMedicationData().subscribe((data) => {
+      this.medicationList = data;
+    });
 
-    
-    this.setDiagnosisList();
-    this.setMedicationList();
-    this.setProcedureList();
+    this.checkVitalSignValue();
   }
 
- 
-  
-  setDiagnosisList(){
-    let ob1: Diagnosis = new Diagnosis();
-    ob1.id=1;
-    ob1.diagnosisCode="11";
-    ob1.diagnosisDescription="aaa";
-    ob1.diagnosisIsDepricated="false";
+  getMeetingId(id: number) {
+    this.appointmentService.getAppointmentById(id).subscribe((data) => {
+      this.meeting = data;
+      this.getPatientInfoId(this.meeting.patientIdInfo?.user?.id);
+    });
+  }
 
-    let ob2: Diagnosis = new Diagnosis();
-    ob2.id=2;
-    ob2.diagnosisCode="22";
-    ob2.diagnosisDescription="bbb";
-    ob2.diagnosisIsDepricated="false";
+  getPatientInfoId(id: number | undefined) {
+    this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
+      this.patientInfoId = data;
+      this.getVitalSignId(this.patientInfoId.id);
+      if (this.patientInfoId === null) {
+        this.selection = 'no';
+        console.log(this.selection);
+      } else {
+        this.selection = 'yes';
+        console.log(this.selection);
+        this.dataSource = this.patientInfoId.allergies;
+      }
+    });
+  }
 
-    let ob3: Diagnosis = new Diagnosis();
-    ob3.id=3;
-    ob3.diagnosisCode="333";
-    ob3.diagnosisDescription="ccc";
-    ob3.diagnosisIsDepricated="false";
+  getVitalSignId(id: number | undefined) {
+    this.vitalSignService.getVitalSignByPatientId(id).subscribe((data) => {
+      this.vitalSignId = data;
+    });
+  }
 
-
-    this.diagnosisList.push(ob1,ob2,ob3);
-   }
-   setProcedureList(){
-    let ob1: Procedure = new Procedure();
-    ob1.id=1;
-    ob1.procedureCode="11";
-    ob1.procedureDescription="aaapppp";
-    ob1.procedureDepricated="false";
-
-    let ob2: Procedure = new Procedure();
-    ob2.id=2;
-    ob2.procedureCode="22";
-    ob2.procedureDescription="bbbppp";
-    ob2.procedureDepricated="false";
-
-    let ob3: Procedure = new Procedure();
-    ob3.id=3;
-    ob3.procedureCode="333";
-    ob3.procedureDescription="cccppp";
-    ob3.procedureDepricated="false";
-
-
-    this.procedureList.push(ob1,ob2,ob3);
-   }
-   setMedicationList(){
-    let ob1: Medication = new Medication();
-    ob1.id=1;
-    ob1.drugName="11";
-    ob1.drugForm="aaa";
-    ob1.drugBrandName="aaaaa";
-    ob1.drugGenericName="aaaaa";
-    ob1.drugStrength="1";
-
-    let ob2: Medication = new Medication();
-    ob2.id=2;
-    ob2.drugName="22";
-    ob2.drugForm="bbb";
-    ob2.drugBrandName="bbbb";
-    ob2.drugGenericName="bbbb";
-    ob2.drugStrength="2";
-
-    let ob3: Medication = new Medication();
-    ob3.id=3;
-    ob3.drugName="33";
-    ob3.drugForm="ccc";
-    ob3.drugBrandName="ccccc";
-    ob3.drugGenericName="cccc";
-    ob3.drugStrength="3";
-    this.medicationList.push(ob1,ob2,ob3);
-   }
-
+  checkVitalSignValue() {
+    this.getVitalSignId(this.patientInfoId!.id);
+    if (this.vitalSignId != null || this.vitalSignId != undefined) {
+      this.vitalentered = true;
+    }
+  }
 }

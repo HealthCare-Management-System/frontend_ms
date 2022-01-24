@@ -25,7 +25,7 @@ export class AllergyService {
       }  
       deleteAllergiesByPatientId(id: number|undefined) {
         return this.http
-          .delete<Allergy>('http://localhost:8080/allergy/allergies/' + id, this.httpOptions)
+          .delete<Allergy>('http://localhost:8080/patienturl/allergy/allergies/' + id, this.httpOptions)
           .pipe(retry(1), catchError(this.handleError));
       }
       getAllergies(): Observable<Allergy> {
@@ -40,7 +40,7 @@ export class AllergyService {
       }
       deleteAllergy(id: number) {
         return this.http
-          .delete<Allergy>('http://localhost:8080/allergy/' + id, this.httpOptions)
+          .delete<Allergy>('http://localhost:8080/patienturl/allergy/' + id, this.httpOptions)
           .pipe(retry(1), catchError(this.handleError));
       }
       // Error handling 

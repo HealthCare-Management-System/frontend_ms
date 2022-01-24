@@ -30,7 +30,7 @@ export class DiagnosisComponent implements OnInit, AfterViewInit {
     'diagnosisCode',
     'diagnosisDescription',
     'diagnosisIsDepricated',
-    'request',
+   
   ];
 
   listOfUsers: any = [];
@@ -63,7 +63,7 @@ export class DiagnosisComponent implements OnInit, AfterViewInit {
 
   loadusers() {
     return this.authservice
-      .getUsersBasedOnRoleAndStatus('PATIENT', 'NotApproved')
+      .getDiagnosisData()
       .subscribe((data: {}) => {
         this.listOfUsers = data;
         this.dataSource = new MatTableDataSource(this.listOfUsers);

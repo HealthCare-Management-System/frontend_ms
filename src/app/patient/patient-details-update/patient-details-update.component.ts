@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Allergy, MasterAllergy } from 'src/app/models/allergy.model';
@@ -16,65 +16,69 @@ import { DemographicService } from 'src/app/service/demographic.service';
   styleUrls: ['./patient-details-update.component.css']
 })
 export class PatientDetailsUpdateComponent implements OnInit {
-  demographicId:any;
-  selectedValue= '';
-  selectedName!:String;
-  selectedType='yes';
-  successMsg!:string;
-  AlCLinicalInformation :any[]=[];
-  AlDescription:any[]=[];
-  allergyType: any[]= [];
-  allergyName:any[]=[];
+  demographicId: any;
+  selectedValue = '';
+  selectedName!: String;
+  selectedType = 'yes';
+  todisableWholePage!:string;
+  @Output() newItemEvent = new EventEmitter<string>();
+  @Input() toInformPatientDeatilsComponentFromAppointment!: string;
+  successMsg!: string;
+  AlCLinicalInformation: any[] = [];
+  AlDescription: any[] = [];
+  allergyType: any[] = [];
+  allergyName: any[] = [];
   master!: MasterAllergy;
-  newAllergy!:string;
-  loggedinUser?:User|null;
-  patientDetails!:PatientDetails;
+  newAllergy!: string;
+  loggedinUser?: User | null;
+  patientDetails!: PatientDetails;
   contactForm!: FormGroup;
-  allergyForm!:FormGroup;
-  emergencyContactForm!:FormGroup;
-  demographicObj!:Demographic|null|undefined;
-  moreAllergyList:any=[];
-  obj!:PatientDetails;
-  displayedColumns: string[] = ['allergyType', 'allergyName', 'allergyDescription', 'allergyClinicalInformation','is Allergy Fatal','Delete'];
-  displayedColumns1:string[]=['allergyType', 'allergyName', 'allergyDescription', 'allergyClinicalInformation','is Allergy Fatal'];
-  dataSource: any=[];
-  constructor(private _formBuilder: FormBuilder,private demographicService:DemographicService,private authService:AuthServiceService,private allergyService:AllergyService,public router: Router) { }
+  allergyForm!: FormGroup;
+  emergencyContactForm!: FormGroup;
+  demographicObj!: Demographic | null | undefined;
+  moreAllergyList: any = [];
+  obj!: PatientDetails;
+  displayedColumns: string[] = ['allergyType', 'allergyName', 'allergyDescription', 'allergyClinicalInformation', 'is Allergy Fatal', 'Delete'];
+  displayedColumns1: string[] = ['allergyType', 'allergyName', 'allergyDescription', 'allergyClinicalInformation', 'is Allergy Fatal'];
+  dataSource: any = [];
+  constructor(private _formBuilder: FormBuilder, private demographicService: DemographicService, private authService: AuthServiceService, private allergyService: AllergyService, public router: Router) { }
 
   ngOnInit(): void {
-    this.loggedinUser=this.authService.isLoggedIn();
+    this. todisableWholePage='yes';
+    this.loggedinUser = this.authService.isLoggedIn();
     this.loadPatientDetails();
-    this.allergyForm=this._formBuilder.group({
-      AllergyN:['', Validators.required],
-      AllergyT:['', Validators.required],
-      AllergyD:['', Validators.required],
-      AllergyC:['', Validators.required],
-      AllergyF:['', Validators.required],
+    this.allergyForm = this._formBuilder.group({
+      AllergyN: ['', Validators.required],
+      AllergyT: ['', Validators.required],
+      AllergyD: ['', Validators.required],
+      AllergyC: ['', Validators.required],
+      AllergyF: ['', Validators.required],
     });
-    this.contactForm=this._formBuilder.group({
-          gender:['', Validators.required],
-      DOB:['', Validators.required],
-      Age:['', Validators.required],
-      addr1:['', Validators.required],
-      langKnown:['', Validators.required],
-      Race:['', Validators.required],
-      ethnicity:['', Validators.required],
-      sel3:['', Validators.required],
-      
+    this.contactForm = this._formBuilder.group({
+      gender: ['', Validators.required],
+      DOB: ['', Validators.required],
+      Age: ['', Validators.required],
+      addr1: ['', Validators.required],
+      langKnown: ['', Validators.required],
+      Race: ['', Validators.required],
+      ethnicity: ['', Validators.required],
+      sel3: ['', Validators.required],
+
     });
-    this.emergencyContactForm=this._formBuilder.group({
-     
-      emTitle:['', Validators.required],
-      emFirstName:['', Validators.required],
-      emLastName:['', Validators.required],
-      emPhone:['', Validators.required],
-      emEmail:['', Validators.required],
-      Relation:['', Validators.required],
-      sel2:['', Validators.required],
-      emAddress:['', Validators.required],
-      
+    this.emergencyContactForm = this._formBuilder.group({
+
+      emTitle: ['', Validators.required],
+      emFirstName: ['', Validators.required],
+      emLastName: ['', Validators.required],
+      emPhone: ['', Validators.required],
+      emEmail: ['', Validators.required],
+      Relation: ['', Validators.required],
+      sel2: ['', Validators.required],
+      emAddress: ['', Validators.required],
+
     });
     this.getMasterAllergies();
-    
+
 
   }
   getMasterAllergies() {
@@ -90,9 +94,7 @@ export class PatientDetailsUpdateComponent implements OnInit {
   fetchAllergyType(master: any) {
     console.log("to get single coulumn");
     this.allergyType = [...new Set(master.map((item:any) => item.allergyType))];
-    this.allergyType.push('Others')//to get distinct type from repeated values
-    this.AlCLinicalInformation=[...new Set(master.map((item:any) => item.allergyClinicalInformation))];
-    // this.AlDescription=[...new Set(master.map((item:any) => item.allergyDescription))];
+    this.allergyType.push('Others')
     console.log(this.allergyType);
     
   }
@@ -103,8 +105,8 @@ export class PatientDetailsUpdateComponent implements OnInit {
     this.selectedValue='';
     this.selectedName='';
     if(newValue==='Others'){
-      this.selectedType='';
       this.selectedName=newValue;
+      this.selectedType='';
     }else{
       this.selectedValue=newValue;
     }
@@ -126,155 +128,199 @@ export class PatientDetailsUpdateComponent implements OnInit {
       this.allergyName=[...new Set(this.allergyName.map((item:any) => item))];
       console.log(this.allergyName);
     }
-  onChangeName(event:any){
-    this.fetchAllergyDescription(this.master,event);
-  }
-  fetchAllergyDescription(master: any, event: any) {
-    for(var m of master){
-      if(m.allergyName.match(event)){
-        this.AlDescription.push(m.allergyDescription);
-      }
-      }
-      this.AlDescription=[...new Set(this.AlDescription.map((item:any) => item))];
-  }
-  
+    onChangeName(event:any){
+      this.fetchAllergyDescription(this.master,event);
+    }
+    fetchAllergyDescription(master: any, event: any) {
+      for(var m of master){
+        if(m.allergyName.match(event)&&m.allergyType.match(this.allergyForm.value.AllergyT)){
+          this.AlDescription.push(m.allergyDescription);
+        }
+        }
+        this.AlDescription=[...new Set(this.AlDescription.map((item:any) => item))];
+        console.log(this.AlDescription);
+    }
+    onChangeDescription(event:any){
+      console.log(event);
+      this.fetchAllergyClinicalInformtion(this.master,event);
+    }
+    fetchAllergyClinicalInformtion(master:any, event: any) {
+      console.log(master);
+      for(var m of master){
+        
+        if(m.allergyDescription!==null){
+          console.log(m.allergyDescription);
+          if(m.allergyDescription.match(event)&&m.allergyName.match(this.allergyForm.value.AllergyN)&&m.allergyType.match(this.allergyForm.value.AllergyT)){
+          
+          this.AlCLinicalInformation.push(m.allergyClinicalInformation);
+          console.log(m.allergyClinicalInformation);
+        }
+        
+        }
+        
+        }
+        this.AlCLinicalInformation=[...new Set(this.AlCLinicalInformation.map((item:any) => item))];
+        console.log(this.AlCLinicalInformation);
+    }
+
   loadPatientDetails() {
-    this.demographicService. getPatientDemographicsById(this.loggedinUser?.id).subscribe((data: any) => {
+    this.demographicService.getPatientDemographicsById(this.loggedinUser?.id).subscribe((data: any) => {
       this.patientDetails = data;
       console.log(this.patientDetails);
-      this.dataSource=this.patientDetails.allergies;
+      console.log(this.patientDetails.demographic?.emgrFname);
+      this.dataSource = this.patientDetails.allergies;
       console.log(this.dataSource);
       console.log("fetching id");
       console.log(this.patientDetails.demographic?.id);
-     });
+    });
   }
-  onChange(event:any){
-    
+  onChange(event: any) {
+
   }
-onSubmit(){
-  let gender=this.contactForm.value.gender;
-  let DOB=this.contactForm.value.DOB;
-  let age=this.contactForm.value.Age;
-  let addr1=this.contactForm.value.addr1;
-  let Race=this.contactForm.value.Race;
-  let emgrTitle=this.emergencyContactForm.value.emTitle;
-  let emFirstName=this.emergencyContactForm.value.emFirstName;
-  let emLastName=this.emergencyContactForm.value.emLastName;
-  let emgrEmail=this.emergencyContactForm.value.emEmail;
-  let emgrContactNo=this.emergencyContactForm.value.emPhone;
-  let Relation=this.emergencyContactForm.value.Relation;
-  let ethnicity=this.contactForm.value.ethnicity;
- let langKnown=this.contactForm.value.langKnown;
-  let sel2=this.emergencyContactForm.value.sel2;
-  let sel3=this.contactForm.value.sel3;
-  let emAddress=this.emergencyContactForm.value.emAddress;
-  this.demographicObj= new Demographic(DOB, age, gender, Race, ethnicity, langKnown, addr1, emgrTitle, emFirstName, emLastName, emgrEmail, emgrContactNo, Relation, sel2, emAddress, sel3); 
-  this.demographicId=this.patientDetails.demographic?.id;
-  // this.demographicObj.id=this.demographicId;
-  // console.log(this.demographicObj);
-    if(this.contactForm.value.sel3==='no'&&this.patientDetails.demographic?.allergyCheck==='no'){
-    this.obj=new PatientDetails(this.demographicObj,this.loggedinUser,this.moreAllergyList);
-    this.obj.id=this.patientDetails.id;
-    console.log("from component ts file");
-   console.log(this.obj);
-   console.log(this.patientDetails.id);
-   console.log(this.obj);
-   this.successMsg='Successfully Updated';
-  this.demographicService.updatePatientDetails(this.patientDetails.id,this.obj).subscribe();
-}
+  onSubmit() {
+    let gender = this.contactForm.value.gender;
+    let DOB = this.contactForm.value.DOB;
+    let age = this.contactForm.value.Age;
+    let addr1 = this.contactForm.value.addr1;
+    let Race = this.contactForm.value.Race;
+    let emgrTitle = this.emergencyContactForm.value.emTitle;
+    let emFirstName = this.emergencyContactForm.value.emFirstName;
+    let emLastName = this.emergencyContactForm.value.emLastName;
+    let emgrEmail = this.emergencyContactForm.value.emEmail;
+    let emgrContactNo = this.emergencyContactForm.value.emPhone;
+    let Relation = this.emergencyContactForm.value.Relation;
+    let ethnicity = this.contactForm.value.ethnicity;
+    let langKnown = this.contactForm.value.langKnown;
+    let sel2 = this.emergencyContactForm.value.sel2;
+    let sel3 = this.contactForm.value.sel3;
+    let emAddress = this.emergencyContactForm.value.emAddress;
+    this.demographicObj = new Demographic(DOB, age, gender, Race, ethnicity, langKnown, addr1, emgrTitle, emFirstName, emLastName, emgrEmail, emgrContactNo, Relation, emAddress,sel2,  sel3);
+    this.demographicId = this.patientDetails.demographic?.id;
+    // this.demographicObj.id=this.demographicId;
+    // console.log(this.demographicObj);
+    if (this.contactForm.value.sel3 === 'no' && this.patientDetails.demographic?.allergyCheck === 'no') {
+      this.obj = new PatientDetails(this.demographicObj, this.loggedinUser, this.moreAllergyList);
+      this.obj.id = this.patientDetails.id;
+      console.log("from component ts file");
+      console.log(this.obj);
+      console.log(this.patientDetails.id);
+      console.log(this.obj);
+      this.successMsg = 'Successfully Updated';
+      this.demographicService.updatePatientDetails(this.patientDetails.id, this.obj).subscribe(data => {
+        console.log(data);
+        // alert("successfully deleted");
+        this.loadPatientDetails();
+      });
+    }
   }
   addAllergy() {
-}
-deleteAllergy(element: Allergy){
-  console.log("deleting by id");
-  console.log(element.allergyId);
-  this.allergyService.deleteAllergy(element.allergyId).subscribe( data => {
-    console.log(data);
-   // alert("successfully deleted");
-    this.loadPatientDetails();
-  });
   }
-  addNewAllergy(){
-    this.newAllergy='yes';
+  deleteAllergy(element: Allergy) {
+    console.log("deleting by id");
+    console.log(element.allergyId);
+    this.allergyService.deleteAllergy(element.allergyId).subscribe(data => {
+      console.log(data);
+      // alert("successfully deleted");
+      this.loadPatientDetails();
+    });
   }
-  submitWithAllergy(){
+  addNewAllergy() {
+    this.newAllergy = 'yes';
+  }
+  submitWithAllergy() {
     this.onSubmit();
-   this.dataSource= this.addToPreviousAllergy(this.moreAllergyList);
-   console.log("all allergies");
-   console.log(this.dataSource);
-    this.obj=new PatientDetails(this.demographicObj,this.loggedinUser,this.dataSource);
+    this.dataSource = this.addToPreviousAllergy(this.moreAllergyList);
+    console.log("all allergies");
+    console.log(this.dataSource);
+    this.obj = new PatientDetails(this.demographicObj, this.loggedinUser, this.dataSource);
     console.log("the patient details with newly added allergies:");
     console.log(this.obj);
-this.demographicService.updatePatientDetails(this.patientDetails.id,this.obj).subscribe();
-    this.successMsg='Successfully Updated';
-    this.loadPatientDetails();
+
+    this.demographicService.updatePatientDetails(this.patientDetails.id, this.obj).subscribe(data => {
+      console.log(data);
+      // alert("successfully deleted");
+      this.loadPatientDetails();
+    });
+    this.successMsg = 'Successfully Updated';
+
+   
   }
-  addMore(){
-    let allergyN=this.allergyForm.value.AllergyN;
-    let allergyT=this.allergyForm.value.AllergyT;
-    let allergyD=this.allergyForm.value.AllergyD;
-    let allergyC=this.allergyForm.value.AllergyC;
-    let allergyF=this.allergyForm.value.AllergyF;
-   let obj=this.getMasterAllergyId(this.master,allergyN,allergyT,allergyD,allergyC);
-    let allergyObj:Allergy=new Allergy(obj,allergyF);
+  addNewItem() {
+    this.newItemEvent.emit("to call appointment component");
+  }
+  addMore() {
+    let allergyN = this.allergyForm.value.AllergyN;
+    let allergyT = this.allergyForm.value.AllergyT;
+    let allergyD = this.allergyForm.value.AllergyD;
+    let allergyC = this.allergyForm.value.AllergyC;
+    let allergyF = this.allergyForm.value.AllergyF;
+    let obj = this.getMasterAllergyId(this.master, allergyT, allergyN, allergyD, allergyC);
+    let allergyObj: Allergy = new Allergy(obj, allergyF);
     this.addtoList(allergyObj);
     this.moreAllergyList.push(allergyObj);
-   this.reset();
+    this.reset();
   }
   addtoList(allergyObj: Allergy) {
     //this.ngOnInit();
     this.dataSource.push(allergyObj);
     console.log("the datasource with newly added allergies");
     console.log(this.dataSource);
-    
+
   }
-  getMasterAllergyId(master: any, allergyN: any, allergyT: any, allergyD: any, allergyC: any) :MasterAllergy{
-    let id!:number;
-    let obj=new MasterAllergy(allergyN,allergyT,allergyD,allergyC);
-    for(var m of master){
-      if(m.allergyType.match(allergyT)&&m.allergyClinicalInformation.match(allergyC)&&m.allergyDescription.match(allergyD)&&m.allergyName.match(allergyN))
-      {        obj.masterallergyId=m.masterallergyId;
+  getMasterAllergyId(master: any, allergyT: any, allergyN: any, allergyD: any, allergyC: any): MasterAllergy {
+    let id!: number;
+    let obj = new MasterAllergy(allergyT, allergyN, allergyD, allergyC);
+    for (var m of master) {
+      if (m.allergyType.match(allergyT) && m.allergyClinicalInformation.match(allergyC) && m.allergyDescription.match(allergyD) && m.allergyName.match(allergyN)) {
+        obj.masterallergyId = m.masterallergyId;
       }
     }
     return obj;
   }
-  addToPreviousAllergy(moreAllergyList: any) :Allergy{
-    for(var m of moreAllergyList){
+  addToPreviousAllergy(moreAllergyList: any): Allergy {
+    for (var m of moreAllergyList) {
       this.dataSource.push(m);
     }
     return this.dataSource;
   }
-  reset(){
-    this.selectedType='yes';
-    this.selectedName='';
+  reset() {
+    this.selectedType = 'yes';
+    this.selectedName = '';
     this.allergyForm.reset();
   }
-  deleteAllAllergis(){
-    
-      this.allergyService.deleteAllergiesByPatientId(this.patientDetails.id).subscribe( data => {
-        console.log(data);
-       // alert("successfully deleted");
-        this.loadPatientDetails();
-      });
+  deleteAllAllergis() {
+
+    this.allergyService.deleteAllergiesByPatientId(this.patientDetails.id).subscribe(data => {
+      console.log(data);
+      // alert("successfully deleted");
       this.loadPatientDetails();
-      this.newAllergy='no';
-     
-    
-    
+    });
+    this.loadPatientDetails();
+    this.newAllergy = 'no';
+
+
+
   }
-  done(){
-    this.newAllergy='no';
-    let allergyN=this.allergyForm.value.AllergyN;
-    let allergyT=this.allergyForm.value.AllergyT;
-    let allergyD=this.allergyForm.value.AllergyD;
-    let allergyC=this.allergyForm.value.AllergyC;
-    let allergyF=this.allergyForm.value.AllergyF;
-   let obj=this.getMasterAllergyId(this.master,allergyN,allergyT,allergyD,allergyC);
-    let allergyObj:Allergy=new Allergy(obj,allergyF);
+  done() {
+    this.newAllergy = 'no';
+    let allergyN = this.allergyForm.value.AllergyN;
+    let allergyT = this.allergyForm.value.AllergyT;
+    let allergyD = this.allergyForm.value.AllergyD;
+    let allergyC = this.allergyForm.value.AllergyC;
+    let allergyF = this.allergyForm.value.AllergyF;
+    let obj = this.getMasterAllergyId(this.master, allergyN, allergyT, allergyD, allergyC);
+    let allergyObj: Allergy = new Allergy(obj, allergyF);
     this.moreAllergyList.push(allergyObj);
     this.loadPatientDetails();
   }
-  goBack(){
-    this.router.navigate(['/patient/dashboard/patient-profile']);
+  goBack() {
+    if (this.toInformPatientDeatilsComponentFromAppointment === 'fromAppointment') {
+      this. todisableWholePage='';
+      this.addNewItem();
+    }
+    else {
+      this.router.navigate(['/patient/dashboard/patient-profile']);
+    }
   }
+  CalAge(event:any){}
 }

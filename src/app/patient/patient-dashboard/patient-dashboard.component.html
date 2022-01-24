@@ -14,6 +14,9 @@
           <a [routerLink]="['patient-profile']"> Profile </a>
         </p>
         <p>
+          <a [routerLink]="['patient-dashboard-diaplay']"> DashBoard </a>
+        </p>
+        <p>
           <a [routerLink]="['patient-demographic-details']" *ngIf="selection==='no'"> Add Patient Demographic Info </a>
         </p>
         <p>
@@ -43,7 +46,7 @@
       </mat-expansion-panel>
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
-          <mat-panel-title><span class="material-icons"  [routerLink]="['patient-inbox']">inbox</span> </mat-panel-title>
+          <mat-panel-title><span class="material-icons"  [routerLink]="['patient-inbox']">inbox</span>INBOX </mat-panel-title>
         </mat-expansion-panel-header>
        
          <p>
@@ -67,7 +70,7 @@
     <button id="b1" type="button" mat-button (click)="drawer.toggle()">
       <mat-icon>compare_arrows</mat-icon>
     </button>
- 
+    
     <router-outlet></router-outlet>
   </div>
 </mat-drawer-container>

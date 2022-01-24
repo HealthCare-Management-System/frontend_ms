@@ -36,9 +36,8 @@ export class NursePatientInfoComponent implements OnInit {
       let bloodpressure=this.contactForm.value.bloodpressure;
       let bodytemperature=this.contactForm.value.bodytemperature;
       let respirationrate=this.contactForm.value.respirationrate;
-      let obj:VitalSign=new VitalSign(height,weight,bloodpressure,bodytemperature,respirationrate);
-      console.log(obj);
-      this.vitalsignservice.saveVitalSign(obj).subscribe();
+     
+
     }
     
   }

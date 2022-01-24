@@ -1,25 +1,21 @@
 <div class="image">
   <mat-tab-group>
     <mat-tab label="Appointment info">
-      <table>
+    <table>
         <tr>
           <th>Visit Date :</th>
           <td>{{ visitDate }}</td>
           <br />
         </tr>
-        <tr>
+          <tr>
           <th>Patient Id :</th>
-          <td>{{ data.patientId }}</td>
+          <td>{{ data.patientIdInfo.user.name }}</td>
           <br />
         </tr>
-         <tr>
-          <th>Physician Id :</th>
-          <td>{{ physicianId }}</td>
-          <br />
-        </tr> 
+
         <tr>
           <th>Physician Name :</th>
-          <td>{{ data.physicianName }}</td>
+          <td>{{ data.physicianIdInfo.email }}</td>
           <br />
         </tr>
         <tr>
@@ -47,9 +43,9 @@
           <td>{{ data.time }}</td>
           <br />
         </tr>
-      </table>
+      </table> 
     </mat-tab>
-     <mat-tab label="Vital Signs">Content 2</mat-tab>
-   <!-- <mat-tab label="Third">Content 3</mat-tab> -->
+    <mat-tab label="Vital Signs">Content 2</mat-tab>
+    <!-- <mat-tab label="Third">Content 3</mat-tab> -->
   </mat-tab-group>
 </div>

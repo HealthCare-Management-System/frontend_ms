@@ -1,0 +1,42 @@
+ <mat-card fxLayoutAlign="center center" *ngIf="selection==='no'&&display" >
+    <div>
+    <table >
+      <tr>
+        <td></td>
+        <td id="data">Name</td>
+        <td id="data">:</td>
+        <td id="value">{{loggedinUser?.title}} {{loggedinUser?.name}} {{loggedinUser?.lname}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td id="data">Email</td>
+        <td id="data">:</td>
+        <td id="value">{{loggedinUser?.email}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td id="data"> Date Of Birth</td>
+        <td id="data">:</td>
+        <td id="value">{{loggedinUser?.dob}}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td id="data">Mobile Number</td>
+        <td id="data">:</td>
+        <td id="value">{{loggedinUser?.phone}}</td>
+      </tr>
+    </table>
+    <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+      <label id="notification">Please Enter Demographic Information </label>
+    </div>
+    <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+    
+      <mat-card-actions fxFlexFill>
+        <button color="accent" mat-raised-button fxFlexFill (click)="navigateToPatientDetails()">
+          Click here
+        </button>
+      </mat-card-actions>
+    </div>
+  </div>
+  </mat-card>
+ 

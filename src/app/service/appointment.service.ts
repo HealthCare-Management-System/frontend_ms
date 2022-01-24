@@ -12,7 +12,7 @@ export class AppointmentService {
 
   currentloggedinUser?: APPOINTMENT | null;
 
-  apiURL = 'http://localhost:8080/appointments/';
+  apiURL = 'http://localhost:8080/appointmenturl/appointments/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -25,7 +25,7 @@ export class AppointmentService {
   createBook(book: APPOINTMENT): Observable<APPOINTMENT> {
     console.log('save booking' + book);
     return this.http.post<APPOINTMENT>(
-      'http://localhost:8080/appointments/save',
+      'http://localhost:8080/appointmenturl/appointments',
       JSON.stringify(book),
       this.httpOptions
     );

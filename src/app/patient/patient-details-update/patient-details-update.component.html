@@ -1,4 +1,4 @@
-<mat-stepper linear #stepper *ngIf="!successMsg">
+<mat-stepper linear #stepper *ngIf="!successMsg&& todisableWholePage">
   <mat-step [stepControl]="contactForm">
     <ng-template matStepLabel>Update Personal Information</ng-template>
     <mat-card fxLayoutAlign="center center">
@@ -16,7 +16,7 @@
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
           <!-- <mat-form-field>
-              <input matInput [matDatepicker]="datepicker" placeholder="Date Of Birth"  [ngModel]="up.birthDate" formControlName="DOB"
+              <input matInput [matDatepicker]="datepicker" placeholder="Date Of Birth"  [ngModel]="patientDetails.demographic?.birthDate" formControlName="DOB"
                   (dateChange)="CalAge($event)" required>
               <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
               <mat-datepicker #datepicker></mat-datepicker>
@@ -83,12 +83,12 @@
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
           <mat-form-field>
-            <input id="fName" matInput type="text" placeholder="FirstName"
+            <input  matInput type="text" placeholder="FirstName"
               [ngModel]="patientDetails.demographic?.emgrFname" formControlName="emFirstName" />
           </mat-form-field>
 
           <mat-form-field>
-            <input id="lName" matInput type="text" placeholder="LastName"
+            <input  matInput type="text" placeholder="LastName"
               [ngModel]="patientDetails.demographic?.emgrLname" formControlName="emLastName" required />
           </mat-form-field>
         </div>
@@ -167,7 +167,7 @@
             <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
               Select the Description:
               <mat-form-field *ngIf="selectedValue||selectedType">
-                <mat-select formControlName="AllergyD">
+                <mat-select formControlName="AllergyD" (ngModelChange)="onChangeDescription($event)">
                   <mat-option *ngFor="let re of  AlDescription" value="{{ re}}">{{
                     re
                     }}</mat-option>
@@ -212,19 +212,19 @@
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length!==0">
           <ng-container matColumnDef="allergyType">
             <th mat-header-cell *matHeaderCellDef>Allergy Type </th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyType}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyType}} </td>
           </ng-container>
           <ng-container matColumnDef="allergyName">
             <th mat-header-cell *matHeaderCellDef>Allergy Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyName}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyName}} </td>
           </ng-container>
           <ng-container matColumnDef="allergyDescription">
             <th mat-header-cell *matHeaderCellDef>Allergy Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyDescription}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyDescription}} </td>
           </ng-container>
           <ng-container matColumnDef="allergyClinicalInformation">
             <th mat-header-cell *matHeaderCellDef> Allergy ClinicalInformation</th>
-            <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyClinicalInformation}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyClinicalInformation}} </td>
           </ng-container>
           <ng-container matColumnDef="is Allergy Fatal">
             <th mat-header-cell *matHeaderCellDef> is Allergy Fatal</th>
@@ -244,13 +244,13 @@
         </table>
         <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
           <mat-card-actions fxFlexFill>
-            <div>
-                  <button color="accent" mat-raised-button matStepperPrevious>Back</button><br>
-                  <button color="accent" mat-raised-button (click)="addNewAllergy()">addAllergy</button><br>
+            <div style="align-items: center" fxLayoutAlign="center center">
+                  <button color="accent" mat-raised-button matStepperPrevious>Back</button>
+                  <button color="accent" mat-raised-button (click)="addNewAllergy()">addAllergy</button>
 
                    <button color="accent" mat-raised-button (click)="submitWithAllergy()"
                       *ngIf="dataSource.length!==0||newAllergy==='no'">Submit</button><br>
-                      <button color="accent" mat-raised-button  (click)="deleteAllAllergis()">DeleteAll</button>
+                      <!-- <button color="accent" mat-raised-button  (click)="deleteAllAllergis()">DeleteAll</button> -->
 
                     </div>
           </mat-card-actions>
@@ -260,7 +260,7 @@
     
   </mat-step>
 </mat-stepper>
-<div *ngIf="successMsg">
+<div *ngIf="successMsg&& todisableWholePage">
   <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%">
     <mat-card-title id="heading"> {{successMsg}} </mat-card-title>
   </div>
@@ -352,23 +352,23 @@
 <br>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length!==0">
   <ng-container matColumnDef="allergyType">
-    <th mat-header-cell *matHeaderCellDef>Allergy Type </th>
-    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyType}} </td>
+    <th mat-header-cell *matHeaderCellDef id="tableheader">Allergy Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyType}} </td>
   </ng-container>
-  <ng-container matColumnDef="allergyName">
-    <th mat-header-cell *matHeaderCellDef>Allergy Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyName}} </td>
+  <ng-container matColumnDef="allergyName" >
+    <th mat-header-cell *matHeaderCellDef id="tableheader">Allergy Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyName}} </td>
   </ng-container>
   <ng-container matColumnDef="allergyDescription">
-    <th mat-header-cell *matHeaderCellDef>Allergy Description </th>
-    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyDescription}} </td>
+    <th mat-header-cell *matHeaderCellDef id="tableheader">Allergy Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyDescription}} </td>
   </ng-container>
   <ng-container matColumnDef="allergyClinicalInformation">
-    <th mat-header-cell *matHeaderCellDef> Allergy ClinicalInformation</th>
-    <td mat-cell *matCellDef="let element"> {{element.master_id?.allergyClinicalInformation}} </td>
+    <th mat-header-cell *matHeaderCellDef id="tableheader"> Allergy ClinicalInformation</th>
+    <td mat-cell *matCellDef="let element"> {{element.masterId?.allergyClinicalInformation}} </td>
   </ng-container>
   <ng-container matColumnDef="is Allergy Fatal">
-    <th mat-header-cell *matHeaderCellDef> is Allergy Fatal</th>
+    <th mat-header-cell *matHeaderCellDef id="tableheader"> is Allergy Fatal</th>
     <td mat-cell *matCellDef="let element"> {{element.isAllergyFatal}} </td>
   </ng-container>
   <!-- <ng-container matColumnDef="Delete">
@@ -383,11 +383,13 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
 </table>
-<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
+<div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
   <mat-card-actions fxFlexFill>
+    <div style="align-items: center" fxLayoutAlign="center center">
     <button mat-raised-button (click)="goBack()" color="accent">
       ok
     </button>
+    </div>
   </mat-card-actions>
 </div>
 </div>

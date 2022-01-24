@@ -7,7 +7,7 @@ import {
   retry,
   throwError,
 } from 'rxjs';
-import { APPOINTMENT, VITAL_SIGNS } from '../models/appointment.model';
+import { APPOINTMENT} from '../models/appointment.model';
 
 @Injectable({ providedIn: 'root' })
 export class InboxService {
@@ -31,15 +31,18 @@ export class InboxService {
    getBookingByPhysicianName(name:any):Observable<APPOINTMENT>{
      return this.http.get<APPOINTMENT>(this.apiURL+'app/'+name);
    }
-  getBookingByPhysician(id:any):Observable<APPOINTMENT>{
-    return this.http.get<APPOINTMENT>(this.apiURL+'physician/'+id);
+  getBookingByPhysicianById(id:any):Observable<APPOINTMENT>{
+    return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments/physician/'+id);
+  }
+  getBookingByPatientById(id:any):Observable<APPOINTMENT>{
+    return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments/patient/'+id);
   }
 
   getAllBooking(): Observable<APPOINTMENT> {
-    return this.http.get<APPOINTMENT>(this.apiURL);
+    return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments');
   }
    getBookingById(id:any){
-     return this.http.get<APPOINTMENT>(this.apiURL+id);
+     return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments/'+id);
    }
 
   deleteById(id: number) {
@@ -47,9 +50,7 @@ export class InboxService {
       .delete<APPOINTMENT>(this.apiURL + id, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
-   getVitalSignsByPatientId(id:any):Observable<VITAL_SIGNS>{
-     return this.http.get<VITAL_SIGNS>('http://localhost:8080/vitalsigns/patient/'+id);
-   }
+   
 
   handleError(error: any) {
     let errorMessage = '';
