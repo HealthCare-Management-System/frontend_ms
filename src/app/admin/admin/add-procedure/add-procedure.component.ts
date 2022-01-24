@@ -6,14 +6,13 @@ import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Procedure } from 'src/app/models/procedure.model';
 
-
 @Component({
   selector: 'app-add-procedure',
   templateUrl: './add-procedure.component.html',
-  styleUrls: ['./add-procedure.component.css']
+  styleUrls: ['./add-procedure.component.css'],
 })
 export class AddProcedureComponent implements OnInit {
-  procedureDepricated1: string[] = ['True', 'False'];
+  procedureIsDepricated1: string[] = ['true', 'false'];
 
   procedure?: Procedure;
 
@@ -28,7 +27,7 @@ export class AddProcedureComponent implements OnInit {
     this.contactForm = this.fb.group({
       procedureCode: ['', Validators.required],
       procedureDescription: ['', Validators.required],
-      procedureDepricated: ['', Validators.required],
+      procedureIsDepricated2: ['', Validators.required],
     });
   }
 
@@ -38,7 +37,9 @@ export class AddProcedureComponent implements OnInit {
     ob.procedureDescription =
       this.contactForm.controls['procedureDescription'].value;
     ob.procedureDepricated =
-      this.contactForm.controls['procedureDepricated2'].value;
+      this.contactForm.controls['procedureIsDepricated2'].value;
+    console.log('printing dia data');
+
     console.log(ob);
 
     this.authservice.addProcedure(ob).subscribe((data) => {

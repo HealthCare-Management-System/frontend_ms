@@ -100,7 +100,7 @@ export class AuthServiceService {
     return this.http
       .post<Procedure>(
         this.apiURL + 'patientvisiturl/procedure',
-        JSON.stringify(Procedure),
+        JSON.stringify(ob),
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.handleError));
@@ -110,17 +110,17 @@ export class AuthServiceService {
     return this.http
       .post<Diagnosis>(
         this.apiURL + 'patientvisiturl/diagnosis',
-        JSON.stringify(Diagnosis),
+        JSON.stringify(ob),
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.handleError));
   }
 
   addMedication(ob: Medication): Observable<Medication> {
-    return this.http
+    return this.http 
       .post<Medication>(
         this.apiURL + 'patientvisiturl/medication',
-        JSON.stringify(Medication),
+        JSON.stringify(ob),
         this.httpOptions
       )
       .pipe(retry(1), catchError(this.handleError));
