@@ -11,7 +11,7 @@
     toInformPatientDeatilsComponentFromAppointment
   "
 ></app-patient-details> -->
-<div class="image" >
+<div class="image">
   <mat-card fxLayoutAlign="center center">
     <form
       [formGroup]="contactForm"
@@ -45,20 +45,11 @@
           ></textarea>
         </mat-form-field>
 
-        <!-- <mat-form-field color="accent">
-          <input
-            id="phy"
-            matInput
-            type="text"
-            placeholder="choose physician"
-            formControlName="physicianName"
-          />
-        </mat-form-field> -->
-
         <mat-form-field color="accent">
           <mat-select
             [(ngModel)]="selectedPhysician"
             formControlName="physicianIdControl"
+            placeholder="choose physician"
             (selectionChange)="changevaluesforphysician()"
           >
             <mat-option value="default" disabled>

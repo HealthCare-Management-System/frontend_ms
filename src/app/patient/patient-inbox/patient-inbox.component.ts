@@ -26,10 +26,10 @@ export class PatientInboxComponent implements OnInit {
     'patientId',
     'time',
    
-    'updateBooking',
-    'editHistory',
+    // 'updateBooking',
+    // 'editHistory',
     
-    'patientDetails',
+    // 'patientDetails',
   ];
   // index: string[] = [ 'id','title', 'description', 'physician','patientId', 'date', 'time',
   // 'updateBooking',

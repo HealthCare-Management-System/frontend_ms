@@ -13,15 +13,10 @@ import { NotesService } from 'src/app/service/notes.service';
 export class PatientNotesComponent implements OnInit {
   displayedColumns: string[] = [
     'sendDate',
-
-    'receiverName',
+    'senderName',
     'message',
     'urgencyLevel',
-    'isDeleted',
-    'reply',
-    'isRead',
-    'action',
-    'ReplySender',
+   
   ];
 
   chatdata: any = [];
@@ -49,7 +44,7 @@ export class PatientNotesComponent implements OnInit {
     let ob: NOTES = new NOTES();
     ob.sendDate = this.noteForm.controls['sendDate'].value;
 
-    ob.receiverName = this.noteForm.controls['receiverName'].value;
+    ob.receiverId = this.noteForm.controls['receiverName'].value;
     ob.message = this.noteForm.controls['message'].value;
     ob.urgencyLevel = this.noteForm.controls['urgencyLevel'].value;
     console.log(ob);
@@ -58,7 +53,7 @@ export class PatientNotesComponent implements OnInit {
   }
 
   loadData() {
-    return this.noteservice.getNotesByName(this.loggedinUser?.name).subscribe((data: {}) => {
+    return this.noteservice.getNotesByReceiver(this.loggedinUser?.id).subscribe((data: {}) => {
       this.chatdata = data;
       console.log(this.chatdata);
     });

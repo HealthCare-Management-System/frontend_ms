@@ -37,4 +37,20 @@ export class AppointmentService {
   getAppointmentById(id: Number): Observable<APPOINTMENT> {
     return this.http.get<APPOINTMENT>(this.apiURL + id, this.httpOptions);
   }
+//  public  updateAppointment(book:APPOINTMENT){
+//     return this.http.put<APPOINTMENT>(this.apiURL+'update/'+book);
+  
+//   }
+  updatePatientDetails(id: number|undefined,book:APPOINTMENT ): Observable<APPOINTMENT> {
+    console.log("from update service");
+    console.log(book);
+    console.log(id);
+    return this.http
+      .patch<APPOINTMENT>(
+        this.apiURL+'update/' + id,
+        JSON.stringify(book),
+        this.httpOptions
+      )
+     
+  }
 }

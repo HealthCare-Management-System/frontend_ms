@@ -1,14 +1,13 @@
+import { User } from './user.model';
+
 export class NOTES {
   'notesid': number;
-  'sendDate':Date;
-    'receiverName': string;
-    'senderName':string;
+  'sendDate': Date;
   'message': string;
-  'reply': string[];
-  'urgencyLevel': boolean;
-  'deleted': boolean;
-  'read': boolean;
-
+  'urgencyLevel': string;
+  'deleted': string;
+  'read': string;
+  'receiverId': User;
+  'senderId': User;
   constructor() {}
-  
 }

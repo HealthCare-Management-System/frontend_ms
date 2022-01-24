@@ -15,83 +15,86 @@ import { UpdateNotesComponent } from '../update-notes/update-notes.component';
 export class ChatInboxComponent implements OnInit {
   displayedColumns1: string[] = [
     'sendDate',
-
     'senderName',
     'message',
     'urgencyLevel',
-    'isDeleted',
-    'reply',
-    'isRead',
     'action',
     'ReplySender',
   ];
 
   chatdata: any = [];
-
   noteForm: FormGroup = new FormGroup({});
-  loggedinUser:User|null|undefined;
+  loggedinUser: User | null | undefined;
   badgeCounter!: number;
-  hideMatBadge : boolean | undefined;
+  hideMatBadge: boolean | undefined;
+  sender!: User;
+  receiverList!: User[];
+  selectedReceiver: User | any;
+  receiver: any = [];
+  receiverName: any = [];
   constructor(
     public fb: FormBuilder,
     private noteservice: NotesService,
     public dialog: MatDialog,
-    public authservice:AuthServiceService
-  ) {
-    this.hideMatBadge = true;
-    this.badgeCounter = 0;
-  }
- 
-  incrementCount() {
-    this.badgeCounter++;
-    this.hideMatBadge = false;
-  }
-  decreaseCount() {
-    if(this.badgeCounter < 0)
-    return;
-   this.badgeCounter--;
-   if(this.badgeCounter == 0){
-     this.hideMatBadge = true;
-   }
-  }
-  resetCount() {
-    this.badgeCounter = 0;
-    this.hideMatBadge = true;
-  }
+    public authservice: AuthServiceService
+  ) {}
+
   ngOnInit(): void {
-    this.loggedinUser=this.authservice.isLoggedIn();
+    this.loggedinUser = this.authservice.isLoggedIn();
+    this.getReceivers();
+    this.loadReceivers();
+    this.getSenderData();
     this.noteForm = this.fb.group({
       sendDate: ['', Validators.required],
-      receiverName: ['', Validators.required],
-           message: ['', Validators.required],
-
+      receiverId: ['', Validators.required],
+      message: ['', Validators.required],
       urgencyLevel: ['', Validators.required],
     });
     this.loadData();
-    console.log("login user=="+this.loggedinUser);
   }
 
   onFormSubmit() {
     console.log(this.noteForm);
     let ob: NOTES = new NOTES();
-    ob.sendDate =new Date();
-    ob.receiverName = this.noteForm.controls['receiverName'].value;
-    ob.senderName=this.loggedinUser?.name!;
-    console.log("sender name"+ob.senderName);
+    ob.sendDate = new Date();
     ob.message = this.noteForm.controls['message'].value;
     ob.urgencyLevel = this.noteForm.controls['urgencyLevel'].value;
-    console.log(ob);
+    ob.receiverId = this.noteForm.controls['receiverId'].value;
+    ob.deleted = 'no';
+    ob.read = 'not yet';
+    // this.authservice.getUser(this.loggedinUser?.id).subscribe((data)=>{
+    //     ob.senderId=data;
+    // });
+    ob.senderId = this.sender;
+    ob.receiverId = this.selectedReceiver;
     this.noteservice.createNotes(ob).subscribe();
     window.alert('Msg send successfully');
-    this.noteForm.reset();
+    // this.noteForm.reset();
   }
-
-  loadData() {
-     
-    return this.noteservice.getNotesByName(this.loggedinUser?.name).subscribe((data: {}) => {
-      this.chatdata = data;
-      console.log(this.chatdata);
+  getSenderData() {
+    console.log('inside sender get');
+    console.log(this.loggedinUser);
+    return this.authservice.getUser(this.loggedinUser?.id).subscribe((data) => {
+      this.sender = data;
     });
+  }
+  selectReceiverFromId(id: any) {
+    for (let rev of this.receiverList) {
+      if (rev.id == id) {
+        this.selectedReceiver = rev;
+      }
+    }
+  }
+  changevaluesforreceiver() {
+    this.selectReceiverFromId(this.noteForm.value.receiverId);
+  }
+  loadData() {
+    return this.noteservice
+      .getNotesByReceiver(this.loggedinUser?.id)
+      .subscribe((data: {}) => {
+        this.chatdata = data;
+        console.log(this.chatdata);
+      });
   }
   replyNote(element: NOTES) {
     console.log('in reply method');
@@ -106,5 +109,24 @@ export class ChatInboxComponent implements OnInit {
       alert('successfully deleted');
       this.loadData();
     });
+  }
+  getReceivers() {
+    return this.authservice
+      .getCorporateActiveUsers('ACTIVE')
+      .subscribe((data: any) => {
+        this.receiverList = data;
+      });
+  }
+  loadReceivers() {
+    return this.authservice
+      .getCorporateActiveUsers('ACTIVE')
+      .subscribe((data: {}) => {
+        this.receiver = data;
+        for (let phy of this.receiver) {
+          this.receiverName.push(phy.name);
+        }
+
+        this.receiver.splice(0, 1);
+      });
   }
 }

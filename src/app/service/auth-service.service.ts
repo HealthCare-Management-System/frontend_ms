@@ -59,10 +59,12 @@ export class AuthServiceService {
 
   getUsers(): Observable<User> {
     return this.http
-      .get<User>(this.apiURL + '/users')
+      .get<User>('http://localhost:8080/userurl/users')
       .pipe(retry(1), catchError(this.handleError));
   }
-
+  getHospitalUser(status:any):Observable<User>{
+    return this.http.get<User>('http://localhost:8080/userurl/users/corporate-user-list/'+status);
+  }
   // authService.getUsersBasedOnRoleAndStatus(role,status) you need to call this to get users based on roles and status
   getUsersBasedOnRoleAndStatus(role: string, status: string): Observable<User> {
     return this.http
@@ -70,9 +72,9 @@ export class AuthServiceService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getUser(id: number): Observable<User> {
+  getUser(id:any): Observable<User> {
     return this.http
-      .get<User>(this.apiURL + '/persons/' + id)
+      .get<User>('http://localhost:8080/userurl/users/users/' + id)
       .pipe(retry(1), catchError(this.handleError));
   }
 

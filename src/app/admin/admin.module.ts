@@ -43,7 +43,7 @@ import { ApproveRequestsComponent } from './approve-requests/approve-requests.co
 import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 import { UpdateNotesComponent } from './update-notes/update-notes.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { NewInboxComponent } from './new-inbox/new-inbox.component';
+import { NewInboxComponent } from './updateAppointment/new-inbox.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import { VisitPatientComponent } from '../patient/visit-patient/visit-patient.component';
 
@@ -63,6 +63,7 @@ import { AddProcedureComponent } from './admin/add-procedure/add-procedure.compo
 import { AddDignosisComponent } from './admin/add-dignosis/add-dignosis.component';
 import { AddMedicationComponent } from './admin/add-medication/add-medication.component';
 import { PatientDiagnosisComponent } from '../shared/patient-diagnosis/patient-diagnosis.component';
+import { UpdateAppointmentComponent } from './update-appointment/update-appointment.component';
 const routes2: Routes = [
   {
     path: 'dashboard',
@@ -117,7 +118,8 @@ const routes2: Routes = [
     AddProcedureComponent,
     AddDignosisComponent,
     AddMedicationComponent,
-    CorporateRegisterationComponent
+    CorporateRegisterationComponent,
+    UpdateAppointmentComponent
   ],
   imports: [
     CommonModule,
