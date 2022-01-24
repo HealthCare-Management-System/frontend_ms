@@ -32,7 +32,6 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
 import { MatTableModule } from '@angular/material/table';
 import { PatientSignupComponent } from '../shared/patient-signup/patient-signup.component';
 
-
 import { HttpClientModule } from '@angular/common/http';
 
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -43,14 +42,13 @@ import { ApproveRequestsComponent } from './approve-requests/approve-requests.co
 import { ChatInboxComponent } from './chat-inbox/chat-inbox.component';
 import { UpdateNotesComponent } from './update-notes/update-notes.component';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { NewInboxComponent } from './updateAppointment/new-inbox.component';
-import {MatBadgeModule} from '@angular/material/badge';
+
+import { MatBadgeModule } from '@angular/material/badge';
 import { VisitPatientComponent } from '../patient/visit-patient/visit-patient.component';
 
 import { ActivePatientsComponent } from './admin/active-patients/active-patients.component';
 import { DeactivePatientsComponent } from './admin/deactive-patients/deactive-patients.component';
 import { BlockPatientsComponent } from './admin/block-patients/block-patients.component';
-
 
 import { ActiveCoUsersComponent } from './admin/active-co-users/active-co-users.component';
 import { DeactiveCoUsersComponent } from './admin/deactive-co-users/deactive-co-users.component';
@@ -63,7 +61,8 @@ import { AddProcedureComponent } from './admin/add-procedure/add-procedure.compo
 import { AddDignosisComponent } from './admin/add-dignosis/add-dignosis.component';
 import { AddMedicationComponent } from './admin/add-medication/add-medication.component';
 import { PatientDiagnosisComponent } from '../shared/patient-diagnosis/patient-diagnosis.component';
-import { UpdateAppointmentComponent } from './update-appointment/update-appointment.component';
+import { UpdateAppointmentComponent } from '../patient/update-appointment/update-appointment.component';
+
 const routes2: Routes = [
   {
     path: 'dashboard',
@@ -85,7 +84,7 @@ const routes2: Routes = [
       { path: 'block-co-users', component: BlockCoUsersComponent },
       { path: 'patient-diagnosis', component: PatientDiagnosisComponent },
       { path: 'chat-inbox', component: ChatInboxComponent },
-      { path: 'new-inbox', component: NewInboxComponent },
+
       { path: 'medication', component: MedicationComponent },
 
       { path: 'diagnosis', component: DiagnosisComponent },
@@ -99,12 +98,12 @@ const routes2: Routes = [
     AdminDashboardComponent,
     InboxComponent,
     NursePatientInfoComponent,
-   
+
     PatientManagementComponent,
     ApproveRequestsComponent,
     ChatInboxComponent,
     UpdateNotesComponent,
-    NewInboxComponent,
+   
     ActivePatientsComponent,
     DeactivePatientsComponent,
     BlockPatientsComponent,
@@ -119,7 +118,7 @@ const routes2: Routes = [
     AddDignosisComponent,
     AddMedicationComponent,
     CorporateRegisterationComponent,
-    UpdateAppointmentComponent
+    UpdateAppointmentComponent,
   ],
   imports: [
     CommonModule,

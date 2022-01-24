@@ -1,4 +1,3 @@
-
 <div class="image">
   <mat-card fxLayoutAlign="center center">
     <form
@@ -15,9 +14,7 @@
             placeholder="choose Reciever"
             (selectionChange)="changevaluesforreceiver()"
           >
-            <mat-option value="default" disabled>
-              Select a Reciever</mat-option
-            >
+            <mat-option value="default" disabled> Select a Reciever</mat-option>
             <mat-option
               *ngFor="let receiver of receiverList"
               [value]="receiver"

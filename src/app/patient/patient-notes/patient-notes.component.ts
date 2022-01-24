@@ -16,7 +16,7 @@ export class PatientNotesComponent implements OnInit {
     'senderName',
     'message',
     'urgencyLevel',
-   
+   'action',
   ];
 
   chatdata: any = [];

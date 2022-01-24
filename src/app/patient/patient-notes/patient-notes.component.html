@@ -10,7 +10,7 @@
 
   <ng-container matColumnDef="sendDate">
     <th mat-header-cell *matHeaderCellDef>Date</th>
-    <td mat-cell *matCellDef="let element">{{ element.sendDate }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.sendDate | date: "medium" }}</td>
   </ng-container>
  
   <ng-container matColumnDef="receiverName">
@@ -34,16 +34,8 @@
     <th mat-header-cell *matHeaderCellDef>isRead</th>
     <td mat-cell *matCellDef="let element">{{ element.read }}</td>
   </ng-container>
-  <ng-container matColumnDef="reply">
-    <th mat-header-cell *matHeaderCellDef>Reply</th>
-    <td mat-cell *matCellDef="let element">{{ element.reply }}</td>
-  </ng-container>
-  <ng-container matColumnDef="ReplySender">
-    <th mat-header-cell *matHeaderCellDef>reply</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="primary">reply</button>
-    </td>
-  </ng-container>
+  
+  
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>action</th>
     <td mat-cell *matCellDef="let element">

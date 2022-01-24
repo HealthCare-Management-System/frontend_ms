@@ -46,8 +46,14 @@
       </mat-expansion-panel>
       <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
-          <mat-panel-title><span class="material-icons"  [routerLink]="['patient-inbox']">inbox</span>INBOX </mat-panel-title>
+          <mat-panel-title >Inbox
+            
+          </mat-panel-title>
         </mat-expansion-panel-header>
+        <p>
+          <a [routerLink]="['patient-inbox']"> View Inbox </a>
+        </p>
+        
        
          <p>
           <a [routerLink]="['patient-note']">View-Notes </a>
