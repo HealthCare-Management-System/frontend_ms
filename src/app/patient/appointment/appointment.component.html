@@ -1,17 +1,17 @@
-<!-- <app-patient-details-update
+<app-patient-details-update
   (newItemEvent)="addItem($event)"
   [toInformPatientDeatilsComponentFromAppointment]="
     toInformPatientDeatilsComponentFromAppointment
   "
-  *ngIf="false"
+  *ngIf="toCheck==='yes'"
 ></app-patient-details-update>
 <app-patient-details
   (newItemEvent)="addItem($event)"
-  [toInformPatientDeatilsComponentFromAppointment]="
-    toInformPatientDeatilsComponentFromAppointment
-  "
-></app-patient-details> -->
-<div class="image" >
+  [toInformPatientDeatilsComponentFromAppointment]=
+  "toInformPatientDeatilsComponentFromAppointment"
+  *ngIf="toCheck==='no'"
+></app-patient-details>
+<div class="image" *ngIf="successMsg">
   <mat-card fxLayoutAlign="center center">
     <form
       [formGroup]="contactForm"

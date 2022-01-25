@@ -5,7 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APPOINTMENT } from 'src/app/models/appointment.model';
 import { Diagnosis } from 'src/app/models/Diagnosis.model';
 import { Medication } from 'src/app/models/Medication.model';
@@ -18,6 +19,7 @@ import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { DemographicService } from 'src/app/service/demographic.service';
 import { PatientVisitServiceService } from 'src/app/service/patient-visit-service.service';
 import { VitalSignService } from 'src/app/service/vitalsigns.service';
+
 
 @Component({
   selector: 'app-patient-diagnosis',

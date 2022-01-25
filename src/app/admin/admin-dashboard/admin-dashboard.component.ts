@@ -23,5 +23,8 @@ export class AdminDashboardComponent implements OnInit {
   routeinmethod(){
     this.router.navigate(['admin/dashboard/patient-diagnosis'], { queryParams: { username: 'randomUser'} });
   }
+  topatientvisitinfo(){
+    this.router.navigate(['admin/dashboard/patient-visit-info'])
+  }
 
 }
