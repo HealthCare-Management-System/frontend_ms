@@ -16,6 +16,7 @@ import { VitalSign } from 'src/app/models/vitalsigns.model';
 import { AppointmentService } from 'src/app/service/appointment.service';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { DemographicService } from 'src/app/service/demographic.service';
+import { PatientVisitServiceService } from 'src/app/service/patient-visit-service.service';
 import { VitalSignService } from 'src/app/service/vitalsigns.service';
 
 @Component({
@@ -41,6 +42,7 @@ export class PatientDiagnosisComponent implements OnInit {
   vitalSignId: VitalSign | null | undefined;
 
   dataSource: any = [];
+  dataSource2: any = [];
   selection: any;
 
   vitalentered = false;
@@ -50,7 +52,8 @@ export class PatientDiagnosisComponent implements OnInit {
     private route: ActivatedRoute,
     private appointmentService: AppointmentService,
     private vitalSignService: VitalSignService,
-    private patientservice: DemographicService
+    private patientservice: DemographicService,
+    private patientVisitServiceService: PatientVisitServiceService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +62,7 @@ export class PatientDiagnosisComponent implements OnInit {
       this.getMeetingId(Number(this.selectedMeeting));
     });
     this.loggedinUser = this.authservice.isLoggedIn();
-    console.log(this.loggedinUser);
+    
     this.employeeId = this.loggedinUser;
     this.authservice.getDiagnosisData().subscribe((data) => {
       this.diagnosisList = data;
@@ -72,6 +75,7 @@ export class PatientDiagnosisComponent implements OnInit {
     });
 
     this.checkVitalSignValue();
+    this.getVisitPatientList(this.patientInfoId!.id);
   }
 
   getMeetingId(id: number) {
@@ -84,7 +88,7 @@ export class PatientDiagnosisComponent implements OnInit {
   getPatientInfoId(id: number | undefined) {
     this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
       this.patientInfoId = data;
-      this.getVitalSignId(this.patientInfoId.id);
+      this.getVitalSignId(this.patientInfoId.id,this.selectedMeeting);
       if (this.patientInfoId === null) {
         this.selection = 'no';
         console.log(this.selection);
@@ -96,16 +100,25 @@ export class PatientDiagnosisComponent implements OnInit {
     });
   }
 
-  getVitalSignId(id: number | undefined) {
-    this.vitalSignService.getVitalSignByPatientId(id).subscribe((data) => {
+  getVitalSignId(id: number | undefined,meetingid:String| null | undefined) {
+    this.vitalSignService.getVitalSignByPatientIdAndMeetingId(id,meetingid).subscribe((data) => {
       this.vitalSignId = data;
     });
   }
 
+  getVisitPatientList(id:number) {
+    this.patientVisitServiceService.getPatientVisitInfoByPatientId(id).subscribe((data) => {
+      this.dataSource2 = data;
+      console.log("********************inside patient visdit data*************************************")
+      console.log(this.dataSource2);
+    });
+  }
+
   checkVitalSignValue() {
-    this.getVitalSignId(this.patientInfoId!.id);
+    this.getVitalSignId(this.patientInfoId!.id,this.selectedMeeting);
     if (this.vitalSignId != null || this.vitalSignId != undefined) {
       this.vitalentered = true;
     }
+    this.getVisitPatientList(this.patientInfoId!.id);
   }
 }
