@@ -31,7 +31,7 @@ export class PatientDiagnosisComponent implements OnInit {
   meeting: APPOINTMENT | null | undefined;
   patient: User | null | undefined;
   selectedMeeting: String | null | undefined;
-  dataSource!:any;
+
   selectedDiagnosis: Diagnosis | null | undefined;
   selectedProcedure: Procedure | null | undefined;
   selectedMedication: Medication | null | undefined;
@@ -43,6 +43,10 @@ export class PatientDiagnosisComponent implements OnInit {
   employeeId: User | null | undefined;
   vitalSignId: VitalSign | null | undefined;
 
+  dataSource: any = [];
+  dataSource2: any = [];
+  selection: any;
+
   vitalentered = false;
 
   constructor(
@@ -51,19 +55,16 @@ export class PatientDiagnosisComponent implements OnInit {
     private appointmentService: AppointmentService,
     private vitalSignService: VitalSignService,
     private patientservice: DemographicService,
-    private patientVisitServiceService:PatientVisitServiceService,
-    public router:Router
+    private patientVisitServiceService: PatientVisitServiceService
   ) {}
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(
-      (params) => (this.selectedMeeting = params.get('username'))
-    );
-
-    this.getPatientInfoId(2);
-    this.getVisitPatientList();
+    this.route.queryParamMap.subscribe((params) => {
+      this.selectedMeeting = params.get('meetingid');
+      this.getMeetingId(Number(this.selectedMeeting));
+    });
     this.loggedinUser = this.authservice.isLoggedIn();
-    console.log(this.loggedinUser);
+    
     this.employeeId = this.loggedinUser;
     this.authservice.getDiagnosisData().subscribe((data) => {
       this.diagnosisList = data;
@@ -76,46 +77,50 @@ export class PatientDiagnosisComponent implements OnInit {
     });
 
     this.checkVitalSignValue();
+    this.getVisitPatientList(this.patientInfoId!.id);
+  }
+
+  getMeetingId(id: number) {
+    this.appointmentService.getAppointmentById(id).subscribe((data) => {
+      this.meeting = data;
+      this.getPatientInfoId(this.meeting.patientIdInfo?.user?.id);
+    });
+  }
+
+  getPatientInfoId(id: number | undefined) {
+    this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
+      this.patientInfoId = data;
+      this.getVitalSignId(this.patientInfoId.id,this.selectedMeeting);
+      if (this.patientInfoId === null) {
+        this.selection = 'no';
+        console.log(this.selection);
+      } else {
+        this.selection = 'yes';
+        console.log(this.selection);
+        this.dataSource = this.patientInfoId.allergies;
+      }
+    });
+  }
+
+  getVitalSignId(id: number | undefined,meetingid:String| null | undefined) {
+    this.vitalSignService.getVitalSignByPatientIdAndMeetingId(id,meetingid).subscribe((data) => {
+      this.vitalSignId = data;
+    });
+  }
+
+  getVisitPatientList(id:number) {
+    this.patientVisitServiceService.getPatientVisitInfoByPatientId(id).subscribe((data) => {
+      this.dataSource2 = data;
+      console.log("********************inside patient visdit data*************************************")
+      console.log(this.dataSource2);
+    });
   }
 
   checkVitalSignValue() {
-    this.getVitalSignId(this.patientInfoId!.id); 
-    if(this.vitalSignId !=null || this.vitalSignId != undefined){
-      this.vitalentered=true;
+    this.getVitalSignId(this.patientInfoId!.id,this.selectedMeeting);
+    if (this.vitalSignId != null || this.vitalSignId != undefined) {
+      this.vitalentered = true;
     }
-
-  }
-
-  getPatientInfoId(id: number) {
-    this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
-      this.patientInfoId = data;
-      console.log(this.patientInfoId);
-      this.getVitalSignId(this.patientInfoId.id);
-    });
-  }
-
-  getVitalSignId(id: number) {
-    this.vitalSignService.getVitalSignByPatientId(id).subscribe((data) => {
-      this.vitalSignId = data;
-      console.log(this.vitalSignId);
-    });
-  }
-  getVisitPatientList(){
-    this.patientVisitServiceService.getPatientVisitList().subscribe((data) => {
-      this.dataSource = data;
-      console.log(this.dataSource);
-      this.checking(this.dataSource);
-    });
-  }
-  checking(dataSource: any) {
-    for(var d of dataSource){
-      console.log(d.vitalSignId.patientInfoId.user.name);
-    }
-  }
-  getPatientVisitinfo(id:number){
-    // this.patientInfoId=element.vitalSignId.patientInfoId.
-//send the elementobject to the component
-this.router.navigate(['admin/dashboard/patient-visit-info'], { queryParams: { meetingid: id} });
-
+    this.getVisitPatientList(this.patientInfoId!.id);
   }
 }

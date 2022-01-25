@@ -1,12 +1,19 @@
-Check data here !! {{ selectedMeeting }}
 <mat-tab-group mat-align-tabs="center" (click)="checkVitalSignValue()">
-  <mat-tab label="Patient Info"> </mat-tab>
+  <mat-tab label="Patient Info">
+    <app-shared-profile
+      [loggedinUser]="loggedinUser"
+      [patientDetails]="patientInfoId"
+      [selection]="selection"
+      [dataSource]="dataSource"
+    ></app-shared-profile>
+  </mat-tab>
 
   <mat-tab label="Vital Signs">
     <app-vital-form
       [patientInfoId]="patientInfoId"
       [employeeId]="employeeId"
       [vitalSignId]="vitalSignId"
+      [meeting]="meeting"
     ></app-vital-form>
   </mat-tab>
 
@@ -19,10 +26,10 @@ Check data here !! {{ selectedMeeting }}
       [medicationList]="medicationList"
     ></app-medication-form>
   </mat-tab>
-  <mat-tab label="list" >
+
+  <mat-tab label="History">
     <app-patient-visit-info-list
-    [dataSource]="dataSource"
-    
+      [dataSource]="dataSource2"
     ></app-patient-visit-info-list>
   </mat-tab>
 </mat-tab-group>

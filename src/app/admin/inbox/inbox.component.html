@@ -52,7 +52,7 @@
             >
               click here
             </button>  -->
-             <button mat-raised-button color="primary" [routerLink]="['../visit-patient/'+element.appid]">view</button> 
+             <button mat-raised-button color="primary" (click)="routeinmethod(element.appid)">view</button> 
           </td>
         </ng-container>
         <ng-container matColumnDef="updateBooking">

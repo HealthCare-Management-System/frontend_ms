@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { APPOINTMENT } from 'src/app/models/appointment.model';
+import { PatientDetails } from 'src/app/models/PatientDetails.model';
 import { User } from 'src/app/models/user.model';
 import { AppointmentService } from 'src/app/service/appointment.service';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
+import { DemographicService } from 'src/app/service/demographic.service';
 import { InboxService } from 'src/app/service/inbox.service';
 import { PatientInboxService } from 'src/app/service/patientinbox.service';
 import { AppointmentComponent } from '../appointment/appointment.component';
@@ -37,17 +39,21 @@ export class PatientInboxComponent implements OnInit {
 
   inboxdata: any = [];
   loggedinUser: User | null | undefined;
+
+  patientInfoId: PatientDetails | null | undefined;
+
   constructor(
     private inboxservice: InboxService,
     private bookservice: AppointmentService,
     public dialog: MatDialog,
-    private authservice: AuthServiceService
+    private authservice: AuthServiceService,
+    private patientservice: DemographicService
   ) {}
 
   ngOnInit(): void {
     this.loggedinUser = this.authservice.isLoggedIn();
 
-    this.loadusers();
+    this.getPatientInfoId(this.loggedinUser?.id);
   }
   openProfile(element:APPOINTMENT) {
     console.log('i method');
@@ -57,12 +63,15 @@ export class PatientInboxComponent implements OnInit {
     const dialogRef = this.dialog.open(AppointmentComponent);
   }
 
-  loadusers() {
-    return this.inboxservice.getBookingByPatientById(this.loggedinUser?.id).subscribe((data) => {
-      this.inboxdata = data;
-     console.log("hello in inbox");
-     console.log(data);
-    
+  loadusers(id:number) {
+      this.inboxservice.getBookingByPatientById(id).subscribe((data) => {
+      this.inboxdata = data;   
+    });
+  }
+  getPatientInfoId(id: number|undefined) {
+    this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
+      this.patientInfoId = data;
+      this.loadusers(this.patientInfoId.id);
     });
   }
 }

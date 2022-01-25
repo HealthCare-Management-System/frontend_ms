@@ -87,7 +87,8 @@ const routes2: Routes = [
       { path: 'chat-inbox', component: ChatInboxComponent },
       { path: 'new-inbox', component: NewInboxComponent },
       { path: 'medication', component: MedicationComponent },
-      { path: 'patient-visit-info', component: PatientVisitInfoComponent},
+      { path: 'patient-visit-info', component: PatientVisitInfoComponent },
+
       { path: 'diagnosis', component: DiagnosisComponent },
       { path: 'procedure', component: ProcedureComponent },
     ],

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { APPOINTMENT } from 'src/app/models/appointment.model';
 import { PatientDetails } from 'src/app/models/PatientDetails.model';
 import { User } from 'src/app/models/user.model';
 import { VitalSign } from 'src/app/models/vitalsigns.model';
@@ -19,6 +20,8 @@ export class VitalFormComponent implements OnInit {
   employeeId:User|null|undefined;
   @Input()
   vitalSignId: VitalSign | null | undefined;
+  @Input()
+  meeting: APPOINTMENT | null | undefined;
 
   constructor(public fb: FormBuilder,
     public vitalSignService:VitalSignService
@@ -43,6 +46,7 @@ export class VitalFormComponent implements OnInit {
     ob.respirationRate = this.VitalSignForm.value.respirationrate;
     ob.employeeId=this.employeeId;
     ob.patientInfoId=this.patientInfoId;
+    ob.meetingid=this.meeting?.appid.toString();
     console.log(ob);
     this.vitalSignService.saveVitalSign(ob).subscribe();
   }

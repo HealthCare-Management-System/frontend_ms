@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { firstNameValidator, passwordValidator } from './validators';
 import { max } from 'rxjs';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-patient-signup',
   templateUrl: './patient-signup.component.html',
@@ -27,7 +28,8 @@ export class PatientSignupComponent implements OnInit {
 
   constructor(
     private authservice: AuthServiceService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public router: Router
   ) {}
 
   // ngOnInit(): void {
@@ -123,7 +125,7 @@ export class PatientSignupComponent implements OnInit {
       ob.email = this.contactForm.controls['email'].value;
       ob.empid = 'PT0000';
       ob.dob = this.contactForm.controls['dob'].value;
-      ob.role = 'Patient';
+      ob.role = 'ct_patient';
       ob.title = this.contactForm.controls['title'].value;
       ob.phone = this.contactForm.controls['formControlPhone'].value;
       ob.status = 'NotApproved';
@@ -134,5 +136,7 @@ export class PatientSignupComponent implements OnInit {
       this.authservice.createUser(ob).subscribe();
     }
     this.contactForm.reset();
+    window.alert('Patient  has been registered successfully');
+    this.router.navigate(['/']);
   }
 }

@@ -17,12 +17,14 @@ selectedVisitId!:any;
     ) { }
 
   ngOnInit(): void {
-    // this.route.queryParamMap.subscribe((params) => {
+    this.route.queryParamMap.subscribe((params) => {
 
-    //   this.selectedVisitId = params.get('meetingid');
-     
-    // });
-    this.patientVisitInfo=this.patientVisitService.getComponent();
+      this.selectedVisitId = params.get('meetingid');
+
+
+      // this.getVisitId(Number(this.selectedVisitId));
+      this.patientVisitInfo=this.patientVisitService.getComponent();
+    });
   }
   
   getVisitId(id:number){
@@ -31,9 +33,9 @@ selectedVisitId!:any;
      console.log(this.patientVisitInfo);
     });
   }
-  // navigatingToInbox(){
-  //   this.router.navigate(['patient/dashboard/patient-inbox']);
-  // }
+  navigatingToInbox(){
+    this.router.navigate(['patient/dashboard/patient-inbox']);
+  }
   click(){
     
   }

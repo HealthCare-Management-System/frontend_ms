@@ -32,8 +32,8 @@ import { PatientDiagnosisComponent } from './patient-diagnosis/patient-diagnosis
 import { PatientSharedInfoComponent } from './patient-shared-info/patient-shared-info.component';
 import { VitalFormComponent } from './vital-form/vital-form.component';
 import { MedicationFormComponent } from './medication-form/medication-form.component';
-import { PatientVisitInfoListComponent } from './patient-visit-info-list/patient-visit-info-list.component';
 import { PatientVisitInfoComponent } from './patient-visit-info/patient-visit-info.component';
+import { PatientVisitInfoListComponent } from './patient-visit-info-list/patient-visit-info-list.component';
 
 
 
@@ -47,8 +47,8 @@ import { PatientVisitInfoComponent } from './patient-visit-info/patient-visit-in
     PatientSharedInfoComponent,
     VitalFormComponent,
     MedicationFormComponent,
-    PatientVisitInfoListComponent,
     PatientVisitInfoComponent,
+    PatientVisitInfoListComponent,
   ],
   imports: [
  MatTabsModule,
