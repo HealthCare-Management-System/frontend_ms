@@ -5,7 +5,7 @@
     color:#ff5b85;
     margin: 2em auto;
     text-align: center;
-    margin-bottom: 2%;
+    margin-bottom: 10%;
     
   }
 }
@@ -46,8 +46,11 @@ td{
 }
  
 table{
-  width:100%
+  width:100%;
+  align-items: center;
 }
+
+
 
 
 #tableheader{
@@ -55,4 +58,3 @@ table{
   font-size: medium;
   background-color: #ff5b85;
 }
-

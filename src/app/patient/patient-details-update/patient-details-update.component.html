@@ -15,18 +15,34 @@
           </div>
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="3%">
-          <!-- <mat-form-field>
+          <mat-form-field>
               <input matInput [matDatepicker]="datepicker" placeholder="Date Of Birth"  [ngModel]="patientDetails.demographic?.birthDate" formControlName="DOB"
                   (dateChange)="CalAge($event)" required>
               <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
               <mat-datepicker #datepicker></mat-datepicker>
+          </mat-form-field>
+          <!-- <mat-form-field class="fieldDiv">
+            <input
+            matInput
+            [(ngModel)]="dateOfBirth"
+            [matDatepicker]="picker"
+            id="dateOfBirth"
+            formControlName="DOB"
+            placeholder="Date of Birth"
+            (dateChange)="CalAge($event)"
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
           </mat-form-field> -->
-          <mat-form-field>
+          <!-- <mat-form-field>
             <input matInput type="text" placeholder="Date Of Birth" [ngModel]="patientDetails.demographic?.birthDate"
               required formControlName="DOB" />
-          </mat-form-field>
+          </mat-form-field> -->
           <mat-form-field>
-            <input matInput type="text" placeholder="Age" [ngModel]="patientDetails.demographic?.age" required
+            <input matInput type="text" placeholder="Age" [(ngModel)]="age" required
               formControlName="Age" />
           </mat-form-field>
         </div>
@@ -201,6 +217,7 @@
             </div>
             <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
               <mat-card-actions fxFlexFill>
+                <button color="accent" mat-raised-button (click)="cancel()">Cancel</button>
                 <button color="accent" mat-raised-button (click)="reset()">Reset</button>
                 <button color="accent" mat-raised-button (click)="addMore()">addMore</button>
                 <button color="accent" mat-raised-button (click)="done()">Done</button>
@@ -272,7 +289,7 @@
     <tr>
       <td id="data">Date Of Birth</td>
       <td id="data">:</td>
-      <td id="value">{{this.contactForm.value.DOB}}</td>
+      <td id="value">{{birthDate}}</td>
       <td>  </td>
       <td id="data">Age</td>
       <td id="data">:</td>
@@ -346,7 +363,7 @@
     </tr>
 </table>
 <br>
-<div fxLayout="row " fxLayoutAlign="right center" fxLayout.lt-sm="column" fxLayoutGap="3%">
+<div fxLayout="row " fxLayoutAlign="right center" fxLayout.lt-sm="column" fxLayoutGap="3%" *ngIf="dataSource.length!==0">
   <label id="heading"> Allergy Information :</label>
 </div>
 <br>

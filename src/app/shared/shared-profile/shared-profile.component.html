@@ -1,6 +1,6 @@
-<mat-tab-group>
+<!-- <mat-tab-group>
 
-  <mat-tab label="User Information" style="color: palevioletred">
+  <mat-tab label="User Information" style="color: palevioletred"> -->
     <mat-card fxLayoutAlign="center left" *ngIf="selection==='no'">
       <table>
         <tr>
@@ -133,7 +133,7 @@
 
         </table>
       </mat-card>
-      <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+      <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%" *ngIf="dataSource.length!==0">
         <div style="align-items: center" fxLayoutAlign="center center">
           <label id="allergy">AllergyInformation</label>
         </div>
@@ -172,8 +172,8 @@
         </mat-card-actions>
       </div>
     </div>
-  </mat-tab>
-  <mat-tab label="Visit History">
+  <!-- </mat-tab> -->
+  <!-- <mat-tab label="Visit History">
 
-  </mat-tab>
-</mat-tab-group>
+  </mat-tab> -->
+<!-- </mat-tab-group> -->

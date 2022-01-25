@@ -17,6 +17,13 @@ export class PatientVisitServiceService {
     })
   }  
 
+  public patientVisit=new PatientVisit();
+ setComponent(p:PatientVisit|any){
+    this.patientVisit=p;
+  }
+  getComponent(){
+    return this.patientVisit;
+  }
   constructor(private http: HttpClient) {}
 
 
@@ -28,7 +35,16 @@ export class PatientVisitServiceService {
     )
   } 
 
-
+  getPatientVisitList(): Observable<PatientVisit> {
+    return this.http
+      .get<PatientVisit>('http://localhost:8080/patientvisiturl/patientvisitinfo')
+      .pipe(retry(1), catchError(this.handleError));
+  }
+  getPatientVisitInfoById(id:number|null|undefined): Observable<PatientVisit> {
+    return this.http
+      .get<PatientVisit>('http://localhost:8080/patientvisiturl/patientvisitinfo/'+id)
+      .pipe(retry(1), catchError(this.handleError));
+  }
   handleError(error:any) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {

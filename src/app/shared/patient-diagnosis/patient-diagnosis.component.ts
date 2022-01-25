@@ -5,7 +5,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APPOINTMENT } from 'src/app/models/appointment.model';
 import { Diagnosis } from 'src/app/models/Diagnosis.model';
 import { Medication } from 'src/app/models/Medication.model';
@@ -16,7 +17,9 @@ import { VitalSign } from 'src/app/models/vitalsigns.model';
 import { AppointmentService } from 'src/app/service/appointment.service';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { DemographicService } from 'src/app/service/demographic.service';
+import { PatientVisitServiceService } from 'src/app/service/patient-visit-service.service';
 import { VitalSignService } from 'src/app/service/vitalsigns.service';
+
 
 @Component({
   selector: 'app-patient-diagnosis',
@@ -28,7 +31,7 @@ export class PatientDiagnosisComponent implements OnInit {
   meeting: APPOINTMENT | null | undefined;
   patient: User | null | undefined;
   selectedMeeting: String | null | undefined;
-
+  dataSource!:any;
   selectedDiagnosis: Diagnosis | null | undefined;
   selectedProcedure: Procedure | null | undefined;
   selectedMedication: Medication | null | undefined;
@@ -47,7 +50,9 @@ export class PatientDiagnosisComponent implements OnInit {
     private route: ActivatedRoute,
     private appointmentService: AppointmentService,
     private vitalSignService: VitalSignService,
-    private patientservice: DemographicService
+    private patientservice: DemographicService,
+    private patientVisitServiceService:PatientVisitServiceService,
+    public router:Router
   ) {}
 
   ngOnInit(): void {
@@ -56,7 +61,7 @@ export class PatientDiagnosisComponent implements OnInit {
     );
 
     this.getPatientInfoId(2);
-
+    this.getVisitPatientList();
     this.loggedinUser = this.authservice.isLoggedIn();
     console.log(this.loggedinUser);
     this.employeeId = this.loggedinUser;
@@ -84,6 +89,7 @@ export class PatientDiagnosisComponent implements OnInit {
   getPatientInfoId(id: number) {
     this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
       this.patientInfoId = data;
+      console.log(this.patientInfoId);
       this.getVitalSignId(this.patientInfoId.id);
     });
   }
@@ -91,6 +97,25 @@ export class PatientDiagnosisComponent implements OnInit {
   getVitalSignId(id: number) {
     this.vitalSignService.getVitalSignByPatientId(id).subscribe((data) => {
       this.vitalSignId = data;
+      console.log(this.vitalSignId);
     });
+  }
+  getVisitPatientList(){
+    this.patientVisitServiceService.getPatientVisitList().subscribe((data) => {
+      this.dataSource = data;
+      console.log(this.dataSource);
+      this.checking(this.dataSource);
+    });
+  }
+  checking(dataSource: any) {
+    for(var d of dataSource){
+      console.log(d.vitalSignId.patientInfoId.user.name);
+    }
+  }
+  getPatientVisitinfo(id:number){
+    // this.patientInfoId=element.vitalSignId.patientInfoId.
+//send the elementobject to the component
+this.router.navigate(['admin/dashboard/patient-visit-info'], { queryParams: { meetingid: id} });
+
   }
 }

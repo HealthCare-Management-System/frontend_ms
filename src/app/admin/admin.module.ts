@@ -63,6 +63,7 @@ import { AddProcedureComponent } from './admin/add-procedure/add-procedure.compo
 import { AddDignosisComponent } from './admin/add-dignosis/add-dignosis.component';
 import { AddMedicationComponent } from './admin/add-medication/add-medication.component';
 import { PatientDiagnosisComponent } from '../shared/patient-diagnosis/patient-diagnosis.component';
+import { PatientVisitInfoComponent } from '../shared/patient-visit-info/patient-visit-info.component';
 const routes2: Routes = [
   {
     path: 'dashboard',
@@ -86,7 +87,7 @@ const routes2: Routes = [
       { path: 'chat-inbox', component: ChatInboxComponent },
       { path: 'new-inbox', component: NewInboxComponent },
       { path: 'medication', component: MedicationComponent },
-
+      { path: 'patient-visit-info', component: PatientVisitInfoComponent},
       { path: 'diagnosis', component: DiagnosisComponent },
       { path: 'procedure', component: ProcedureComponent },
     ],

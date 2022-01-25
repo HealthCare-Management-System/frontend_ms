@@ -1,0 +1,137 @@
+<mat-card>
+    <div>
+    <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <mat-card-title id="heading"> Patient Visit Details </mat-card-title>
+    </div>
+    <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%">
+        <label id="value"> Date:{{patientVisitInfo.vitalSignId.dateTime}}</label>
+    </div>
+    <table>
+        <tr>
+            <td id="heading" colspan="4">Your Details:</td>
+        </tr>
+        <tr>
+            <td id="data">Name</td>
+            <td id="data">:</td>
+            <td id="value">{{patientVisitInfo.vitalSignId.patientInfoId.user.name}}</td>
+            <td id="data">EmailId</td>
+            <td id="data">:</td>
+            <td id="value">{{patientVisitInfo.vitalSignId.patientInfoId.user.email}}</td>
+            <td id="data">Mobile Number</td>
+            <td id="data">:</td>
+            <td id="value">{{patientVisitInfo.vitalSignId.patientInfoId.user.phone}}</td>
+          </tr>
+          <tr>
+            <td id="data">Date Of Birth</td>
+            <td id="data">:</td>
+            <td id="value">{{patientVisitInfo.vitalSignId.patientInfoId.demographic.birthDate}}</td>
+            <td id="data">Age</td>
+            <td id="data">:</td>
+            <td id="value">{{patientVisitInfo.vitalSignId.patientInfoId.demographic.age}}</td>
+            <td id="data">Gender</td>
+            <td id="data">:</td>
+            <td id="value">{{patientVisitInfo.vitalSignId.patientInfoId.demographic.gender}}</td>
+          </tr>
+    </table>
+    <table>
+        <tr>
+            <td id="heading" colspan="4">Vital Signs:</td>
+        </tr>
+        <tr>
+            <td id="data" >Entered By: </td> 
+            <td id="value">{{patientVisitInfo.vitalSignId.employeeId.name}}</td>
+        </tr>
+        <tr>
+            <td id="data">Height </td> 
+            <td id="value">: {{patientVisitInfo.vitalSignId.height}}</td>
+            <td id="data" >Weight </td> 
+            <td id="value">: {{patientVisitInfo.vitalSignId.weight}}</td>
+            <td id="data">Blood Pressure </td> 
+            <td id="value">: {{patientVisitInfo.vitalSignId.bloodPressure}}</td>
+            <td id="data">Body Temperature</td> 
+            <td id="value">: {{patientVisitInfo.vitalSignId.bodyTemperature}}</td>
+            <td id="data" >Respiration Rate</td> 
+            <td id="value">: {{patientVisitInfo.vitalSignId.respirationRate}}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td id="heading" colspan="4">Visit Info:</td>
+        </tr>
+        <tr>
+            <td id="data" colspan="4">Entered By: </td> 
+            <td id="value">{{patientVisitInfo.employeeId.name}}</td>
+        </tr>
+        <tr>
+            <td id="heading" colspan="4">Medication:</td>
+        </tr>
+        <tr>
+            <td id="data" colspan="4">Drug Brand Name </td>  
+            <td id="value">: {{patientVisitInfo.medication.drugBrandName}}</td>
+            <td id="data" colspan="4">Drug Form </td> 
+            <td id="value">: {{patientVisitInfo.medication.drugForm}}</td>
+            <td id="data" colspan="4">Drug Generic Name </td> 
+            <td id="value">: {{patientVisitInfo.medication.drugGenericName}}</td>
+        </tr>
+        <tr>
+            <td id="data" colspan="4">Drug Name</td> 
+            <td id="value">: {{patientVisitInfo.medication.drugName}}</td>
+            <td id="data" colspan="4">Drug Strength</td> 
+            <td id="value">: {{patientVisitInfo.medication.drugStrength}}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td id="heading" colspan="4">Diagnosis:</td>
+        </tr>
+        <tr>
+            <td id="data" colspan="4">Diagnosis Code</td> 
+            <td id="value">: {{patientVisitInfo.disgnosis.diagnosisCode}}</td>
+        </tr>
+        <tr>
+            <td id="data" colspan="4">Diagnosis Description </td> 
+            <td id="value">: {{patientVisitInfo.disgnosis.diagnosisDescription}}</td>
+        </tr>
+        <tr>
+            <td id="data" colspan="4">Diagnosis Is Depricated </td> 
+            <td id="value">: {{patientVisitInfo.disgnosis.diagnosisIsDepricated}}</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td id="heading" colspan="4">Procedure:</td>
+        </tr>
+        <tr>
+            <td id="data">Procedure Code</td> 
+            <td id="value">: {{patientVisitInfo.procedure.procedureCode}}</td>
+            <!-- <td id="data" >Procedure Depricated </td> 
+            <td id="value" >: {{patientVisitInfo.procedure.procedureDepricated}}</td> -->
+            <!-- <td id="data">Procedure Description </td>
+            <td id="value">: {{patientVisitInfo.procedure.procedureDescription}}</td> -->
+        </tr>
+        <tr>
+            <td id="data">Procedure Description </td>
+            <td id="value">: {{patientVisitInfo.procedure.procedureDescription}}</td>
+        </tr>
+        <tr>
+            <td id="data" >Procedure Depricated </td> 
+            <td id="value" >: {{patientVisitInfo.procedure.procedureDepricated}}</td>
+        </tr>
+    </table>
+    <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+        <!-- <mat-card-actions fxFlexFill>
+          <div style="align-items: center" fxLayoutAlign="center center">
+          <button mat-raised-button  color="accent" (click)="navigatingToInbox()">
+            ok
+          </button>
+          </div>
+        </mat-card-actions> -->
+        
+        <mat-dialog-actions >
+        <div style="align-items: center" fxLayoutAlign="center center">
+            <button mat-raised-button mat-dialog-close color="accent" (click)="click()">Ok</button>
+        </div>
+        </mat-dialog-actions>
+    </div>
+    </div>
+</mat-card>

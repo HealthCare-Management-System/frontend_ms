@@ -75,7 +75,17 @@ export class AppointmentComponent implements OnInit {
       .getPatientDemographicsById(this.loggedinUser?.id)
       .subscribe((data) => {
         this.patientInfoId1 = data;
+        this.enablingPatientDetailsForm(this.patientInfoId1);
       });
+  }
+  enablingPatientDetailsForm(patientInfoId1: PatientDetails) {
+   if(patientInfoId1!==null){
+     alert("Please Update Demoraphic Info");
+     this.toCheck='yes';
+   }else{
+     alert("Please Enter Demographic Info");
+     this.toCheck='no';
+   }
   }
 
   selectPhysicianFromId(id: any) {
