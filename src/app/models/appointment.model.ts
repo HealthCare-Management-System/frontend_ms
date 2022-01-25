@@ -7,6 +7,7 @@ export class APPOINTMENT{
     "description": string;
     "appointmentDate": string;
     "time": string;
+    "status":string;
     "patientIdInfo":PatientDetails | null | undefined;
     "physicianIdInfo":User;
    

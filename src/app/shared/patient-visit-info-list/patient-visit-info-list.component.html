@@ -1,0 +1,34 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+    <ng-container matColumnDef="PatientName">
+      <th mat-header-cell *matHeaderCellDef id="tableheader">PatientName </th>
+      <td mat-cell *matCellDef="let element"> {{element.vitalSignId.patientInfoId.user.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="PhysicianName" >
+      <th mat-header-cell *matHeaderCellDef id="tableheader">PhysicianName </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeId.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="VisitDate">
+      <th mat-header-cell *matHeaderCellDef id="tableheader">VisitDate</th>
+      <td mat-cell *matCellDef="let element"> {{element.vitalSignId.dateTime}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Procedures">
+      <th mat-header-cell *matHeaderCellDef id="tableheader"> Procedures</th>
+      <td mat-cell *matCellDef="let element"> {{element.procedure.procedureCode}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Medication">
+      <th mat-header-cell *matHeaderCellDef id="tableheader"> Medication</th>
+      <td mat-cell *matCellDef="let element"> {{element.medication.drugBrandName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header id="tableheader">view</th>
+      <td mat-cell *matCellDef="let element" >
+        <button mat-raised-button (click)="getPatientVisitinfo(element)" color="accent">
+          view
+        </button>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+

@@ -38,7 +38,7 @@
                         <mat-datepicker #datepicker></mat-datepicker>
                     </mat-form-field>
                     <mat-form-field>
-                        <input matInput type="number" placeholder="Age" value="{{age}}" formControlName="Age" >
+                        <input matInput type="number" placeholder="Age" [(ngModel)]="age" formControlName="Age" >
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="10%">
@@ -66,7 +66,7 @@
                 </div>
                 <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
                     <mat-card-actions fxFlexFill>
-                        <button color="accent" mat-raised-button matStepperNext>Next</button>
+                        <button color="accent" mat-raised-button matStepperNext  (click)="next()">Next</button>
                     </mat-card-actions>
                 </div>
                 
@@ -118,19 +118,15 @@
                 <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
                     <div id="title-label"> Address : </div>
                     <div id="title-label"> Same as Patient Address: </div>
-                    <mat-radio-group required formControlName="sel1">
-                        <mat-radio-button value="1" checked>Yes</mat-radio-button>
-                        <mat-radio-button value="2">No</mat-radio-button>
+                    <mat-radio-group required >
+                        <mat-radio-button [value]="1" (click)="forAddress1()" checked="true">Yes</mat-radio-button>
+                        <mat-radio-button [value]="2" (click)="forAddress2()">No</mat-radio-button>
                     </mat-radio-group>
                 </div>
                 <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
-                    <mat-form-field *ngIf="this.emergencyContactForm.value.sel1==='1'">
-                        <input matInput type="textarea" [ngModel]="this.contactForm.value.addr1" placeholder="Emergency Address"
+                    <mat-form-field >
+                        <input matInput type="textarea" [ngModel]="emergencyAddress" placeholder="Emergency Address"
                             required formControlName="emAddress">
-                    </mat-form-field>
-                    <mat-form-field *ngIf="this.emergencyContactForm.value.sel1==='2'">
-                        <input matInput type="textarea" placeholder="Enter Emergency Contact Address" required
-                            formControlName="emAddress">
                     </mat-form-field>
                 </div>
                 <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
@@ -311,7 +307,7 @@
         </tr>
     </table>
 </mat-card>
-<mat-card *ngIf="successMsg">
+<mat-card *ngIf="successMsg&&todisableWholePage&&EnableAllergyDisplay">
     <div>
         <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%">
             <mat-card-title id="heading"> Allergy Information </mat-card-title>
@@ -344,7 +340,7 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+        <!-- <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
             <mat-card-actions fxFlexFill>
               <div style="align-items: center" fxLayoutAlign="center center">
               <button mat-raised-button (click)="goBack()" color="accent">
@@ -352,6 +348,15 @@
               </button>
               </div>
             </mat-card-actions>
-          </div>
+          </div> -->
     </div>
 </mat-card>
+<div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%" *ngIf="successMsg&&todisableWholePage">
+    <mat-card-actions fxFlexFill>
+      <div style="align-items: center" fxLayoutAlign="center center">
+      <button mat-raised-button (click)="goBack()" color="accent">
+        ok
+      </button>
+      </div>
+    </mat-card-actions>
+  </div>

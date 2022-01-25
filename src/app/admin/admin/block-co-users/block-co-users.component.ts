@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CorporateRegisterationComponent } from '../../corporate-registeration/corporate-registeration.component';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-block-co-users',
@@ -16,7 +17,7 @@ import { CorporateRegisterationComponent } from '../../corporate-registeration/c
 export class BlockCoUsersComponent implements OnInit, AfterViewInit {
   constructor(
     private authservice: AuthServiceService,
-    private dialog: MatDialog
+    private dialog: MatDialog,private adminService:AdminService
   ) {}
 
   strString!: String;
@@ -72,7 +73,8 @@ export class BlockCoUsersComponent implements OnInit, AfterViewInit {
     });
   }
   ngOnInit(): void {
-    this.loadusers();
+    // this.loadusers();
+    this.dataSource= this.adminService.getData5();
     console.log('printing data');
     console.log(this.dataSource);
 
@@ -80,24 +82,24 @@ export class BlockCoUsersComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  loadusers() {
-    return this.authservice
-    .getCorporateActiveUsers('Block')
-      .subscribe((data: {}) => {
-        this.lockUnlockUsers = data;
+  // loadusers() {
+  //   return this.authservice
+  //   .getCorporateActiveUsers('Block')
+  //     .subscribe((data: {}) => {
+  //       this.lockUnlockUsers = data;
 
-        console.log('Printing lockunlock' + this.lockUnlockUsers);
-        this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
-        this.lockUnlockUsers.splice(0, 1);
-      });
-  }
+  //       console.log('Printing lockunlock' + this.lockUnlockUsers);
+  //       this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
+  //       this.lockUnlockUsers.splice(0, 1);
+  //     });
+  // }
 
-  onRegistration() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    // dialogConfig.width = "40%";
+  // onRegistration() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+  //   // dialogConfig.width = "40%";
 
-    this.dialog.open(CorporateRegisterationComponent, dialogConfig);
-  }
+  //   this.dialog.open(CorporateRegisterationComponent, dialogConfig);
+  // }
 }

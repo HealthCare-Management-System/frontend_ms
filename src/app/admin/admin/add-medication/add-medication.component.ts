@@ -54,6 +54,7 @@ export class AddMedicationComponent implements OnInit {
     ob.drugForm = this.contactForm.controls['drugForm'].value;
     ob.drugStrength = this.contactForm.controls['drugStrength'].value;
   
+    console.log("printing object data ")
     console.log(ob);
 
     this.authservice.addMedication(ob).subscribe((data) => {

@@ -40,10 +40,7 @@ export class AddDignosisComponent implements OnInit {
       this.contactForm.controls['diagnosisIsDepricated2'].value;
       console.log("printing dia data");
       
-    console.log(ob);
-    console.log(ob.diagnosisCode);
-    console.log(ob.diagnosisDescription);
-    console.log(ob.diagnosisIsDepricated);
+   
     console.log(ob);
     
 
