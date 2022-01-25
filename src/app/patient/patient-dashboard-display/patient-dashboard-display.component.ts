@@ -16,8 +16,9 @@ export class PatientDashboardDisplayComponent implements OnInit {
   loggedinUser?: User | null;
   selection!:string;
   patientDetails:any;
+  dataSource: any=[];
   constructor( private authservice: AuthServiceService, public demographicService: DemographicService, public allergyService: AllergyService,public router: Router) { }
-
+  displayedColumns1:string[]=['allergyType', 'allergyName', 'allergyDescription', 'allergyClinicalInformation','is Allergy Fatal'];
   ngOnInit(): void {
     this.router.navigate(['/patient/dashboardpatient-dashboard-diaplay']);
     this.display='yes';
@@ -33,6 +34,7 @@ export class PatientDashboardDisplayComponent implements OnInit {
       }else{
         this.selection='yes';
         console.log(this.selection);
+        this.dataSource=this.patientDetails.allergies;
       }
      });
     //  this.allergyService.getMasterAllergies().subscribe((data: any) => {

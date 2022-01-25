@@ -133,7 +133,7 @@
 
         </table>
       </mat-card>
-      <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+      <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%" *ngIf="dataSource.length!==0">
         <div style="align-items: center" fxLayoutAlign="center center">
           <label id="allergy">AllergyInformation</label>
         </div>

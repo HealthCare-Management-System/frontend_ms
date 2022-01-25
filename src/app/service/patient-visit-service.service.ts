@@ -81,4 +81,4 @@ export class PatientVisitServiceService {
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
-}
+  }

@@ -16,10 +16,12 @@ import { DemographicService } from 'src/app/service/demographic.service';
   styleUrls: ['./patient-details-update.component.css']
 })
 export class PatientDetailsUpdateComponent implements OnInit {
+  birthDate!:string;
   demographicId: any;
   selectedValue = '';
   selectedName!: String;
   selectedType = 'yes';
+  age!:number|undefined;
   todisableWholePage!:string;
   @Output() newItemEvent = new EventEmitter<string>();
   @Input() toInformPatientDeatilsComponentFromAppointment!: string;
@@ -95,6 +97,7 @@ export class PatientDetailsUpdateComponent implements OnInit {
     console.log("to get single coulumn");
     this.allergyType = [...new Set(master.map((item:any) => item.allergyType))];
     this.allergyType.push('Others')
+    this.allergyType = [...new Set(master.map((item:any) => item.allergyType))];
     console.log(this.allergyType);
     
   }
@@ -171,8 +174,15 @@ export class PatientDetailsUpdateComponent implements OnInit {
       this.dataSource = this.patientDetails.allergies;
       console.log(this.dataSource);
       console.log("fetching id");
+      this.age=this.patientDetails.demographic?.age;
       console.log(this.patientDetails.demographic?.id);
+      this.removePreviousAllergies(this.dataSource);
     });
+  }
+  removePreviousAllergies(dataSource: any) {
+    for(var d of dataSource){
+      console.log(d);
+    }
   }
   onChange(event: any) {
 
@@ -180,6 +190,7 @@ export class PatientDetailsUpdateComponent implements OnInit {
   onSubmit() {
     let gender = this.contactForm.value.gender;
     let DOB = this.contactForm.value.DOB;
+   // this.birthDate=this.contactForm.value.DOB.toDateString();
     let age = this.contactForm.value.Age;
     let addr1 = this.contactForm.value.addr1;
     let Race = this.contactForm.value.Race;
@@ -206,11 +217,11 @@ export class PatientDetailsUpdateComponent implements OnInit {
       console.log(this.patientDetails.id);
       console.log(this.obj);
       this.successMsg = 'Successfully Updated';
-      this.demographicService.updatePatientDetails(this.patientDetails.id, this.obj).subscribe(data => {
-        console.log(data);
-        // alert("successfully deleted");
-        this.loadPatientDetails();
-      });
+      // this.demographicService.updatePatientDetails(this.patientDetails.id, this.obj).subscribe(data => {
+      //   console.log(data);
+      //   // alert("successfully deleted");
+      //   this.loadPatientDetails();
+      // });
     }
   }
   addAllergy() {
@@ -236,11 +247,11 @@ export class PatientDetailsUpdateComponent implements OnInit {
     console.log("the patient details with newly added allergies:");
     console.log(this.obj);
 
-    this.demographicService.updatePatientDetails(this.patientDetails.id, this.obj).subscribe(data => {
-      console.log(data);
-      // alert("successfully deleted");
-      this.loadPatientDetails();
-    });
+    // this.demographicService.updatePatientDetails(this.patientDetails.id, this.obj).subscribe(data => {
+    //   console.log(data);
+    //   // alert("successfully deleted");
+    //   this.loadPatientDetails();
+    // });
     this.successMsg = 'Successfully Updated';
 
    
@@ -308,7 +319,7 @@ export class PatientDetailsUpdateComponent implements OnInit {
     let allergyD = this.allergyForm.value.AllergyD;
     let allergyC = this.allergyForm.value.AllergyC;
     let allergyF = this.allergyForm.value.AllergyF;
-    let obj = this.getMasterAllergyId(this.master, allergyN, allergyT, allergyD, allergyC);
+    let obj = this.getMasterAllergyId(this.master, allergyT, allergyN, allergyD, allergyC);
     let allergyObj: Allergy = new Allergy(obj, allergyF);
     this.moreAllergyList.push(allergyObj);
     this.loadPatientDetails();
@@ -322,5 +333,14 @@ export class PatientDetailsUpdateComponent implements OnInit {
       this.router.navigate(['/patient/dashboard/patient-profile']);
     }
   }
-  CalAge(event:any){}
+  CalAge(event:any){
+    let d= this.contactForm.value.DOB;
+    let d1 = new Date(d).getFullYear();
+    let t = new Date().getFullYear();
+    this.age=t-d1;
+    console.log(this.age);
+  }
+  cancel(){
+    this.newAllergy='no';
+  }
 }

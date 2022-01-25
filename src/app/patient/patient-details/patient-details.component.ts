@@ -2,6 +2,7 @@ import { ContentObserver } from '@angular/cdk/observers';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { YearService } from '@syncfusion/ej2-angular-schedule';
 import { Allergy, MasterAllergy } from 'src/app/models/allergy.model';
 import { Demographic } from 'src/app/models/demographic.model';
 import { PatientDetails } from 'src/app/models/PatientDetails.model';
@@ -17,6 +18,9 @@ import { DemographicService } from 'src/app/service/demographic.service';
   styleUrls: ['./patient-details.component.css']
 })
 export class PatientDetailsComponent implements OnInit {
+  default!:number;
+  EnableAllergyDisplay!:string;
+  emergencyAddress!:string;
   todisableWholePage!:string;
   @Output() newItemEvent = new EventEmitter<string>();
   @Input() toInformPatientDeatilsComponentFromAppointment!: string;
@@ -53,6 +57,7 @@ export class PatientDetailsComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,private demographicService:DemographicService,private authservice: AuthServiceService, public router: Router,private allergyService:AllergyService) { }
 
   ngOnInit(): void {
+    this.default=1;
     this.display='';
     this. todisableWholePage='yes';
     this.allergyForm=this._formBuilder.group({
@@ -74,7 +79,7 @@ export class PatientDetailsComponent implements OnInit {
       
     });
     this.emergencyContactForm=this._formBuilder.group({
-      sel1:['', Validators.required],
+      // sel1:['', Validators.required],
       emTitle:['', Validators.required],
       emFirstName:['', Validators.required],
       emLastName:['', Validators.required],
@@ -234,12 +239,19 @@ export class PatientDetailsComponent implements OnInit {
     let sel2=this.emergencyContactForm.value.sel2;
     let sel3=this.contactForm.value.sel3;
     let emAddress=this.emergencyContactForm.value.emAddress;
-    this.demographicObj=new Demographic(DOB.toDateString(),age,gender,Race,ethnicity,langKnown,addr1,emgrTitle,emFirstName,emLastName,emgrEmail,emgrContactNo,Relation,emAddress,sel2,sel3); 
+    this.demographicObj=new Demographic(DOB,age,gender,Race,ethnicity,langKnown,addr1,emgrTitle,emFirstName,emLastName,emgrEmail,emgrContactNo,Relation,emAddress,sel2,sel3); 
     console.log("the demogrpahic information without allergies");
     console.log(this.demographicObj);
     if(this.contactForm.value.sel3==='no'){
+    
     this.obj=new PatientDetails(this.demographicObj,this.loggedinUser,this.moreAllergyList);
-    this.demographicService.savePatientDemographic(this.obj).subscribe();
+    console.log(this.obj);
+    
+  this.demographicService.savePatientDemographic(this.obj).subscribe(data => {
+    console.log(data);
+    // alert("successfully deleted");
+    // this.loadPatientDetails();
+  });
     this.successMsg = `Successfully Submitted`;
   }
     console.log(this.obj);
@@ -262,6 +274,7 @@ export class PatientDetailsComponent implements OnInit {
     this.demographicService.savePatientDemographic(this.obj).subscribe();
     console.log("after submitting");
     console.log(this.obj);
+    this.EnableAllergyDisplay='yes';
     this.successMsg = `Successfully Submitted`;
     this.allergyForm.reset();
     
@@ -279,7 +292,17 @@ export class PatientDetailsComponent implements OnInit {
       this.router.navigate(['/patient/dashboard/patient-profile']);
     }
   }
-  
+  forAddress1(){
+    console.log("from address1");
+    this.emergencyAddress=this.contactForm.value.addr1;
+  }
+  forAddress2(){
+console.log("from Address2")
+this.emergencyAddress='';
+  }
+  next(){
+    this.forAddress1();
+  }
 }
 export class Datepicker {
   // minDate = new Date(2017, 0, 1);
