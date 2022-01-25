@@ -37,7 +37,12 @@ export class VitalSignService {
     return this.http.get<VitalSign>(this.apiURL + 'vitalsignurl/vitalsigns/patient/' + id);
   
     
-  }  
+  }
+  getVitalSignByPatientIdAndMeetingId(id:number|undefined,meetingid:String| null | undefined): Observable<VitalSign> {
+    return this.http.get<VitalSign>(this.apiURL + 'vitalsignurl/vitalsigns/patient/' + id+"/"+meetingid);
+  
+    
+  }    
 
  
   saveVitalSign(vitalsign:VitalSign): Observable<VitalSign> {

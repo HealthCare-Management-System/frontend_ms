@@ -1,11 +1,11 @@
-
 <mat-tab-group mat-align-tabs="center" (click)="checkVitalSignValue()">
   <mat-tab label="Patient Info">
-    
-    <app-shared-profile [loggedinUser]="loggedinUser"
-    [patientDetails]="patientInfoId"
-    [selection]="selection"
-    [dataSource]="dataSource"></app-shared-profile>
+    <app-shared-profile
+      [loggedinUser]="loggedinUser"
+      [patientDetails]="patientInfoId"
+      [selection]="selection"
+      [dataSource]="dataSource"
+    ></app-shared-profile>
   </mat-tab>
 
   <mat-tab label="Vital Signs">
@@ -25,5 +25,11 @@
       [procedureList]="procedureList"
       [medicationList]="medicationList"
     ></app-medication-form>
+  </mat-tab>
+
+  <mat-tab label="History">
+    <app-patient-visit-info-list
+      [dataSource]="dataSource2"
+    ></app-patient-visit-info-list>
   </mat-tab>
 </mat-tab-group>
