@@ -84,6 +84,7 @@ import { PatientVisitInfoListComponent } from './patient-visit-info-list/patient
     HeaderComponent,
     FooterComponent ,
     SharedProfileComponent,
+    PatientVisitInfoListComponent
 ]
 })
 export class SharedModule { }
