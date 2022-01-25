@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { CorporateRegisterationComponent } from '../../corporate-registeration/corporate-registeration.component';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-active-patients',
@@ -14,7 +15,7 @@ import { CorporateRegisterationComponent } from '../../corporate-registeration/c
   styleUrls: ['./active-patients.component.css']
 })
 export class ActivePatientsComponent implements OnInit, AfterViewInit {
-  constructor(private authservice: AuthServiceService, private dialog: MatDialog) {}
+  constructor(private authservice: AuthServiceService, private dialog: MatDialog,private adminService:AdminService) {}
 
   strString!: String;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,16 +39,16 @@ export class ActivePatientsComponent implements OnInit, AfterViewInit {
   lockUnlockUsers: any = [];
   ActiveUsers: any = [];
   //dataSource!: MatTableDataSource<LockUnlockUsers>;
-  dataSource: any;
+  dataSource1: any;
 
   onSearch(){
     
-    this.dataSource.filter = this.strString;
+    this.dataSource1.filter = this.strString;
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource1.paginator = this.paginator;
+    this.dataSource1.sort = this.sort;
   }
 
  
@@ -79,24 +80,25 @@ export class ActivePatientsComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.loadusers();
-    console.log("printing data")
-    console.log(this.dataSource);
+    //this.loadusers();
+    this.dataSource1= this.adminService.getData();
+    console.log("printing data inside active patients")
+    console.log(this.dataSource1);
 
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource1.paginator = this.paginator;
+    this.dataSource1.sort = this.sort;
   }
 
 
-  loadusers() {
-    return this.authservice.getUsersBasedOnRoleAndStatus("CT_PATIENT","Active").subscribe((data: {}) => {
-      this.lockUnlockUsers = data;
+  // loadusers() {
+  //   return this.authservice.getUsersBasedOnRoleAndStatus("CT_PATIENT","Active").subscribe((data: {}) => {
+  //     this.lockUnlockUsers = data;
        
-      console.log("Printing lockunlock"+this.lockUnlockUsers)
-      this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
-      this.lockUnlockUsers.splice(0, 1);
-    });
-  }
+  //     console.log("Printing lockunlock"+this.lockUnlockUsers)
+  //     this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
+  //     this.lockUnlockUsers.splice(0, 1);
+  //   });
+  // }
 
   onRegistration(){
     const dialogConfig = new MatDialogConfig();

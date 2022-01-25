@@ -172,6 +172,7 @@ export class AuthServiceService {
       .get<User>(this.apiURL + 'userurl/users/corporate-user-list/' + status)
       .pipe(retry(1), catchError(this.handleError));
   }
+ 
 
   deleteUser(id: number) {
     return this.http

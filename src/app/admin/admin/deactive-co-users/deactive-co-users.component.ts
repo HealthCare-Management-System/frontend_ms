@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CorporateRegisterationComponent } from '../../corporate-registeration/corporate-registeration.component';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-deactive-co-users',
@@ -16,7 +17,7 @@ import { CorporateRegisterationComponent } from '../../corporate-registeration/c
 export class DeactiveCoUsersComponent implements OnInit, AfterViewInit {
   constructor(
     private authservice: AuthServiceService,
-    private dialog: MatDialog
+    private dialog: MatDialog,private adminService:AdminService
   ) {}
 
   strString!: String;
@@ -73,7 +74,8 @@ export class DeactiveCoUsersComponent implements OnInit, AfterViewInit {
     });
   }
   ngOnInit(): void {
-    this.loadusers();
+    // this.loadusers();
+    this.dataSource= this.adminService.getData4();
     console.log('printing data');
     console.log(this.dataSource);
 

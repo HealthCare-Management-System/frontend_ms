@@ -5,6 +5,7 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AdminService } from 'src/app/service/admin.service';
 
 @Component({
   selector: 'app-block-patients',
@@ -12,7 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./block-patients.component.css']
 })
 export class BlockPatientsComponent implements OnInit, AfterViewInit {
-  constructor(private authservice: AuthServiceService) {}
+  constructor(private authservice: AuthServiceService,private adminService:AdminService) {}
 
   strString!: String;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -77,24 +78,25 @@ export class BlockPatientsComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
-    this.loadusers();
-    console.log("printing data")
-    console.log(this.dataSource);
-
+    //this.loadusers();
+   
+this.dataSource=this.adminService.getData2();
+console.log("printing data inside bloack patient ngonit")
+console.log(this.dataSource);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
 
-  loadusers() {
-    return this.authservice.getUsersBasedOnRoleAndStatus("CT_PATIENT","Block").subscribe((data: {}) => {
-      this.lockUnlockUsers = data;
+  // loadusers() {
+  //   return this.authservice.getUsersBasedOnRoleAndStatus("CT_PATIENT","Block").subscribe((data: {}) => {
+  //     this.lockUnlockUsers = data;
        
-      console.log("Printing lockunlock"+this.lockUnlockUsers)
-      this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
-      this.lockUnlockUsers.splice(0, 1);
-    });
-  }
+  //     console.log("Printing lockunlock"+this.lockUnlockUsers)
+  //     this.dataSource = new MatTableDataSource(this.lockUnlockUsers);
+  //     this.lockUnlockUsers.splice(0, 1);
+  //   });
+  // }
 
 }
 
