@@ -37,7 +37,11 @@ export class ApproveRequestsComponent implements OnInit, AfterViewInit {
     element.status = 'Active';
 
     console.log(element);
-    this.authservice.updateUserStatus(element.id, element.status).subscribe();
+    this.authservice.updateUserStatus(element.id, element.status).subscribe(((res) => {
+      console.log(res);
+      window.location.reload();
+      // this.authservice.getUsersBasedOnRoleAndStatus(element.role,element.status);
+    }));
   }
 
   ngOnInit(): void {
@@ -48,7 +52,7 @@ export class ApproveRequestsComponent implements OnInit, AfterViewInit {
   }
 
   loadusers() {
-    return this.authservice.getUsersBasedOnRoleAndStatus("PATIENT","NotApproved").subscribe((data: {}) => {
+    return this.authservice.getUsersBasedOnRoleAndStatus("CT_PATIENT","NotApproved").subscribe((data: {}) => {
       this.listOfUsers = data;
       this.dataSource = new MatTableDataSource(this.listOfUsers);
       this.listOfUsers.splice(0, 1);
