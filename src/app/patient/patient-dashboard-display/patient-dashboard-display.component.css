@@ -4,7 +4,7 @@
   @media screen and (min-width: 700px)
 {
     mat-card {
-    max-width: 80%;
+    max-width: 100%;
     color:#ff5b85;
     margin: 2em auto;
     text-align: center;

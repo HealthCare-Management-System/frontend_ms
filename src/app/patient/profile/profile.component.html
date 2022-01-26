@@ -7,5 +7,13 @@
       [dataSource]="dataSource"
     ></app-shared-profile>
   </mat-tab>
-  <mat-tab label="Visit History"> </mat-tab>
+  <mat-tab label="History" >
+    <app-patient-visit-info-list
+    *ngIf="hasHistory"
+      [dataSource]="dataSource2"
+    ></app-patient-visit-info-list>
+    <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%" *ngIf="!hasHistory">
+      <mat-card-title id="note"> You Don't have any previous visits </mat-card-title>
+    </div>
+  </mat-tab>
 </mat-tab-group>

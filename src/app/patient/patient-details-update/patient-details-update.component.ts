@@ -19,6 +19,7 @@ export class PatientDetailsUpdateComponent implements OnInit {
   birthDate!:string;
   demographicId: any;
   selectedValue = '';
+  allergyT!:string;
   selectedName!: String;
   selectedType = 'yes';
   age!:number|undefined;
@@ -110,6 +111,7 @@ export class PatientDetailsUpdateComponent implements OnInit {
     if(newValue==='Others'){
       this.selectedName=newValue;
       this.selectedType='';
+      this.allergyT='';
     }else{
       this.selectedValue=newValue;
     }

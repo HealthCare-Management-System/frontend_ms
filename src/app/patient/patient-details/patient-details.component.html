@@ -158,7 +158,7 @@
                         </mat-select>
                     </mat-form-field>
                     <mat-form-field *ngIf="selectedName">
-                        <input type="text" matInput placeholder=" Enter The Allergy Type" formControlName="AllergyT" />
+                        <input type="text" matInput placeholder=" Enter The Allergy Type" formControlName="AllergyT" [ngModel]="allergyT"/>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row " fxLayout.lt-sm="column" fxLayoutGap="3%">
