@@ -23,6 +23,7 @@ export class AppointmentService {
   constructor(private http: HttpClient) {}
 
   createBook(book: APPOINTMENT): Observable<APPOINTMENT> {
+    console.log(book);
     console.log('save booking' + book);
     return this.http.post<APPOINTMENT>(
       'http://localhost:8080/appointmenturl/appointments',

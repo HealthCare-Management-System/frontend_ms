@@ -75,17 +75,21 @@ export class AppointmentComponent implements OnInit {
       .getPatientDemographicsById(this.loggedinUser?.id)
       .subscribe((data) => {
         this.patientInfoId1 = data;
+        console.log(this.patientInfoId1);
         this.enablingPatientDetailsForm(this.patientInfoId1);
       });
   }
   enablingPatientDetailsForm(patientInfoId1: PatientDetails) {
-   if(patientInfoId1!==null){
-     alert("Please Update Demoraphic Info");
+   if(patientInfoId1===null){
+     alert("Please Enter Demoraphic Info");
      this.toCheck='yes';
    }else{
-     alert("Please Enter Demographic Info");
-     this.toCheck='no';
+     this.successMsg="yes";
    }
+  //  else{
+  //    alert("Please Enter Demographic Info");
+  //    this.toCheck='no';
+  //  }
   }
 
   selectPhysicianFromId(id: any) {
@@ -97,15 +101,19 @@ export class AppointmentComponent implements OnInit {
   }
   changevaluesforphysician() {
     this.selectPhysicianFromId(this.contactForm.value.physicianIdControl);
+    this.getPatientData();
   }
 
   onFormSubmit() {
-    console.log(this.contactForm);
+    this.getPatientData();
     let ob: APPOINTMENT = new APPOINTMENT();
     ob.title = this.contactForm.controls['title'].value;
     ob.description = this.contactForm.controls['description'].value;
     ob.appointmentDate = this.contactForm.controls['appointmentDate'].value;
     ob.time = this.contactForm.controls['time'].value;
+      console.log(this.patientInfoId1);
+    console.log(this.contactForm);
+    console.log(ob.patientIdInfo);
     ob.patientIdInfo = this.patientInfoId1;
     ob.physicianIdInfo = this.selectedPhysician;
     console.log('entered data+++++++++++');

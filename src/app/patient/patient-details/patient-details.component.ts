@@ -28,6 +28,7 @@ export class PatientDetailsComponent implements OnInit {
   allergyForm!:FormGroup;
   emergencyContactForm!:FormGroup;
   display!:string;
+  allergyT!:string;
   displayedColumns: string[] = ['allergyType', 'allergyName', 'allergyDescription', 'allergyClinicalInformation','is Allergy Fatal'];
   dataSource!: any;
   obj!:PatientDetails;
@@ -128,6 +129,7 @@ export class PatientDetailsComponent implements OnInit {
     if(newValue==='Others'){
       this.selectedName=newValue;
       this.selectedType='';
+      this.allergyT='';
     }else{
       this.selectedValue=newValue;
     }
