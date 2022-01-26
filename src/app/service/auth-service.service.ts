@@ -70,7 +70,7 @@ export class AuthServiceService {
       .pipe(retry(1), catchError(this.handleError));
   }
 
-  getUser(id: number): Observable<User> {
+  getUser(id: number|undefined): Observable<User> {
     return this.http
       .get<User>(this.apiURL + '/persons/' + id)
       .pipe(retry(1), catchError(this.handleError));

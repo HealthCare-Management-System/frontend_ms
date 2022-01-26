@@ -58,10 +58,10 @@ export class PatientNotesComponent implements OnInit {
   }
 
   loadData() {
-    return this.noteservice.getNotesByName(this.loggedinUser?.name).subscribe((data: {}) => {
-      this.chatdata = data;
-      console.log(this.chatdata);
-    });
+ //   return this.noteservice.getNotesByName(this.loggedinUser?.name).subscribe((data: {}) => {
+ //     this.chatdata = data;
+  //    console.log(this.chatdata);
+ //   });
   }
 
   deleteNotes(element: NOTES) {

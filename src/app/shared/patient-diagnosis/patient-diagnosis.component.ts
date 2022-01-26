@@ -38,7 +38,7 @@ export class PatientDiagnosisComponent implements OnInit {
   diagnosisList: Diagnosis[] | any = [];
   procedureList: Procedure[] | any = [];
   medicationList: Medication[] | any = [];
-
+  patientuser:User | null | undefined;
   patientInfoId: PatientDetails | null | undefined;
   employeeId: User | null | undefined;
   vitalSignId: VitalSign | null | undefined;
@@ -90,6 +90,7 @@ export class PatientDiagnosisComponent implements OnInit {
   getPatientInfoId(id: number | undefined) {
     this.patientservice.getPatientDemographicsById(id).subscribe((data) => {
       this.patientInfoId = data;
+      this.patientuser=this.patientInfoId.user;
       this.getVitalSignId(this.patientInfoId.id,this.selectedMeeting);
       if (this.patientInfoId === null) {
         this.selection = 'no';

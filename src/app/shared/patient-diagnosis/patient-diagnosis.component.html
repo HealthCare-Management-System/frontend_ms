@@ -1,7 +1,7 @@
 <mat-tab-group mat-align-tabs="center" (click)="checkVitalSignValue()">
   <mat-tab label="Patient Info">
     <app-shared-profile
-      [loggedinUser]="loggedinUser"
+      [loggedinUser]="patientuser"
       [patientDetails]="patientInfoId"
       [selection]="selection"
       [dataSource]="dataSource"

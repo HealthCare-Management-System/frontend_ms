@@ -18,7 +18,7 @@ export class InboxService {
 
   currentloggedinUser?: APPOINTMENT | null;
 
-  apiURL = 'http://localhost:8080/appointments/';
+  apiURL = 'http://localhost:8080/appointmenturl/appointments/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -45,9 +45,11 @@ export class InboxService {
      return this.http.get<APPOINTMENT>('http://localhost:8080/appointmenturl/appointments/'+id);
    }
 
-  deleteById(id: number) {
+  deleteById(appid: number) {
+    console.log("we are in delete servise method ");
+    console.log(appid);
     return this.http
-      .delete<APPOINTMENT>(this.apiURL + id, this.httpOptions)
+      .delete<APPOINTMENT>(this.apiURL + appid, this.httpOptions)
       .pipe(retry(1), catchError(this.handleError));
   }
    

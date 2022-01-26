@@ -72,3 +72,9 @@ table {
     margin-bottom: 10%;
   }
 }
+.red {
+  background: red;
+}
+.green {
+  background: green;
+}

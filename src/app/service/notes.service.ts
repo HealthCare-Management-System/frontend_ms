@@ -18,7 +18,7 @@ export class NotesService {
 
   currentloggedinUser?: NOTES | null;
 
-  apiURL = 'http://localhost:8080/notes/';
+  apiURL = 'http://localhost:8080/inboxurl/notes/';
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -29,9 +29,9 @@ export class NotesService {
   constructor(private http: HttpClient) {}
 
   createNotes(note: NOTES): Observable<NOTES> {
-    console.log('save booking' + note);
-    return this.http.post<NOTES>(
-      this.apiURL + 'save',
+    console.log('save booking');
+    console.log(note);
+    return this.http.post<NOTES>(this.apiURL+'save',
       JSON.stringify(note),
       this.httpOptions
     );
@@ -41,10 +41,12 @@ export class NotesService {
       .get<NOTES>(this.apiURL + id)
       .pipe(retry(1), catchError(this.handleError));
   }
-    getNotesByName(name:any):Observable<NOTES>{
-      return this.http.get<NOTES>(this.apiURL+'name/'+name);
+    getNotesBySender(id:any):Observable<NOTES>{
+      return this.http.get<NOTES>(this.apiURL+'sender/'+id);
     }
-
+    getNotesByReceiver(id:any):Observable<NOTES>{
+      return this.http.get<NOTES>(this.apiURL+'receiver/'+id);
+    }
   replyNote(id: any, note: NOTES): Observable<NOTES> {
     console.log('update service');
     console.log(note);
