@@ -1,4 +1,4 @@
- <mat-card fxLayoutAlign="center center" *ngIf="selection==='no'&&display&&!hasHistory" >
+ <mat-card fxLayoutAlign="center center" *ngIf="selection==='no'&&display" >
     <div>
     <table >
       <tr>
@@ -39,7 +39,7 @@
     </div>
   </div>
   </mat-card>
-  <mat-card fxLayoutAlign="center center" *ngIf="selection==='yes'&&display&&!hasHistory" >
+  <mat-card fxLayoutAlign="center center" *ngIf="selection==='yes'&&display" >
     <div>
     <!-- <mat-card> -->
       <table>
@@ -180,5 +180,5 @@
    
   </div>
   </mat-card>
-  <app-patient-visit-display *ngIf="hasHistory"></app-patient-visit-display>
+
  

@@ -27,7 +27,7 @@ export class PatientInboxComponent implements OnInit {
     'time',
    
     'updateBooking',
-    'editHistory',
+
     
     'patientDetails',
   ];
