@@ -29,13 +29,13 @@ export class InboxComponent implements OnInit {
     'action',
     'ReplySender',
   ];
-  displayedColumns2: string[] = [
-    'sendDate',
-    'receiverName',
-    'message',
-    'urgencyLevel',
-    'action',
-  ];
+   displayedColumns2: string[] = [
+     'sendDate',
+     'receiverName',
+     'message',
+     'urgencyLevel',
+     'action',
+   ];
 
   sentdata: any = [];
   chatdata: any = [];
@@ -49,6 +49,7 @@ export class InboxComponent implements OnInit {
     'time',
     'patientDetails',
     'Actions',
+    'update',
   ];
   index: string[] = [
     'title',
@@ -78,8 +79,10 @@ export class InboxComponent implements OnInit {
     public noteservice: NotesService,
     public authservice: AuthServiceService,
     public routerthing: Router
-  ) {}
-
+  ) {
+    
+  }
+ 
   ngOnInit(): void {
     this.loggedinUser = this.authservice.isLoggedIn();
     this.getReceivers();
@@ -156,6 +159,7 @@ export class InboxComponent implements OnInit {
     this.noteservice.createNotes(ob).subscribe();
     window.alert('Msg send successfully');
     this.noteForm.reset();
+   
   }
 
   routeinmethod(id: number) {
@@ -221,6 +225,7 @@ export class InboxComponent implements OnInit {
       .subscribe((data: {}) => {
         this.chatdata = data;
         console.log(this.chatdata);
+        
       });
   }
   loadSentNote() {
@@ -231,5 +236,9 @@ export class InboxComponent implements OnInit {
         console.log(this.sentdata);
       });
   }
-
+  updateApp(id:number){
+   // const booking=this.inboxservice.getAllBooking().find(c=>c.appid===id);
+    const dialogRef=this.dialog.open(UpdateAppointmentComponent);
+   // this.inboxdata=booking;
+  }
 }
