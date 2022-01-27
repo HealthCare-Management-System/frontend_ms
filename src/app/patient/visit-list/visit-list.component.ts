@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Allergy } from 'src/app/models/allergy.model';
-import { Demographic } from 'src/app/models/demographic.model';
 import { User } from 'src/app/models/user.model';
-import { AllergyService } from 'src/app/service/allergy.service';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { DemographicService } from 'src/app/service/demographic.service';
 import { PatientVisitServiceService } from 'src/app/service/patient-visit-service.service';
-
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-visit-list',
+  templateUrl: './visit-list.component.html',
+  styleUrls: ['./visit-list.component.css']
 })
-export class ProfileComponent implements OnInit {
-  
+export class VisitListComponent implements OnInit {
+
+   
   dataSource: any=[];
   dataSource2:any=[];
   loggedinUser?:User|null;
@@ -24,7 +21,7 @@ export class ProfileComponent implements OnInit {
   constructor(private authservice: AuthServiceService,
     public demographicService:DemographicService,
     public router: Router,
-    public patientVisitServiceService:PatientVisitServiceService
+    public patientVisitServiceService:PatientVisitServiceService,
     ) { }
 
   ngOnInit(): void {
@@ -54,13 +51,14 @@ export class ProfileComponent implements OnInit {
       console.log("********************inside patient visdit data*************************************")
       console.log(this.dataSource2);
       if(this.dataSource2.length===0){
-        console.log("don't have visit history");
+       // console.log("don't have visit history");
         this.hasHistory=false;
       }else{
-        console.log("have visit list");
+       // console.log("have visit list");
         this.hasHistory=true;
       }
     });
   }
+
 
 }

@@ -1,0 +1,68 @@
+
+<mat-card>
+
+<mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile [colspan]="3" [rowspan]="2" style="background-color: white">
+        <mat-card style="width: 100%;height: 50%;">
+            <table>
+                <tr>
+                    <td id="heading">Your Information</td>
+                </tr>
+                <tr>
+                    <td id="data">Name:</td>
+                    <td id="value">{{patientDetails.user.name}}</td>
+                    <td id="data">Email:</td>
+                    <td id="value">{{patientDetails.user.email}}</td>
+                    <td id="data">Mobile Number:</td>
+                    <td id="value">{{patientDetails.user.phone}}</td>
+                </tr>
+            </table>
+           <table>
+               <tr>
+                   <td id="heading">VitalSigns</td>
+               </tr>
+               <tr>
+                   <td id="data">Height</td>
+                   <td id="value">{{recentVisit.vitalSignId.height}}</td>
+                    <td id="data">Your Weight</td>
+                    <td id="value">{{recentVisit.vitalSignId.weight}}</td>
+                    <td id="data">Body Temperature</td>
+                    <td id="value">{{recentVisit.vitalSignId.bodyTemperature}}</td>
+                    <td id="data">Blood Pressure</td>
+                    <td id="value">{{recentVisit.vitalSignId.bloodPressure}}</td>
+                </tr>
+           </table>
+        </mat-card>
+    </mat-grid-tile>
+    <!-- <mat-grid-tile [colspan]="1" [rowspan]="4" style="background-color: white">
+        <div style="width: 100%;height: 50%;">
+        <mat-card style="width: 100%;height: 100%;">
+            hi
+        </mat-card>
+    </div>
+    </mat-grid-tile> -->
+    <mat-grid-tile [colspan]="1" [rowspan]="2" style="background-color:white">
+        <mat-card style="width: 100%;height: 50%;">
+            <button mat-raised-button color="accent" class="addUser" (click)="showInbox()">Today Appointment</button>
+            <mat-card-content>with {{todayAppointment.physicianIdInfo.name}}</mat-card-content>
+            <mat-card-content *ngIf="appointmentT"> meeting Title :{{todayAppointment.title}}</mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2" style="background-color: white">
+        <mat-card style="width: 100%;height: 50%;" >
+            <button mat-raised-button color="accent" class="addUser" (click)="showInbox()">Next Appointment</button>
+            <!-- <mat-card-content *ngIf="appointmentT"></mat-card-content> -->
+            <mat-card-content *ngIf="appointmentT"> with {{comingAppointment.physicianIdInfo.name}}</mat-card-content>
+            <mat-card-content *ngIf="appointmentT"> meeting Title :{{comingAppointment.title}}</mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="2" style="background-color: white">
+        <mat-card style="width: 100%;height: 50%;">
+            <button mat-raised-button color="accent" class="addUser" (click)="showListOfVisits()" >
+                 <button  mat-mini-fab  >{{length}} </button>Number Of visits
+            </button>
+        </mat-card>
+    </mat-grid-tile>
+    
+</mat-grid-list>
+</mat-card>
