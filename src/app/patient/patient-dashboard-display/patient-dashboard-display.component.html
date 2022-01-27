@@ -1,4 +1,4 @@
- <mat-card fxLayoutAlign="center center" *ngIf="selection==='no'&&display" >
+ <mat-card fxLayoutAlign="center center" *ngIf="selection==='no'&&display&&!hasHistory" >
     <div>
     <table >
       <tr>
@@ -39,7 +39,7 @@
     </div>
   </div>
   </mat-card>
-  <mat-card fxLayoutAlign="center center" *ngIf="selection==='yes'&&display" >
+  <mat-card fxLayoutAlign="center center" *ngIf="selection==='yes'&&display&&!hasHistory" >
     <div>
     <!-- <mat-card> -->
       <table>
@@ -177,15 +177,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
     </table>
-    <!-- <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
-      <mat-card-actions fxFlexFill>
-        <div style="align-items: center" fxLayoutAlign="center center">
-          <button mat-raised-button (click)="edit()" color="accent">
-            Edit
-          </button>
-        </div>
-      </mat-card-actions>
-    </div> -->
+   
   </div>
   </mat-card>
+  <app-patient-visit-display *ngIf="hasHistory"></app-patient-visit-display>
  
