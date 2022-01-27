@@ -1,0 +1,23 @@
+<app-patient-visit-info-list
+    *ngIf="hasHistory"
+      [dataSource]="dataSource2"
+    ></app-patient-visit-info-list>
+    <div fxLayout="row " fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="3%" *ngIf="!hasHistory">
+      <mat-card-title id="note"> You Don't have any previous visits </mat-card-title>
+    </div>
+
+    <div fxLayoutAlign="center center" fxLayout.lt-sm="column" fxLayoutGap="1%">
+      <!-- <mat-card-actions fxFlexFill>
+        <div style="align-items: center" fxLayoutAlign="center center">
+        <button mat-raised-button  color="accent" (click)="navigatingToInbox()">
+          ok
+        </button>
+        </div>
+      </mat-card-actions> -->
+      
+      <mat-dialog-actions >
+      <div style="align-items: center" fxLayoutAlign="center center">
+          <button mat-raised-button mat-dialog-close color="accent">Ok</button>
+      </div>
+      </mat-dialog-actions>
+  </div>
